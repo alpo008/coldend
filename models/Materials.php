@@ -46,8 +46,8 @@ class Materials extends ActiveRecord
             [['model_ref'], 'string', 'max' => 40],
             [['trade_mark', 'type'], 'string', 'max' => 16],
             [['manufacturer'], 'string', 'max' => 32],
-            [['imagefile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg'],
-            [['docfile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
+            [['imagefile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg', 'maxSize' => 64*1024],
+            [['docfile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
         ];
     }
 

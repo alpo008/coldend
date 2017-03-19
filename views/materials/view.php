@@ -27,17 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);
                 ?>
             </div>
+            
             <div class="row material-cart__doc">
                 <?php
                 $docfile = $_SERVER['DOCUMENT_ROOT'] . '/docs/' . $model->id . '.pdf';
                 $docfile_ = 'docs/' . $model->id . '.pdf';
-                if (file_exists($docfile)):
-                    echo Html::a(Yii::t('app', 'Open datasheet'),'@web/docs/' . $model->id . '.pdf',['target'=>'_blank']);
-                endif;?>
+                if (file_exists($docfile)) {
+                    echo Html::a(Yii::t('app', 'Open datasheet'), '@web/docs/' . $model->id . '.pdf', ['target' => '_blank']);
+                }
+                ?>
             </div>
         </div>
-
-
 
         <div class="col-lg-9 material-cart__attributes">
             <?php echo DetailView::widget([

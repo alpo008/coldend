@@ -18,16 +18,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Machines'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'name',
             'place',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($searchModel) {
+                        return $searchModel->statusNames()[$searchModel->status];
+                },
+                'format' => 'raw',
+                /**
+                 * Отображение фильтра.
+                 * Вместо поля для ввода - выпадающий список с заданными значениями directions
+                 */
+                'filter' => $searchModel->statusNames(),
+            ],
             'to_do:ntext',
             // 'to_replace',
             // 'to_order',

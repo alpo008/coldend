@@ -268,6 +268,19 @@ return [
     'Open datasheet' => 'Открыть документацию',
     'Upload datasheet' => 'Загрузить документацию (pdf)',
     'Upload jpeg image' => 'Загрузить изображение (jpg)',
+    'Create Machines' => 'Добавить новое оборудование',
+    'Machine name' => 'Наименование',
+    'Place' => 'Расположение',
+    'To Do' => 'Необходимые работы',
+    'To Replace' => 'Необходимые замены',
+    'To Order' => 'Необходимые заказы',
+    'Works normally' => 'Работает нормально',
+    'Needs small repair' => 'Нуждается в мелком ремонте',
+    'Needs parts replacement' => 'Требует замены деталей',
+    'Does not work' => 'Не работает',
+    'Not used, working state' => 'Не используется, исправно',
+    'Not used, defective' => 'Не используется, неисправно',
+
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',

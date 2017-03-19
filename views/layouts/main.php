@@ -37,7 +37,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => mb_strtoupper(Yii::t('app', 'Home')), 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => mb_strtoupper(Yii::t('app', 'Machines')), 'url' => ['/machines']],
             ['label' => mb_strtoupper(Yii::t('app', 'Materials')), 'url' => ['/materials']],
             Yii::$app->user->isGuest ? (
                 ['label' => mb_strtoupper(Yii::t('app', 'Login')), 'url' => ['/site/login']]

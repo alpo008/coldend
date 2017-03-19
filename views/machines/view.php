@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Machines */
 
-$this->title = $model->name;
+$this->title = $model->name . ' - ' . $model->place;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Machines'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -31,10 +31,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'place',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => $model->statusNames()[$model->status],
+            ],
             'to_do:ntext',
-            'to_replace',
-            'to_order',
+            [
+                'attribute' => 'to_order',
+                'value' => (array_key_exists($model->to_order, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_order] : null,
+            ],
+            [
+                'attribute' => 'to_replace',
+                'value' => (array_key_exists($model->to_replace, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_replace] : null,
+            ],
             'unit_01',
             'unit_02',
             'unit_03',

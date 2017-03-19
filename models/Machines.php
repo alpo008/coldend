@@ -45,7 +45,8 @@ class Machines extends \yii\db\ActiveRecord
     {
         return [
             [['status'], 'required'],
-            [['status', 'to_replace', 'to_order'], 'integer'],
+            [['status'], 'integer'],
+            [['to_replace', 'to_order'], 'safe'],
             [['to_do', 'comment'], 'string'],
             [['name', 'place'], 'string', 'max' => 24],
             [['unit_01', 'unit_02', 'unit_03', 'unit_04', 'unit_05', 'unit_06', 'unit_07', 'unit_08', 'unit_09', 'unit_10', 'unit_11', 'unit_12'], 'string', 'max' => 32],
@@ -59,7 +60,7 @@ class Machines extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Machine name'),
             'place' => Yii::t('app', 'Place'),
             'status' => Yii::t('app', 'Status'),
             'to_do' => Yii::t('app', 'To Do'),
@@ -79,5 +80,37 @@ class Machines extends \yii\db\ActiveRecord
             'unit_12' => Yii::t('app', 'Unit 12'),
             'comment' => Yii::t('app', 'Comment'),
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)){
+            $this->to_order = (int)$this->to_order;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function statusNames(){
+        return [
+            0 => Yii::t('app', 'Not used, defective'),
+            1 => Yii::t('app', 'Not used, working state'),
+            2 => Yii::t('app', 'Does not work'),
+            3 => Yii::t('app', 'Needs parts replacement'),
+            4 => Yii::t('app', 'Needs small repair'),
+            5 => Yii::t('app', 'Works normally'),
+        ];
+    }
+
+    public function partsAutocompleteList(){
+        $arr = Materials::find()
+            ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
+            ->asArray()
+            ->all();
+        return array_column($arr, 'value', 'id');
     }
 }

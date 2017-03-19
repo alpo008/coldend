@@ -64,7 +64,7 @@ class MachinesController extends Controller
     public function actionCreate()
     {
         $model = new Machines();
-
+        //var_dump($model->partsAutocompleteList());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
