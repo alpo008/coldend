@@ -253,6 +253,23 @@ return [
     
     'No stock data available' => 'Нет данных по наличию материала на складе.',
     'No movements data available' => 'Нет данных по складским операциям.',
+
+    //COLDEND
+
+    'Suppliers Ref' => 'Код производителя',
+    'Trade Mark' => 'Торговая марка',
+    'Manufacturer' => 'Фирма-производитель',
+    'Generic Usage' => 'Область применения',
+    'Function' => 'Функциональное назначение',
+    'Sap' => 'Код по SAP',
+    'Sap not defined' => 'Код по SAP не задан',
+    'Comment 1' => 'Комментарий 1',
+    'Comment 2' => 'Комментарий 2',
+    'Open datasheet' => 'Открыть документацию',
+    'Upload datasheet' => 'Загрузить документацию (pdf)',
+    'Upload jpeg image' => 'Загрузить изображение (jpg)',
+
+    
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
     'You can upload at most {limit, number} {limit, plural, one{file} other{files}}.' => 'Вы не можете загружать более {limit, number} {limit, plural, one{файла} few{файлов} many{файлов} other{файла}}.',
     'in {delta, plural, =1{a day} other{# days}}' => 'через {delta, plural, =1{день} one{# день} few{# дня} many{# дней} other{# дня}}',

@@ -12,7 +12,53 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="materials-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($model->name) ?></h1>
+    <h2><?= (!!$model->sap) ? Html::encode($model->sap) : Yii::t('app' ,'Sap not defined') ?></h2>
+
+    <div class="row material-cart">
+        <div class="col-lg-3">
+            <div class="row material-cart__image">
+                <?php
+                $imagefile = '@web/photos/' . $model->id . '.jpg';
+                $imagefile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/' . $model->id . '.jpg')) ? $imagefile : '@web/photos/_no-image.jpg';
+                echo Html::img($imagefile, ['alt' => $model->name,
+                    'title' => $model->name,
+                    'width' => '200'
+                ]);
+                ?>
+            </div>
+            <div class="row material-cart__doc">
+                <?php
+                $docfile = $_SERVER['DOCUMENT_ROOT'] . '/docs/' . $model->id . '.pdf';
+                $docfile_ = 'docs/' . $model->id . '.pdf';
+                if (file_exists($docfile)):
+                    echo Html::a(Yii::t('app', 'Open datasheet'),'@web/docs/' . $model->id . '.pdf',['target'=>'_blank']);
+                endif;?>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-9 material-cart__attributes">
+            <?php echo DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'name',
+                    'model_ref',
+                    'trade_mark',
+                    'manufacturer',
+                    'generic_usage',
+                    'function',
+                    'sap',
+                    'type',
+                    'comment_1',
+                    'comment_2:ntext',
+                ],
+            ])
+            ?>
+        </div>
+    </div>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -25,21 +71,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'model_ref',
-            'trade_mark',
-            'manufacturer',
-            'generic_usage',
-            'function',
-            'sap',
-            'type',
-            'comment_1',
-            'comment_2:ntext',
-        ],
-    ]) ?>
 
 </div>

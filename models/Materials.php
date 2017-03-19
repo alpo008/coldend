@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "materials".
@@ -22,6 +23,8 @@ use yii\db\ActiveRecord;
  */
 class Materials extends ActiveRecord
 {
+    public $imagefile;
+    public $docfile;
     /**
      * @inheritdoc
      */
@@ -36,13 +39,15 @@ class Materials extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'function'], 'required'],
+            [['id', 'name'], 'required'],
             [['id', 'sap'], 'integer'],
-            [['comment_2'], 'string'],
+            [['function', 'comment_2'], 'string'],
             [['name', 'generic_usage', 'function', 'comment_1'], 'string', 'max' => 64],
             [['model_ref'], 'string', 'max' => 40],
             [['trade_mark', 'type'], 'string', 'max' => 16],
             [['manufacturer'], 'string', 'max' => 32],
+            [['imagefile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg'],
+            [['docfile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
         ];
     }
 
@@ -53,8 +58,8 @@ class Materials extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'model_ref' => Yii::t('app', 'Model Ref'),
+            'name' => Yii::t('app', 'Material description'),
+            'model_ref' => Yii::t('app', 'Suppliers Ref'),
             'trade_mark' => Yii::t('app', 'Trade Mark'),
             'manufacturer' => Yii::t('app', 'Manufacturer'),
             'generic_usage' => Yii::t('app', 'Generic Usage'),
@@ -63,6 +68,22 @@ class Materials extends ActiveRecord
             'type' => Yii::t('app', 'Type'),
             'comment_1' => Yii::t('app', 'Comment 1'),
             'comment_2' => Yii::t('app', 'Comment 2'),
+            'imagefile' => Yii::t('app', 'Upload jpeg image'),
+            'docfile' => Yii::t('app', 'Upload datasheet')
         ];
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $imagesStoragePath = Yii::getAlias('@app/web/photos/');
+        $docsStoragePath = Yii::getAlias('@app/web/docs/');
+        if ($this->imagefile = UploadedFile::getInstance($this, 'imagefile')){
+            $this->imagefile->saveAs($imagesStoragePath . $this->id . '.' . $this->imagefile->extension);
+        }
+        if ($this->docfile = UploadedFile::getInstance($this, 'docfile')){
+            $this->docfile->saveAs($docsStoragePath . $this->id . '.' . $this->docfile->extension);
+        }
+            return true;
+    }
+
 }

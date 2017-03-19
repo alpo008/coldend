@@ -38,7 +38,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => mb_strtoupper(Yii::t('app', 'Home')), 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => mb_strtoupper(Yii::t('app', 'Materials')), 'url' => ['/materials']],
             Yii::$app->user->isGuest ? (
                 ['label' => mb_strtoupper(Yii::t('app', 'Login')), 'url' => ['/site/login']]
             ) : (
