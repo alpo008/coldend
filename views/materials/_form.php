@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use anmaslov\autocomplete\AutoComplete;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Materials */
@@ -36,6 +37,19 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'sap')->textInput() ?>
 
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'analog')->textInput()->widget(
+        AutoComplete::className(),
+        [
+            'attribute' => 'analog',
+            'name' => 'Materials[analog]',
+            'data' => $model->analogsAutocompleteList($model->type),
+            'value' => (isset ($model->analogsAutocompleteList($model->type)[$model->analog])) ? $model->analogsAutocompleteList($model->type)[$model->analog] : '',
+            'clientOptions' => [
+                'minChars' => 2,
+            ]
+        ]);
+    ?>
 
     <?= $form->field($model, 'comment_1')->textInput(['maxlength' => true]) ?>
 

@@ -86,6 +86,7 @@ class Machines extends \yii\db\ActiveRecord
     {
         if (parent::beforeSave($insert)){
             $this->to_order = (int)$this->to_order;
+            $this->to_replace = (int)$this->to_replace;
             return true;
         }else{
             return false;
@@ -106,6 +107,9 @@ class Machines extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @return array
+     */
     public function partsAutocompleteList(){
         $arr = Materials::find()
             ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])

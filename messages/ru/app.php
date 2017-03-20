@@ -262,6 +262,7 @@ return [
     'Generic Usage' => 'Область применения',
     'Function' => 'Функциональное назначение',
     'Sap' => 'Код по SAP',
+    'Analog' => 'Аналог',
     'Sap not defined' => 'Код по SAP не задан',
     'Comment 1' => 'Комментарий 1',
     'Comment 2' => 'Комментарий 2',

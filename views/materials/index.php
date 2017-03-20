@@ -18,21 +18,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Materials'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
             'model_ref',
-            'trade_mark',
+            //'trade_mark',
             'manufacturer',
-            // 'generic_usage',
+            'generic_usage',
             // 'function',
-            // 'sap',
-            // 'type',
+            'sap',
+            [
+                'attribute' => 'analog',
+                'value' => function ($searchModel) {
+                    if (!!($searchModel->analog)){
+                        $result = (array_key_exists($searchModel->analog, $searchModel->analogsAutocompleteList($searchModel->type))) ? $searchModel->analogsAutocompleteList($searchModel->type)[$searchModel->analog] : null;
+                        $result = (is_string($result)) ? explode(';', $result) :null;
+                        $result = (is_array($result)) ? trim($result[2]) : null;
+                        return (!!$result) ? Html::a(Yii::t('app', $result), ['materials/view', 'id' => $searchModel->analog]) : null;
+                    }else{
+                        return NULL;
+                    }
+                },
+
+                'format' => 'raw',
+            ],
+            'type',
             // 'comment_1',
             // 'comment_2:ntext',
 

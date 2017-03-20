@@ -19,7 +19,7 @@ class MaterialsSearch extends Materials
     {
         return [
             [['id', 'sap'], 'integer'],
-            [['name', 'model_ref', 'trade_mark', 'manufacturer', 'generic_usage', 'function', 'type', 'comment_1', 'comment_2'], 'safe'],
+            [['name', 'model_ref', 'trade_mark', 'manufacturer', 'generic_usage', 'function', 'type', 'analog', 'comment_1', 'comment_2'], 'safe'],
         ];
     }
 
@@ -61,6 +61,7 @@ class MaterialsSearch extends Materials
         $query->andFilterWhere([
             'id' => $this->id,
             'sap' => $this->sap,
+            'analog' => $this->analog,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

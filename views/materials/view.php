@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 $docfile = $_SERVER['DOCUMENT_ROOT'] . '/docs/' . $model->id . '.pdf';
                 $docfile_ = 'docs/' . $model->id . '.pdf';
                 if (file_exists($docfile)) {
-                    echo Html::a(Yii::t('app', 'Open datasheet'), '@web/docs/' . $model->id . '.pdf', ['target' => '_blank']);
+                    echo '<br />' . Html::a(Yii::t('app', 'Open datasheet'), '@web/docs/' . $model->id . '.pdf', ['target' => '_blank']);
                 }
                 ?>
             </div>
@@ -52,6 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'function',
                     'sap',
                     'type',
+                    [
+                        'attribute' => 'analog',
+                        'value' => (array_key_exists($model->analog, $model->analogsAutocompleteList($model->type))) ? $model->analogsAutocompleteList($model->type)[$model->analog] : null,
+                    ],
                     'comment_1',
                     'comment_2:ntext',
                 ],

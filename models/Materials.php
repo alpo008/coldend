@@ -18,6 +18,7 @@ use yii\web\UploadedFile;
  * @property string $function
  * @property integer $sap
  * @property string $type
+ * @property integer $analog
  * @property string $comment_1
  * @property string $comment_2
  */
@@ -45,8 +46,9 @@ class Materials extends ActiveRecord
             [['name', 'generic_usage', 'function', 'comment_1'], 'string', 'max' => 64],
             [['model_ref'], 'string', 'max' => 40],
             [['trade_mark', 'type'], 'string', 'max' => 16],
+            [['analog'], 'safe'],
             [['manufacturer'], 'string', 'max' => 32],
-            [['imagefile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg', 'maxSize' => 64*1024],
+            [['imagefile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg', 'maxSize' => 128*1024],
             [['docfile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
         ];
     }
@@ -66,6 +68,7 @@ class Materials extends ActiveRecord
             'function' => Yii::t('app', 'Function'),
             'sap' => Yii::t('app', 'Sap'),
             'type' => Yii::t('app', 'Type'),
+            'analog' => Yii::t('app', 'Analog'),
             'comment_1' => Yii::t('app', 'Comment 1'),
             'comment_2' => Yii::t('app', 'Comment 2'),
             'imagefile' => Yii::t('app', 'Upload jpeg image'),
@@ -84,6 +87,15 @@ class Materials extends ActiveRecord
             $this->docfile->saveAs($docsStoragePath . $this->id . '.' . $this->docfile->extension);
         }
             return true;
+    }
+
+    public function analogsAutocompleteList($type){
+        $arr = Materials::find()
+            ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
+            ->where(['type' => $type])
+            ->asArray()
+            ->all();
+        return array_column($arr, 'value', 'id');
     }
 
 }
