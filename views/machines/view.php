@@ -46,9 +46,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'to_replace',
                         'value' => (array_key_exists($model->to_replace, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_replace] : null,
                     ],
-
                 ],
             ]) ?>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><?= $model->attributeLabels()['comment'].':'; ?></div>
+                <div class="panel-body">
+                    <?= $model->comment; ?>
+                </div>
+            </div>
         </div>
 
         <div class="col-lg-1 col-md-1"></div>
@@ -70,8 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div id="<?= 'collapse'. $i; ?>" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <p>
-                                        HTML stands for HyperText Markup Language. HTML is the main markup language for describing the structure of Web pages.
-                                        <a href="http://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, deleniti ex natus obcaecati odio, pariatur reprehenderit.
+                                        <a href="/" target="_blank">Lorem.</a>
                                     </p>
                                 </div>
                             </div>
@@ -80,17 +86,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php endfor;?>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-lg-12 col-md12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?= $model->attributeLabels()['comment'].':'; ?></div>
-                    <div class="panel-body">
-                        <?= $model->comment; ?>
-                    </div>
-                </div
-            </div>
-        </div>
     </div>
-
 </div>

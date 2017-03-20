@@ -66,9 +66,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Ruscam-UFA 2017</p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"><a href="mailto:alexey.pozhidaev.ext@hotmail.com?subject=MYSQL">github.com/alpo008</a></p>
     </div>
 </footer>
 

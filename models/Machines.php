@@ -101,6 +101,17 @@ class Machines extends \yii\db\ActiveRecord
         }
     }
 
+    public function getUsages()
+    {
+        return $this->hasMany(Usages::className(), ['machines_id' => 'id']);
+    }
+
+    public function getMaterials()
+    {
+        return $this->hasMany(Materials::className(), ['id' => 'materials_id'])
+            ->via('usages');
+    }
+
     /**
      * @return array
      */

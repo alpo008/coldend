@@ -99,6 +99,17 @@ class Materials extends ActiveRecord
             return true;
     }
 
+    public function getUsages()
+    {
+        return $this->hasMany(Usages::className(), ['materials_id' => 'id']);
+    }
+
+    public function getMachines()
+    {
+        return $this->hasMany(Machines::className(), ['id' => 'machines_id'])
+            ->via('usages');
+    }
+
     public function analogsAutocompleteList($type){
         $arr = Materials::find()
             ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
