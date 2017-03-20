@@ -85,6 +85,8 @@ class MachinesSearch extends Machines
             ->andFilterWhere(['like', 'unit_15', $this->unit_15])
             ->andFilterWhere(['like', 'unit_16', $this->unit_16])
             ->andFilterWhere(['like', 'comment', $this->comment]);
+        //$query->joinWith('materials');
+        //$query->joinWith('usages');
 
         return $dataProvider;
     }

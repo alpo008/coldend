@@ -105,11 +105,26 @@ class Machines extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Usages::className(), ['machines_id' => 'id']);
     }
-
+    
     public function getMaterials()
     {
         return $this->hasMany(Materials::className(), ['id' => 'materials_id'])
             ->via('usages');
+    }
+
+    /**
+     * This function returns materials usage data related to unique unit on the unique machine identified by their id's 
+     * @param integer $machine
+     * @param integer $unit
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getUnitUsages($machine, $unit){
+        return Usages::find()
+            ->where(['machines_id' => $machine])
+            ->andWhere(['unit_id' => $unit])
+            ->joinWith('materials')
+            ->asArray()
+            ->all();
     }
 
     /**

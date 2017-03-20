@@ -75,10 +75,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                             <div id="<?= 'collapse'. $i; ?>" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, deleniti ex natus obcaecati odio, pariatur reprehenderit.
-                                        <a href="/" target="_blank">Lorem.</a>
-                                    </p>
+                                    <table class="table table-bordered">
+                                        <?php foreach ($model->getUnitUsages($model->id, $i) as $part): ?>
+                                            <tr>
+                                                <td>
+                                                    <?=$part['materials']['name']; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= '/materials/' . $part['materials_id'];?>"><?=$part['materials']['model_ref']; ?></a>
+                                                </td>
+                                                <td>
+                                                    <?=$part['unit_qty']; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
                                 </div>
                             </div>
                         </div>
