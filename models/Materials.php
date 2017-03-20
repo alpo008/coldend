@@ -76,6 +76,16 @@ class Materials extends ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)){
+            $this->analog = (int)$this->analog;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         $imagesStoragePath = Yii::getAlias('@app/web/photos/');

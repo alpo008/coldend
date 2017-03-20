@@ -25,39 +25,72 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'place',
-            [
-                'attribute' => 'status',
-                'value' => $model->statusNames()[$model->status],
-            ],
-            'to_do:ntext',
-            [
-                'attribute' => 'to_order',
-                'value' => (array_key_exists($model->to_order, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_order] : null,
-            ],
-            [
-                'attribute' => 'to_replace',
-                'value' => (array_key_exists($model->to_replace, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_replace] : null,
-            ],
-            'unit_01',
-            'unit_02',
-            'unit_03',
-            'unit_04',
-            'unit_05',
-            'unit_06',
-            'unit_07',
-            'unit_08',
-            'unit_09',
-            'unit_10',
-            'unit_11',
-            'unit_12',
-            'comment:ntext',
-        ],
-    ]) ?>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'name',
+                    'place',
+                    [
+                        'attribute' => 'status',
+                        'value' => $model->statusNames()[$model->status],
+                    ],
+                    'to_do:ntext',
+                    [
+                        'attribute' => 'to_order',
+                        'value' => (array_key_exists($model->to_order, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_order] : null,
+                    ],
+                    [
+                        'attribute' => 'to_replace',
+                        'value' => (array_key_exists($model->to_replace, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->to_replace] : null,
+                    ],
+
+                ],
+            ]) ?>
+        </div>
+
+        <div class="col-lg-1 col-md-1"></div>
+
+        <div class="col-lg-5 col-md-5">
+            <div id="accordion" class="panel-group">
+                <?php for ($i = 1; $i < 17; $i++):?>
+                    <?php
+                    $i = ($i < 10) ? '0' . $i : $i;
+                    $unitId = 'unit_' . $i;
+                    ?>
+                    <?php if ((!!$model->{$unitId})): ?>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="<?= '#collapse'. $i; ?>"><?= $i . '. ' . $model->{$unitId}; ?></a>
+                                </h4>
+                            </div>
+                            <div id="<?= 'collapse'. $i; ?>" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>
+                                        HTML stands for HyperText Markup Language. HTML is the main markup language for describing the structure of Web pages.
+                                        <a href="http://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endfor;?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><?= $model->attributeLabels()['comment'].':'; ?></div>
+                    <div class="panel-body">
+                        <?= $model->comment; ?>
+                    </div>
+                </div
+            </div>
+        </div>
+    </div>
 
 </div>

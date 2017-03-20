@@ -52,6 +52,14 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'unit_11') ?>
 
     <?php // echo $form->field($model, 'unit_12') ?>
+    
+    <?php // echo $form->field($model, 'unit_13') ?>
+    
+    <?php // echo $form->field($model, 'unit_14') ?>
+    
+    <?php // echo $form->field($model, 'unit_15') ?>
+    
+    <?php // echo $form->field($model, 'unit_16') ?>
 
     <?php // echo $form->field($model, 'comment') ?>
 

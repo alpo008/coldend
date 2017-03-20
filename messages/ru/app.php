@@ -281,6 +281,7 @@ return [
     'Does not work' => 'Не работает',
     'Not used, working state' => 'Не используется, исправно',
     'Not used, defective' => 'Не используется, неисправно',
+    'Main units' => 'Основные узлы',
 
 
     

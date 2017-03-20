@@ -80,6 +80,10 @@ class MachinesSearch extends Machines
             ->andFilterWhere(['like', 'unit_10', $this->unit_10])
             ->andFilterWhere(['like', 'unit_11', $this->unit_11])
             ->andFilterWhere(['like', 'unit_12', $this->unit_12])
+            ->andFilterWhere(['like', 'unit_13', $this->unit_13])
+            ->andFilterWhere(['like', 'unit_14', $this->unit_14])
+            ->andFilterWhere(['like', 'unit_15', $this->unit_15])
+            ->andFilterWhere(['like', 'unit_16', $this->unit_16])
             ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;

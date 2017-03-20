@@ -26,6 +26,10 @@ use Yii;
  * @property string $unit_10
  * @property string $unit_11
  * @property string $unit_12
+ * @property string $unit_13
+ * @property string $unit_14
+ * @property string $unit_15
+ * @property string $unit_16
  * @property string $comment
  */
 class Machines extends \yii\db\ActiveRecord
@@ -49,7 +53,7 @@ class Machines extends \yii\db\ActiveRecord
             [['to_replace', 'to_order'], 'safe'],
             [['to_do', 'comment'], 'string'],
             [['name', 'place'], 'string', 'max' => 24],
-            [['unit_01', 'unit_02', 'unit_03', 'unit_04', 'unit_05', 'unit_06', 'unit_07', 'unit_08', 'unit_09', 'unit_10', 'unit_11', 'unit_12'], 'string', 'max' => 32],
+            [['unit_01', 'unit_02', 'unit_03', 'unit_04', 'unit_05', 'unit_06', 'unit_07', 'unit_08', 'unit_09', 'unit_10', 'unit_11', 'unit_12', 'unit_13', 'unit_14', 'unit_15', 'unit_16'], 'string', 'max' => 32],
         ];
     }
 
@@ -78,7 +82,11 @@ class Machines extends \yii\db\ActiveRecord
             'unit_10' => Yii::t('app', 'Unit 10'),
             'unit_11' => Yii::t('app', 'Unit 11'),
             'unit_12' => Yii::t('app', 'Unit 12'),
-            'comment' => Yii::t('app', 'Comment'),
+            'unit_13' => Yii::t('app', 'Unit 13'),
+            'unit_14' => Yii::t('app', 'Unit 14'),
+            'unit_15' => Yii::t('app', 'Unit 15'),
+            'unit_16' => Yii::t('app', 'Unit 16'),
+            'comment' => Yii::t('app', 'Comments'),
         ];
     }
 

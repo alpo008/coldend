@@ -59,6 +59,14 @@ use anmaslov\autocomplete\AutoComplete;
             <?= $form->field($model, 'unit_11')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'unit_12')->textInput(['maxlength' => true]) ?>
+            
+            <?= $form->field($model, 'unit_13')->textInput(['maxlength' => true]) ?>
+            
+            <?= $form->field($model, 'unit_14')->textInput(['maxlength' => true]) ?>
+            
+            <?= $form->field($model, 'unit_15')->textInput(['maxlength' => true]) ?>
+            
+            <?= $form->field($model, 'unit_16')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
     <div class="row">
