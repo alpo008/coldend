@@ -69,7 +69,17 @@ class UsagesController extends Controller
         $model->machines_id = $machinesId;
         $model->unit_id = $unitId;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            //$model->save())
+
+            var_dump($model->unit_qty);
+            $existingRow = Usages::findOne(['machines_id' => $model->machines_id, 'unit_id' => $model->unit_id, 'materials_id' => $model->materials_id]);
+            if (!!$existingRow){
+                $existingRow->unit_qty += $model->unit_qty;
+                $existingRow->save();
+            }else{
+                $model->save();
+            }
             return $this->redirect(['machines/view', 'id' => $machinesId]);
         } else {
             return $this->render('create', [
@@ -95,7 +105,6 @@ class UsagesController extends Controller
             }else{
                 $model->delete();
             }
-
             return $this->redirect(['machines/view', 'id' => $machinesId]);
         } else {
             return $this->render('update', [
