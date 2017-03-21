@@ -19,6 +19,7 @@ use yii\web\UploadedFile;
  * @property integer $sap
  * @property string $type
  * @property integer $analog
+ * @property integer $minqty
  * @property string $comment_1
  * @property string $comment_2
  */
@@ -41,7 +42,7 @@ class Materials extends ActiveRecord
     {
         return [
             [['id', 'name'], 'required'],
-            [['id', 'sap'], 'integer'],
+            [['id', 'sap', 'minqty'], 'integer'],
             [['function', 'comment_2'], 'string'],
             [['name', 'generic_usage', 'function', 'comment_1'], 'string', 'max' => 64],
             [['model_ref'], 'string', 'max' => 40],
@@ -69,6 +70,7 @@ class Materials extends ActiveRecord
             'sap' => Yii::t('app', 'Sap'),
             'type' => Yii::t('app', 'Type'),
             'analog' => Yii::t('app', 'Analog'),
+            'minqty' => Yii::t('app', 'Minimal qty'),
             'comment_1' => Yii::t('app', 'Comment 1'),
             'comment_2' => Yii::t('app', 'Comment 2'),
             'imagefile' => Yii::t('app', 'Upload jpeg image'),

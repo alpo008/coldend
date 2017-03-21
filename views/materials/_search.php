@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'trade_mark') ?>
 
+    <?= $form->field($model, 'minqty') ?>
+
     <?= $form->field($model, 'manufacturer') ?>
 
     <?php // echo $form->field($model, 'generic_usage') ?>

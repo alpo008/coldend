@@ -18,6 +18,7 @@ class m170320_120306_materials extends Migration
               `sap` int(12) DEFAULT NULL,
               `type` varchar(16) DEFAULT NULL,
               `analog` int(3) DEFAULT NULL,
+              `minqty` int(4) NOT NULL DEFAULT '0',
               `comment_1` varchar(64) DEFAULT NULL,
               `comment_2` text
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

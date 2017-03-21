@@ -56,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'analog',
                         'value' => (array_key_exists($model->analog, $model->analogsAutocompleteList($model->type))) ? $model->analogsAutocompleteList($model->type)[$model->analog] : null,
                     ],
+                    'minqty',
                     'comment_1',
                     'comment_2:ntext',
                 ],

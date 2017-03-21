@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'model_ref',
             //'trade_mark',
             'manufacturer',
-            'generic_usage',
+            //'generic_usage',
             // 'function',
             'sap',
             [
@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'format' => 'raw',
             ],
+            'minqty',
             'type',
             // 'comment_1',
             // 'comment_2:ntext',

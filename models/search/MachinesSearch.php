@@ -63,7 +63,7 @@ class MachinesSearch extends Machines
             'status' => $this->status,
             'to_replace' => $this->to_replace,
             'to_order' => $this->to_order,
-        ]);
+            ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'place', $this->place])
