@@ -20,7 +20,7 @@ use anmaslov\autocomplete\AutoComplete;
     ]);
     ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <?php //$form->field($model, 'id')->textInput() ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -43,7 +43,7 @@ use anmaslov\autocomplete\AutoComplete;
         [
             'attribute' => 'analog',
             'name' => 'Materials[analog]',
-            'data' => $model->analogsAutocompleteList($model->type),
+            'data' => (isset ($model->type)) ? $model->analogsAutocompleteList($model->type) : $model->analogsAutocompleteList(false),
             'value' => (isset ($model->analogsAutocompleteList($model->type)[$model->analog])) ? $model->analogsAutocompleteList($model->type)[$model->analog] : '',
             'clientOptions' => [
                 'minChars' => 2,

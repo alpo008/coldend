@@ -41,7 +41,7 @@ class Materials extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name'], 'required'],
+            [['name'], 'required'],
             [['id', 'sap', 'minqty'], 'integer'],
             [['function', 'comment_2'], 'string'],
             [['name', 'generic_usage', 'function', 'comment_1'], 'string', 'max' => 64],
@@ -101,6 +101,16 @@ class Materials extends ActiveRecord
             return true;
     }
 
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()){
+            Usages::deleteAll(['materials_id' => $this->id]);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getUsages()
     {
         return $this->hasMany(Usages::className(), ['materials_id' => 'id']);
@@ -113,11 +123,18 @@ class Materials extends ActiveRecord
     }
 
     public function analogsAutocompleteList($type){
-        $arr = Materials::find()
-            ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
-            ->where(['type' => $type])
-            ->asArray()
-            ->all();
+        if (!!$type) {
+            $arr = Materials::find()
+                ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
+                ->where(['type' => $type])
+                ->asArray()
+                ->all();
+        }else{
+            $arr = Materials::find()
+                ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
+                ->asArray()
+                ->all();
+        }
         return array_column($arr, 'value', 'id');
     }
 

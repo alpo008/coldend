@@ -101,6 +101,16 @@ class Machines extends \yii\db\ActiveRecord
         }
     }
 
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()){
+            Usages::deleteAll(['machines_id' => $this->id]);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getUsages()
     {
         return $this->hasMany(Usages::className(), ['machines_id' => 'id']);

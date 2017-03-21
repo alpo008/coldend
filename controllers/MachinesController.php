@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use Yii;
+use yii;
 use app\models\Machines;
 use app\models\search\MachinesSearch;
 use yii\web\Controller;

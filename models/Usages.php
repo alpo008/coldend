@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use yii;
 
 /**
  * This is the model class for table "usages".
