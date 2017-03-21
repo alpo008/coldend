@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'name',
-                    'place',
+                    //'name',
+                    //'place',
                     [
                         'attribute' => 'status',
                         'value' => $model->statusNames()[$model->status],
@@ -87,9 +87,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <td>
                                                     <?=$part['unit_qty']; ?>
                                                 </td>
+                                                <td>
+                                                    <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['usages/delete', 'id' => $part['id']]);?>
+                                                </td>
+                                                <td>
+                                                    <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['usages/update', 'id' => $part['id']]);?>
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </table>
+                                    <?= Html::a('<span class="glyphicon glyphicon-plus-sign">', ['usages/create', 'id' => $model->id .'-' .$i]);?>
                                 </div>
                             </div>
                         </div>

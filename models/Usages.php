@@ -3,6 +3,9 @@
 namespace app\models;
 
 use yii;
+use yii\db\ActiveRecord;
+use app\traits\AutocompleteTrait;
+
 
 /**
  * This is the model class for table "usages".
@@ -13,8 +16,9 @@ use yii;
  * @property integer $materials_id
  * @property integer $unit_qty
  */
-class Usages extends \yii\db\ActiveRecord
+class Usages extends ActiveRecord
 {
+    use AutocompleteTrait;
     /**
      * @inheritdoc
      */
@@ -29,8 +33,9 @@ class Usages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['machines_id', 'unit_id', 'materials_id', 'unit_qty'], 'required'],
-            [['machines_id', 'unit_id', 'materials_id', 'unit_qty'], 'integer'],
+            [['unit_id', 'materials_id', 'unit_qty'], 'required'],
+            [['machines_id', 'unit_id', 'unit_qty'], 'integer'],
+            [['materials_id', 'machines_id'], 'safe'],
         ];
     }
 
@@ -46,6 +51,16 @@ class Usages extends \yii\db\ActiveRecord
             'materials_id' => Yii::t('app', 'Materials ID'),
             'unit_qty' => Yii::t('app', 'Unit Qty'),
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)){
+            $this->materials_id = (int)$this->materials_id;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function getMaterials()

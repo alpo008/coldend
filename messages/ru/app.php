@@ -282,7 +282,7 @@ return [
     'Not used, working state' => 'Не используется, исправно',
     'Not used, defective' => 'Не используется, неисправно',
     'Main units' => 'Основные узлы',
-
+    'Unit Qty' => 'Используемое количество',
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',

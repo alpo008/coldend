@@ -5,6 +5,7 @@ namespace app\models;
 use yii;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
+use app\traits\AutocompleteTrait;
 
 /**
  * This is the model class for table "materials".
@@ -25,6 +26,8 @@ use yii\web\UploadedFile;
  */
 class Materials extends ActiveRecord
 {
+    use AutocompleteTrait;
+
     public $imagefile;
     public $docfile;
     /**
@@ -121,21 +124,4 @@ class Materials extends ActiveRecord
         return $this->hasMany(Machines::className(), ['id' => 'machines_id'])
             ->via('usages');
     }
-
-    public function analogsAutocompleteList($type){
-        if (!!$type) {
-            $arr = Materials::find()
-                ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
-                ->where(['type' => $type])
-                ->asArray()
-                ->all();
-        }else{
-            $arr = Materials::find()
-                ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
-                ->asArray()
-                ->all();
-        }
-        return array_column($arr, 'value', 'id');
-    }
-
 }

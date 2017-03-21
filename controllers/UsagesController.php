@@ -2,17 +2,17 @@
 
 namespace app\controllers;
 
-use yii;
-use app\models\Machines;
-use app\models\search\MachinesSearch;
+use Yii;
+use app\models\Usages;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MachinesController implements the CRUD actions for Machines model.
+ * UsagesController implements the CRUD actions for Usages model.
  */
-class MachinesController extends Controller
+class UsagesController extends Controller
 {
     /**
      * @inheritdoc
@@ -23,29 +23,29 @@ class MachinesController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['GET'],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all Machines models.
+     * Lists all Usages models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MachinesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Usages::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Machines model.
+     * Displays a single Usages model.
      * @param integer $id
      * @return mixed
      */
@@ -57,24 +57,29 @@ class MachinesController extends Controller
     }
 
     /**
-     * Creates a new Machines model.
+     * Creates a new Usages model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new Machines();
+        $machinesId = explode('-', $id)[0];
+        $unitId = explode('-', $id)[1];
+        $model = new Usages();
+        $model->machines_id = $machinesId;
+        $model->unit_id = $unitId;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['machines/view', 'id' => $machinesId]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+               'model' => $model,
             ]);
         }
     }
 
     /**
-     * Updates an existing Machines model.
+     * Updates an existing Usages model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,9 +87,16 @@ class MachinesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $machinesId = $model->machines_id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->unit_qty > 0){
+                $model->save();
+            }else{
+                $model->delete();
+            }
+
+            return $this->redirect(['machines/view', 'id' => $machinesId]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,28 +105,29 @@ class MachinesController extends Controller
     }
 
     /**
-     * Deletes an existing Machines model.
+     * Deletes an existing Usages model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $usage = $this->findModel($id);
+        $machinesId = $usage->machines_id;
+        $usage->delete();
+        return $this->redirect(['machines/view', 'id' => $machinesId]);
     }
 
     /**
-     * Finds the Machines model based on its primary key value.
+     * Finds the Usages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Machines the loaded model
+     * @return Usages the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Machines::findOne($id)) !== null) {
+        if (($model = Usages::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

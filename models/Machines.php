@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii;
+use app\traits\AutocompleteTrait;
 
 /**
  * This is the model class for table "machines".
@@ -34,6 +35,8 @@ use Yii;
  */
 class Machines extends \yii\db\ActiveRecord
 {
+    use AutocompleteTrait;
+    
     /**
      * @inheritdoc
      */
@@ -154,11 +157,6 @@ class Machines extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public function partsAutocompleteList(){
-        $arr = Materials::find()
-            ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
-            ->asArray()
-            ->all();
-        return array_column($arr, 'value', 'id');
-    }
+
+
 }
