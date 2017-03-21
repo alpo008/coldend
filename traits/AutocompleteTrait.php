@@ -13,6 +13,9 @@ use app\models\Materials;
 
 trait AutocompleteTrait
 {
+    /**
+     * @return array
+     */
     public function partsAutocompleteList(){
         $arr = Materials::find()
             ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
@@ -21,6 +24,10 @@ trait AutocompleteTrait
         return array_column($arr, 'value', 'id');
     }
 
+    /**
+     * @param string $type
+     * @return array
+     */
     public function analogsAutocompleteList($type){
         if (!!$type) {
             $arr = Materials::find()
@@ -28,12 +35,10 @@ trait AutocompleteTrait
                 ->where(['type' => $type])
                 ->asArray()
                 ->all();
+            return array_column($arr, 'value', 'id');
         }else{
-            $arr = Materials::find()
-                ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
-                ->asArray()
-                ->all();
+            return self::partsAutocompleteList();
         }
-        return array_column($arr, 'value', 'id');
+
     }
 }
