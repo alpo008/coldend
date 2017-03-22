@@ -1,7 +1,10 @@
 <?php
 
+use anmaslov\autocomplete\AutoComplete;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Machines */
@@ -97,6 +100,39 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php endforeach; ?>
                                     </table>
                                     <?= Html::a('<span class="glyphicon glyphicon-plus-sign">', ['usages/create', 'id' => $model->id .'-' .$i]);?>
+                                    <?php $usagesModel->unit_id = $i;
+                                    $usagesModel->machines_id = $model->id;
+                                    ?>
+                                    <div class="create-form display-none">
+                                        <?php Pjax::begin(); ?>
+                                        <?php $form = ActiveForm::begin(['action' => '/usages/create', 'options' => ['data-pjax' => true]]); ?>
+
+                                        <?php echo $form->field($usagesModel, 'machines_id')->textInput(['class' => 'hidden'])->label('', ['class' => 'hidden']) ?>
+
+                                        <?php echo $form->field($usagesModel, 'unit_id')->textInput(['class' => 'hidden'])->label('', ['class' => 'hidden']) ?>
+
+                                        <?= $form->field($usagesModel, 'materials_id', ['options' => ['id' => 'usages-materials_id' . $i]])->textInput(['options' => ['id' => 'usages-materials_id' . $i]])->widget(
+                                            AutoComplete::className(),
+                                            [
+                                                'attribute' => 'materials_id',
+                                                'name' => 'Usages[materials_id]',
+                                                'data' => $usagesModel->partsAutocompleteList(),
+                                                'value' => (isset ($usagesModel->partsAutocompleteList()[$usagesModel->materials_id])) ? $usagesModel->partsAutocompleteList()[$usagesModel->materials_id] : '',
+                                                'clientOptions' => [
+                                                    'minChars' => 2,
+                                                ]
+                                            ]);
+                                        ?>
+
+                                        <?= $form->field($usagesModel, 'unit_qty')->textInput() ?>
+                                        <div class="form-group">
+                                            <?= Html::submitButton($usagesModel->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $usagesModel->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                                        </div>
+                                        <?php ActiveForm::end(); ?>
+                                        <?php Pjax::end(); ?>
+                                    </div>
+                                
+                                
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Usages;
 use yii;
 use app\models\Machines;
 use app\models\search\MachinesSearch;
@@ -51,8 +52,10 @@ class MachinesController extends Controller
      */
     public function actionView($id)
     {
+        $usagesModel = new Usages();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'usagesModel' => $usagesModel
         ]);
     }
 

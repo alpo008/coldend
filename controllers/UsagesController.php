@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use Yii;
+use yii;
 use app\models\Usages;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -61,18 +61,11 @@ class UsagesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $machinesId = explode('-', $id)[0];
-        $unitId = explode('-', $id)[1];
         $model = new Usages();
-        $model->machines_id = $machinesId;
-        $model->unit_id = $unitId;
-
-        if ($model->load(Yii::$app->request->post())) {
-            //$model->save())
-
-            var_dump($model->unit_qty);
+        if ($model->load(Yii::$app->request->post())){
+            $machinesId = $model->machines_id;
             $existingRow = Usages::findOne(['machines_id' => $model->machines_id, 'unit_id' => $model->unit_id, 'materials_id' => $model->materials_id]);
             if (!!$existingRow){
                 $existingRow->unit_qty += $model->unit_qty;
@@ -81,11 +74,10 @@ class UsagesController extends Controller
                 $model->save();
             }
             return $this->redirect(['machines/view', 'id' => $machinesId]);
-        } else {
-            return $this->render('create', [
-               'model' => $model,
-            ]);
+        }else{
+            return new NotFoundHttpException();
         }
+
     }
 
     /**
