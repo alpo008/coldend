@@ -114,6 +114,16 @@ a.desc:after {
     outline: none;
 }
 
-.display-none{
+.form-opener{
+    color: #337ab7;
+    cursor: pointer;
+}
+.form-opener:hover{
+    color: #23527c;
+}
+.create-form{
     display: none;
+}
+.display-block{
+    display: block!important;
 }
