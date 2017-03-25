@@ -76,7 +76,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Ruscam-UFA 2017</p>
 
-        <p class="pull-right"><a href="mailto:alexey.pozhidaev.ext@hotmail.com?subject=MYSQL">github.com/alpo008</a></p>
+        <p class="pull-right"><a href="mailto:alexey.pozhidaev.ext@hotmail.com?subject=RUSCAM MYSQL">github.com/alpo008</a></p>
     </div>
 </footer>
 
