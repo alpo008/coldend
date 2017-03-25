@@ -124,4 +124,10 @@ class Materials extends ActiveRecord
         return $this->hasMany(Machines::className(), ['id' => 'machines_id'])
             ->via('usages');
     }
+    
+    public  function  typesDropdown () {
+        $typesArray = Mattypes::find()->asArray()->all();
+        $typesArray = array_column($typesArray, 'type_name', 'type_name');
+        return $typesArray;
+    }
 }

@@ -36,7 +36,7 @@ use anmaslov\autocomplete\AutoComplete;
 
     <?= $form->field($model, 'sap')->textInput() ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList($model->typesDropdown()) ?>
 
     <?= $form->field($model, 'analog')->textInput()->widget(
         AutoComplete::className(),
