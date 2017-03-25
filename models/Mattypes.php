@@ -27,6 +27,7 @@ class Mattypes extends \yii\db\ActiveRecord
     {
         return [
             [['type_name'], 'required'],
+            [['type_name'], 'unique'],
             [['id'], 'integer'],
             [['type_name'], 'string', 'max' => 16],
         ];

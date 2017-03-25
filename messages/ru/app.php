@@ -175,7 +175,7 @@ return [
     'The image "{file}" is too small. The width cannot be smaller than {limit, number} {limit, plural, one{pixel} other{pixels}}.' => 'Файл «{file}» слишком маленький. Ширина должна быть более {limit, number} {limit, plural, one{пиксель} few{пикселя} many{пикселей} other{пикселя}}.',
     'The requested view "{name}" was not found.' => 'Запрашиваемый файл представления "{name}" не найден.',
     'The verification code is incorrect.' => 'Неправильный проверочный код.',
-    'Total <b>{count, number}</b> {count, plural, one{item} other{items}}.' => 'Всего <b>{count, number}</b> {count, plural, one{запись} few{записи} many{записей} other{записи}}.',
+    'Total <b>{count, number}</b> {count, plural, one{item} other{items}}.' => 'Всего <b>{count, number}</b> {count, plural, one{запись} few{записи} many{записей} other{запись}}.',
     'Unable to verify your data submission.' => 'Не удалось проверить переданные данные.',
     'Unknown option: --{name}' => 'Неизвестная опция: --{name}',
     'Update' => 'Редактировать',
@@ -285,6 +285,7 @@ return [
     'Unit Qty' => 'Используется',
     'Options' => 'Служебные',
     'Materials types' => 'Типы материалов',
+    'Type Name' => 'Обозначение типа',
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
