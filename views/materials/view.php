@@ -1,5 +1,6 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -75,6 +76,48 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+
+    <div id="accordion" class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><?= Yii::t('app', 'Using in machines'); ?></a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <?php foreach ($model->machines as $machine): ?>
+                        <tr>
+                            <td>
+                                <?= Html::a($machine->name, ['machines/view', 'id' => $machine->id]); ?>
+                            </td>
+                            <td>
+                                <?= $machine->place; ?>
+                            </td>
+                            <td>
+                                <?php foreach ($model->usages as $usage){
+                                    if ($usage->unit_id < 10){
+                                        $unitId = 'unit_0' . $usage->unit_id;
+                                    }else{
+                                    $unitId = 'unit_' . $usage->unit_id;
+                                    }
+                                    echo $machine->{$unitId} . '&nbsp;' . '|' . '&nbsp;';
+                                } ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <?php
+    foreach ($model->machines as $machine){
+
+    };
+    ?>
 
 
 </div>
