@@ -52,10 +52,29 @@ class MachinesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         $usagesModel = new Usages();
+        if ($usagesModel->load(Yii::$app->request->post())) {
+            $machinesId = $usagesModel->machines_id;
+            $existingRow = Usages::findOne(['machines_id' => $usagesModel->machines_id, 'unit_id' => $usagesModel->unit_id, 'materials_id' => $usagesModel->materials_id]);
+            if (!!$existingRow) {
+                $existingRow->unit_qty += $usagesModel->unit_qty;
+                if ($existingRow->unit_qty == 0){
+                    $existingRow->delete();
+                }else{
+                $existingRow->save();
+                }
+            } else {
+                $usagesModel->save();
+            }
+            $usagesModel = new Usages();
+        }
+        $existingUsages = Usages::find()->where(['machines_id' => $id]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'usagesModel' => $usagesModel
+            'model' => $model,
+            'usagesModel' => $usagesModel,
+            'existingUsages' => $existingUsages,
         ]);
     }
 

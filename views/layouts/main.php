@@ -39,6 +39,14 @@ AppAsset::register($this);
             ['label' => mb_strtoupper(Yii::t('app', 'Home')), 'url' => ['/site/index']],
             ['label' => mb_strtoupper(Yii::t('app', 'Machines')), 'url' => ['/machines']],
             ['label' => mb_strtoupper(Yii::t('app', 'Materials')), 'url' => ['/materials']],
+            [
+                'label' => mb_strtoupper(Yii::t('app', 'Options')),
+                'items' => [
+                    ['label' => Yii::t('app', 'Materials types'), 'url' => '/mattypes'],
+                    ['label' => '---', 'url' => '#'],
+
+                ],
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => mb_strtoupper(Yii::t('app', 'Login')), 'url' => ['/site/login']]
             ) : (
