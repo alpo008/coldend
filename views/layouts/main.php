@@ -53,7 +53,7 @@ AppAsset::register($this);
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    mb_strtoupper(Yii::t('app', 'Logout')) . ' (' . Yii::$app->user->identity->username . ')',
+                    mb_strtoupper(Yii::t('app', 'Logout')) . ' (' . Yii::$app->user->identity->surname . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

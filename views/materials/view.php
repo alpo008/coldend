@@ -113,11 +113,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     </div>
-    <?php
-    foreach ($model->machines as $machine){
-
-    };
-    ?>
-
-
 </div>

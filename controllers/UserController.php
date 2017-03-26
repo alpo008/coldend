@@ -3,18 +3,17 @@
 namespace app\controllers;
 
 use yii;
-use app\models\Materials;
-use app\models\search\MaterialsSearch;
+use app\models\User;
+use app\models\search\UserSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\User;
 
 /**
- * MaterialsController implements the CRUD actions for Materials model.
+ * UserController implements the CRUD actions for User model.
  */
-class MaterialsController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,7 +29,7 @@ class MaterialsController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['view', 'create', 'update', 'delete'],
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -55,7 +54,7 @@ class MaterialsController extends Controller
     }
 
     /**
-     * Lists all Materials models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
@@ -63,7 +62,8 @@ class MaterialsController extends Controller
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         };
-        $searchModel = new MaterialsSearch();
+        
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -73,7 +73,7 @@ class MaterialsController extends Controller
     }
 
     /**
-     * Displays a single Materials model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      */
@@ -85,13 +85,13 @@ class MaterialsController extends Controller
     }
 
     /**
-     * Creates a new Materials model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Materials();
+        $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -103,7 +103,7 @@ class MaterialsController extends Controller
     }
 
     /**
-     * Updates an existing Materials model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -122,7 +122,7 @@ class MaterialsController extends Controller
     }
 
     /**
-     * Deletes an existing Materials model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -135,15 +135,15 @@ class MaterialsController extends Controller
     }
 
     /**
-     * Finds the Materials model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Materials the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Materials::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

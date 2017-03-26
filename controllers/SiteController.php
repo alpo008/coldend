@@ -60,7 +60,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest){
+            return $this->actionLogin();
+        }elseif (Yii::$app->user->identity->role === 'ADMIN' || Yii::$app->user->identity->role === 'ENGINEER'){
         return $this->render('index');
+        }
     }
 
     /**
@@ -68,6 +72,8 @@ class SiteController extends Controller
      *
      * @return string
      */
+
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
