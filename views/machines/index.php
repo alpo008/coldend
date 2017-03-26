@@ -60,7 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'unit_16',
             // 'comment:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\models\CustomActionColumn',
+                'filter' =>     '<a href="/machines"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

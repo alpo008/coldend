@@ -43,7 +43,11 @@ AppAsset::register($this);
                 'label' => mb_strtoupper(Yii::t('app', 'Options')),
                 'items' => [
                     ['label' => Yii::t('app', 'Materials types'), 'url' => '/mattypes'],
-                    ['label' => '---', 'url' => '#'],
+                    ['label' => Yii::t('app', 'Users'), 'url' => '/user',
+                        'options' => [
+                            'class' => (Yii::$app->user->identity['role'] != 'ADMIN' && Yii::$app->user->identity['role'] != 'ENGINEER') ? 'hidden' : '',
+                        ]
+                    ],
 
                 ],
             ],

@@ -230,6 +230,7 @@ class User extends ActiveRecord implements IdentityInterface
         return array (
             'ADMIN' => 'ADMIN',
             'ENGINEER' => 'ENGINEER',
+            'MASTER' => 'MASTER',
             'OPERATOR' => 'OPERATOR',
          );
     }
@@ -248,11 +249,15 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => true,
                     'delete' => true,
                 ),
-                'movements' => array(
+                'machines' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => true,
                     'update' => true,
+                    'delete' => true,
+                ),
+                'mattypes' => array(
+                    'index' =>true,
                     'delete' => true,
                 ),
                 'orders' => array(
@@ -286,12 +291,16 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => true,
                     'delete' => true,
                 ),
-                'movements' => array(
+                'machines' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => false,
-                    'delete' => false,
+                    'update' => true,
+                    'delete' => true,
+                ),
+                'mattypes' => array(
+                    'index' =>true,
+                    'delete' => true,
                 ),
                 'orders' => array(
                     'index' =>true,
@@ -316,6 +325,48 @@ class User extends ActiveRecord implements IdentityInterface
                 ),
             ),
 
+            'MASTER' => array(
+                'materials' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
+                    'delete' => true,
+                ),
+                'machines' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
+                    'delete' => true,
+                ),
+                'mattypes' => array(
+                    'index' =>true,
+                    'delete' => true,
+                ),
+                'orders' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
+                    'delete' => false,
+                ),
+                'stocks' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
+                    'delete' => true,
+                ),
+                'user' => array(
+                    'index' =>false,
+                    'view' => false,
+                    'create' => false,
+                    'update' => false,
+                    'delete' => false,
+                ),
+            ),
+
             'OPERATOR' => array(
                 'materials' => array(
                     'index' =>true,
@@ -324,11 +375,15 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => false,
                     'delete' => false,
                 ),
-                'movements' => array(
+                'machines' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => true,
                     'update' => false,
+                    'delete' => false,
+                ),
+                'mattypes' => array(
+                    'index' =>true,
                     'delete' => false,
                 ),
                 'orders' => array(

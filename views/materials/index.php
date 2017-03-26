@@ -54,7 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'comment_1',
             // 'comment_2:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\models\CustomActionColumn',
+                'filter' =>     '<a href="/user"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

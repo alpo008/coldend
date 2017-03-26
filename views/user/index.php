@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -32,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'role',
             // 'created',
 
-            ['class' => 'app\models\custom\CustomActionColumn',
+            ['class' => 'app\models\CustomActionColumn',
                 'filter' =>     '<a href="/user"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
             ],
         ],
