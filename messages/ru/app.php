@@ -287,6 +287,12 @@ return [
     'Materials types' => 'Типы материалов',
     'Type Name' => 'Обозначение типа',
     'Using in machines' => 'Где применяется',
+    'HOME' =>'ГЛАВНАЯ',
+    'MACHINES' => 'МАШИНЫ',
+    'MATERIALS' => 'МАТЕРИАЛЫ',
+    'OPTIONS' => 'СЛУЖЕБНЫЕ',
+    'LOGIN' => 'ВХОД',
+    'LOGOUT' => 'ВЫХОД',
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',

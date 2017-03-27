@@ -127,3 +127,8 @@ a.desc:after {
 .display-block{
     display: block!important;
 }
+.autocomplete-suggestions {
+    background: #ccc;
+    height: 300px;
+    overflow: hidden;
+}

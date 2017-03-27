@@ -8,7 +8,7 @@ class m170326_094857_user extends Migration
     {
         $this->execute("
             CREATE TABLE `coldendspares`.`user` (
-              `id` int(11) NOT NULL,
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
               `name` varchar(25) NOT NULL,
               `surname` varchar(35) NOT NULL,
               `email` varchar(50) NOT NULL,

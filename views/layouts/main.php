@@ -36,11 +36,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => mb_strtoupper(Yii::t('app', 'Home')), 'url' => ['/site/index']],
-            ['label' => mb_strtoupper(Yii::t('app', 'Machines')), 'url' => ['/machines']],
-            ['label' => mb_strtoupper(Yii::t('app', 'Materials')), 'url' => ['/materials']],
+            ['label' => (Yii::t('app', 'HOME')), 'url' => ['/site/index']],
+            ['label' => (Yii::t('app', 'MACHINES')), 'url' => ['/machines']],
+            ['label' => (Yii::t('app', 'MATERIALS')), 'url' => ['/materials']],
             [
-                'label' => mb_strtoupper(Yii::t('app', 'Options')),
+                'label' => (Yii::t('app', 'OPTIONS')),
                 'items' => [
                     ['label' => Yii::t('app', 'Materials types'), 'url' => '/mattypes'],
                     ['label' => Yii::t('app', 'Users'), 'url' => '/user',
@@ -52,12 +52,12 @@ AppAsset::register($this);
                 ],
             ],
             Yii::$app->user->isGuest ? (
-                ['label' => mb_strtoupper(Yii::t('app', 'Login')), 'url' => ['/site/login']]
+                ['label' => (Yii::t('app', 'LOGIN')), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    mb_strtoupper(Yii::t('app', 'Logout')) . ' (' . Yii::$app->user->identity->surname . ')',
+                    (Yii::t('app', 'LOGOUT')) . ' (' . Yii::$app->user->identity->surname . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
