@@ -10,8 +10,11 @@
         oldQuantity : function (object){
             return parseInt($(object).find('.old-qty').html());
         },
-        inputGroups : function (object) {
-            return $(object).parents('.panel-collapse').find('.create-form').find('input').parent().find('input');
+        sendForm : function (object, offset) {
+            var $inputsGroup = $(object).parents('.panel-collapse').find('.create-form').find('input').parent().find('input');
+            $($inputsGroup[3]).val(object.id);
+            $($inputsGroup[4]).val(offset);
+            $(object).parents('.panel-collapse').find('.create-form').find('button').click();
         }
     };
 
@@ -22,31 +25,23 @@
     });
 
     $(document).on('click', '.usages-edit', function(){
-        var partId = parseInt(this.id);
         var $gridViewRow = $(this).parents('tr');
         var newQty = UsagesView.newQuantity($gridViewRow);
         var oldQty = UsagesView.oldQuantity($gridViewRow);
         var offsettQty = newQty - oldQty;
-        if (newQty < 1 ){
+        if (newQty < 1 || offsettQty == 0 ){
             alert ('Такое изменение невозможно или бессмысленно!')
         }else{
             if (confirm('Количество будет установлено равным.' + ' ' + newQty + '.')){
-                var $inputsGroup = UsagesView.inputGroups(this);
-                $($inputsGroup[3]).val(partId);
-                $($inputsGroup[4]).val(offsettQty);
-                $(this).parents('.panel-collapse').find('.create-form').find('button').click();
+                UsagesView.sendForm(this, offsettQty);
             }
         }
     });
     $(document).on('click', '.usages-delete', function(){
-        var partId = parseInt(this.id);
         var $gridViewRow = $(this).parents('tr');
         var offsettQty = - UsagesView.oldQuantity($gridViewRow);
-        var $inputsGroup = UsagesView.inputGroups(this);
-        $($inputsGroup[3]).val(partId);
-        $($inputsGroup[4]).val(offsettQty);
         if (confirm('Пожалуйста, подтвердите удаление.')){
-            $(this).parents('.panel-collapse').find('.create-form').find('button').click();
+            UsagesView.sendForm(this, offsettQty);
         }
     });
 
