@@ -25,7 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'name',
+            [
+                'attribute' => 'name',
+                'value' => function ($searchModel) {
+                    return ( Html::a(Yii::t('app', $searchModel->name), ['machines/view', 'id' => $searchModel->id]));
+                },
+
+                'format' => 'raw',
+            ],
             'place',
             [
                 'attribute' => 'status',

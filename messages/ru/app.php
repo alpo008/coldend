@@ -282,7 +282,7 @@ return [
     'Not used, working state' => 'Не используется, исправно',
     'Not used, defective' => 'Не используется, неисправно',
     'Main units' => 'Основные узлы',
-    'Unit Qty' => 'Используется',
+    'Unit Qty' => 'Сколько в узле',
     'Options' => 'Служебные',
     'Materials types' => 'Типы материалов',
     'Type Name' => 'Обозначение типа',
@@ -293,6 +293,7 @@ return [
     'OPTIONS' => 'СЛУЖЕБНЫЕ',
     'LOGIN' => 'ВХОД',
     'LOGOUT' => 'ВЫХОД',
+    'Materials type' => 'Тип материала',
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',

@@ -1,7 +1,8 @@
 <?php
 use anmaslov\autocomplete\AutoComplete;
 use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Html;
+//use yii\bootstrap\Html;
+use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -111,11 +112,38 @@ $this->registerJs(
                                     'value' => function ($unitModel) use($usagesModel) {
                                         $str = $usagesModel->partsAutocompleteList()[$unitModel->materials_id];
                                         $arr = explode (';', $str);
-                                        return $arr[1] . ';' . $arr[2];
+                                        return Html::a($arr[1] . ';' . $arr[2], ['materials/view', 'id' => $unitModel->materials_id]);
                                     },
+                                    'format' => 'raw',
 
                                 ],
-                                'unit_qty',
+
+                                [
+                                'attribute' => 'unit_qty',
+                                'value' => function ($unitModel) use($usagesModel) {
+                                    $str = $usagesModel->partsAutocompleteList()[$unitModel->materials_id];
+                                    $arr = explode (';', $str);
+                                    return Html::input('text', 'username', $unitModel->unit_qty, ['class' => 'usages-qty']);
+                                },
+                                'format' => 'raw',
+
+                            ],
+                                [
+                                    'label' => '',
+                                    'format' => 'raw',
+                                    'value' => function($unitModel){
+                                        return Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil usages-edit', 'id' => $unitModel->materials_id . '_e']);
+                                    },
+                                    'format' => 'raw',
+                                ],
+                                [
+                                    'label' => '',
+                                    'format' => 'raw',
+                                    'value' => function($unitModel){
+                                        return Html::tag('span', '', ['class' => 'glyphicon glyphicon-trash usages-delete', 'id' => $unitModel->materials_id . '_d']);
+                                    },
+                                    'format' => 'raw',
+                                ],
                             ],
                         ]) ?>
                         <?php Pjax::end(); ?>

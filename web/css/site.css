@@ -114,11 +114,11 @@ a.desc:after {
     outline: none;
 }
 
-.form-opener{
+.form-opener, .usages-edit, .usages-delete{
     color: #337ab7;
     cursor: pointer;
 }
-.form-opener:hover{
+.form-opener:hover, .usages-edit:hover, .usages-delete:hover{
     color: #23527c;
 }
 .create-form{
@@ -131,4 +131,7 @@ a.desc:after {
     background: #ccc;
     height: 300px;
     overflow: hidden;
+}
+.usages-qty{
+    width: 45px;
 }

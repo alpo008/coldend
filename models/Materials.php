@@ -71,7 +71,7 @@ class Materials extends ActiveRecord
             'generic_usage' => Yii::t('app', 'Generic Usage'),
             'function' => Yii::t('app', 'Function'),
             'sap' => Yii::t('app', 'Sap'),
-            'type' => Yii::t('app', 'Type'),
+            'type' => Yii::t('app', 'Materials type'),
             'analog' => Yii::t('app', 'Analog'),
             'minqty' => Yii::t('app', 'Minimal qty'),
             'comment_1' => Yii::t('app', 'Comment 1'),

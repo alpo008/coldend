@@ -27,7 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'name',
+            [
+                'attribute' => 'name',
+                'value' => function ($searchModel) {
+                        return ( Html::a(Yii::t('app', $searchModel->name), ['materials/view', 'id' => $searchModel->id]));
+                },
+
+                'format' => 'raw',
+            ],
+
             'model_ref',
             //'trade_mark',
             'manufacturer',
@@ -50,7 +58,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
             'minqty',
-            'type',
+            [
+                'attribute' => 'type',
+                /**
+                 * Отображение фильтра.
+                 * Вместо поля для ввода - выпадающий список с заданными значениями directions
+                 */
+                'filter' => $searchModel->typesDropdown(),
+            ],
             // 'comment_1',
             // 'comment_2:ntext',
 
