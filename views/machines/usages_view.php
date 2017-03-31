@@ -10,72 +10,72 @@ use yii\widgets\Pjax;
 $this->registerJs(
     '$("document").ready(function(){
         $("#accordion").find("a").on("click", function(){
-        $(".display-block").toggleClass("display-block");
+        $(".display-block").removeClass("display-block");
         });
     
         $("#usages-form_01").on("pjax:end", function() {
         $.pjax.reload({container:"#usages-table_01",timeout:1000});
-        $(this).parent().toggleClass("display-block");
+        $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_02").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_02",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_03").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_03",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_04").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_04",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_05").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_05",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_06").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_06",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_07").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_07",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_08").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_08",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_09").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_09",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_10").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_10",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_11").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_11",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_12").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_12",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_13").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_13",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_14").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_14",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });            
         $("#usages-form_15").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_15",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });        
         $("#usages-form_16").on("pjax:end", function() {
             $.pjax.reload({container:"#usages-table_16",timeout:1000});
-            $(this).parent().toggleClass("display-block");
+            $(this).parent().removeClass("display-block");
         });
     });'
 );
@@ -127,10 +127,9 @@ $this->registerJs(
                                 },
                                 'format' => 'raw',
 
-                            ],
+                                ],
                                 [
                                     'label' => '',
-                                    'format' => 'raw',
                                     'value' => function($unitModel){
                                         return Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil usages-edit', 'id' => $unitModel->materials_id . '_e']);
                                     },
@@ -138,9 +137,15 @@ $this->registerJs(
                                 ],
                                 [
                                     'label' => '',
-                                    'format' => 'raw',
                                     'value' => function($unitModel){
                                         return Html::tag('span', '', ['class' => 'glyphicon glyphicon-trash usages-delete', 'id' => $unitModel->materials_id . '_d']);
+                                    },
+                                    'format' => 'raw',
+                                ],
+                                [
+                                    'label' => '',
+                                    'value' => function($unitModel){
+                                        return Html::tag('div', $unitModel->unit_qty, ['class' => 'old-qty hidden']);
                                     },
                                     'format' => 'raw',
                                 ],
