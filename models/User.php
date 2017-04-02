@@ -267,11 +267,11 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => true,
                     'delete' => true,
                 ),
-                'stocks' => array(
+                'incoms' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => true,
+                    'update' => false,
                     'delete' => true,
                 ),
                 'user' => array(
@@ -309,11 +309,11 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => true,
                     'delete' => false,
                 ),
-                'stocks' => array(
+                'incoms' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => true,
+                    'update' => false,
                     'delete' => true,
                 ),
                 'user' => array(
@@ -351,12 +351,12 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => true,
                     'delete' => false,
                 ),
-                'stocks' => array(
+                'incoms' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => true,
-                    'delete' => true,
+                    'update' => false,
+                    'delete' => false,
                 ),
                 'user' => array(
                     'index' =>false,
@@ -393,11 +393,11 @@ class User extends ActiveRecord implements IdentityInterface
                     'update' => false,
                     'delete' => false,
                 ),
-                'stocks' => array(
+                'incoms' => array(
                     'index' =>true,
                     'view' => true,
-                    'create' => true,
-                    'update' => true,
+                    'create' => false,
+                    'update' => false,
                     'delete' => false,
                 ),
                 'user' => array(

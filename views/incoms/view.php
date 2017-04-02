@@ -28,11 +28,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'materials_id',
+            //'id',
+            [
+                'attribute' => 'materials_id',
+                'value' => (array_key_exists($model->materials_id, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$model->materials_id] : $model->materials_id,
+            ],
             'qty',
-            'came_from',
-            'came_to',
+            [
+                'attribute' => 'came_from',
+                'value' => (array_key_exists($model->came_from, $model->fromDropdown())) ? $model->fromDropdown()[$model->came_from] : $model->came_from,
+            ],
+            [
+                'attribute' => 'came_to',
+                'value' => (array_key_exists($model->came_to, $model->toDropdown())) ? $model->toDropdown()[$model->came_to] : $model->came_to,
+            ],
             'responsible',
             'trans_date',
             'ref_doc',

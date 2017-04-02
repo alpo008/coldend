@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'generic_usage',
             // 'function',
             'sap',
-            [
+/*            [
                 'attribute' => 'analog',
                 'value' => function ($searchModel) {
                     if (!!($searchModel->analog)){
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
 
                 'format' => 'raw',
-            ],
+            ],*/
             'minqty',
             [
                 'attribute' => 'unit',

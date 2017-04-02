@@ -49,7 +49,7 @@ class Materials extends ActiveRecord
         return [
             [['name'], 'required'],
             [['id', 'sap', 'unit'], 'integer'],
-            [['minqty', 'at_stock', 'at_dept'], 'number'],
+            [['minqty', 'at_stock', 'at_dept'], 'number', 'min' => 0],
             [['function', 'comment_2'], 'string'],
             [['name', 'generic_usage', 'function', 'comment_1'], 'string', 'max' => 64],
             [['model_ref'], 'string', 'max' => 40],
@@ -144,6 +144,11 @@ class Materials extends ActiveRecord
      */
     public function getChildren (){
         return $this->hasMany(Relations::className(),['parent_id' => 'id']);
+    }
+
+    public function getIncoms()
+    {
+        return $this->hasMany(Incoms::className(), ['materials_id' => 'id']);
     }
 
     /**

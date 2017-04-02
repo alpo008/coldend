@@ -301,8 +301,22 @@ return [
     'Choice of materials' => 'Выбор материалов',
     'Relation type' => 'Чем является по отношению к данному материалу',
     'At stock' => 'На складе',
-    'At department' => 'В отделе',
-
+    'At department' => 'На участке',
+    'Supplier' => 'Поставщик',
+    'Factory stock' => 'Заводской склад',
+    'Second hand' => 'Склад б/у запчастей',
+    'Department' => 'Участок',
+    'Materials table' => 'Таблица материалов',
+    'Materials incoms' => 'Приход материалов',
+    'Materials outlays' => 'Расход материалов',
+    'Came From' => 'Откуда поступил',
+    'Came To' => 'Куда поступил',
+    'Responsible' => 'Кто принял',
+    'Trans Date' => 'Дата операции',
+    'Ref Doc' => 'Номер заявки',
+    'Create Incoms' => 'Создать запись о поступлении',
+    
+ 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
     'You can upload at most {limit, number} {limit, plural, one{file} other{files}}.' => 'Вы не можете загружать более {limit, number} {limit, plural, one{файла} few{файлов} many{файлов} other{файла}}.',

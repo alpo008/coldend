@@ -38,8 +38,14 @@ AppAsset::register($this);
         'items' => [
             ['label' => (Yii::t('app', 'HOME')), 'url' => ['/site/index']],
             ['label' => (Yii::t('app', 'MACHINES')), 'url' => ['/machines']],
-            ['label' => (Yii::t('app', 'MATERIALS')), 'url' => ['/materials']],
             [
+                'label' => (Yii::t('app', 'MATERIALS')),
+                'items' => [
+                    ['label' => Yii::t('app', 'Materials table'), 'url' => ['/materials'] ],
+                    ['label' => Yii::t('app', 'Materials incoms'), 'url' => ['/incoms'] ],
+                    ['label' => Yii::t('app', 'Materials outlays'), 'url' => ['/outlays'] ],
+                ],
+            ],            [
                 'label' => (Yii::t('app', 'OPTIONS')),
                 'items' => [
                     ['label' => Yii::t('app', 'Materials types'), 'url' => '/mattypes'],

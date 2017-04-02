@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\search\IncomsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Incoms');
+$this->title = Yii::t('app', 'Materials incoms');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="incoms-index">
@@ -24,17 +24,43 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'materials_id',
+            //'id',
+            [
+                'attribute' => 'materials_id',
+                'value' => function ($searchModel) {
+                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), ['materials/view', 'id' => $searchModel->id]));
+                },
+
+                'format' => 'raw',
+            ],
             'qty',
-            'came_from',
-            'came_to',
-            // 'responsible',
-            // 'trans_date',
-            // 'ref_doc',
+            [
+                'attribute' => 'came_from',
+                'value' => function ($searchModel) {
+                    return Yii::t('app', $searchModel->fromDropdown()[$searchModel->came_from]);
+                },
+
+                'format' => 'raw',
+                'filter' => $searchModel->fromDropdown(),
+            ],
+            [
+                'attribute' => 'came_to',
+                'value' => function ($searchModel) {
+                    return Yii::t('app', $searchModel->toDropdown()[$searchModel->came_to]);
+                },
+
+                'format' => 'raw',
+                'filter' => $searchModel->toDropdown(),
+            ],
+            'responsible',
+            'trans_date',
+            'ref_doc',
             // 'comment:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\models\CustomActionColumn',
+                'buttons' => ['update' => function(){return false;}],
+                'filter' =>     '<a href="/incoms"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

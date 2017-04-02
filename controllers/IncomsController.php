@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
-use Yii;
+use app\models\User;
+use yii;
 use app\models\Incoms;
 use app\models\search\IncomsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,29 @@ class IncomsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['site/login'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::checkRights(Yii::$app->user->identity['role'], $this->uniqueId, $action->id);
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['logout'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
         ];
     }
 
