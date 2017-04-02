@@ -59,6 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'minqty',
             [
+                'attribute' => 'unit',
+                'value' => function ($searchModel) {
+                    return $searchModel->unitsDropdown()[$searchModel->unit];
+                },
+
+                'filter' => $searchModel->unitsDropdown(),
+            ],
+
+            'at_stock',
+            'at_dept',
+            [
                 'attribute' => 'type',
                 /**
                  * Отображение фильтра.
@@ -70,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'comment_2:ntext',
 
             ['class' => 'app\models\CustomActionColumn',
-                'filter' =>     '<a href="/user"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+                'filter' =>     '<a href="/materials"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
             ],
         ],
     ]); ?>

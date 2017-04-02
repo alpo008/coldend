@@ -45,20 +45,32 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php echo DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'id',
-                    'name',
+                    //'id',
+                    //'name',
                     'model_ref',
                     'trade_mark',
                     'manufacturer',
                     'generic_usage',
                     'function',
-                    'sap',
+                    //'sap',
                     'type',
                     [
                         'attribute' => 'analog',
                         'value' => (array_key_exists($model->analog, $model->analogsAutocompleteList($model->type))) ? $model->analogsAutocompleteList($model->type)[$model->analog] : null,
                     ],
-                    'minqty',
+                    [
+                        'attribute' => 'minqty',
+                        'value' => (array_key_exists($model->unit, $model->unitsDropdown())) ? $model->minqty . ' ' . $model->unitsDropdown()[$model->unit] : $model->minqty,
+                    ],
+                    [
+                        'attribute' => 'at_stock',
+                        'value' => (array_key_exists($model->unit, $model->unitsDropdown())) ? $model->at_stock . ' ' . $model->unitsDropdown()[$model->unit] : $model->at_stock,
+                    ],
+                    [
+                        'attribute' => 'at_dept',
+                        'value' => (array_key_exists($model->unit, $model->unitsDropdown())) ? $model->at_dept . ' ' . $model->unitsDropdown()[$model->unit] : $model->at_dept,
+                    ],
+
                     'comment_1',
                     'comment_2:ntext',
                 ],

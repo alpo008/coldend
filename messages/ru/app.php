@@ -300,6 +300,8 @@ return [
     'Part Type' => 'Чем является',
     'Choice of materials' => 'Выбор материалов',
     'Relation type' => 'Чем является по отношению к данному материалу',
+    'At stock' => 'На складе',
+    'At department' => 'В отделе',
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',

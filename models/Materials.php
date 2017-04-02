@@ -23,6 +23,7 @@ use app\traits\AutocompleteTrait;
  * @property number $minqty
  * @property number $at_stock
  * @property number $at_dept
+ * @property integer $unit
  * @property string $comment_1
  * @property string $comment_2
  */
@@ -132,15 +133,6 @@ class Materials extends ActiveRecord
     }
 
     /**
-     * @return array|yii\db\ActiveRecord[]
-     */
-    public  function  typesDropdown () {
-        $typesArray = Mattypes::find()->asArray()->all();
-        $typesArray = array_column($typesArray, 'type_name', 'type_name');
-        return $typesArray;
-    }
-
-    /**
      * @return yii\db\ActiveQuery
      */
     public function getParents (){
@@ -152,5 +144,24 @@ class Materials extends ActiveRecord
      */
     public function getChildren (){
         return $this->hasMany(Relations::className(),['parent_id' => 'id']);
+    }
+
+    /**
+     * @return array|yii\db\ActiveRecord[]
+     */
+    public  function  typesDropdown () {
+        $typesArray = Mattypes::find()->asArray()->all();
+        $typesArray = array_column($typesArray, 'type_name', 'type_name');
+        return $typesArray;
+    }    
+    
+    public  function  unitsDropdown () {
+        return array (
+            0 => 'ШТ',
+            1 => 'М',
+            2 => 'ПАР',
+            3 => 'КГ',
+            4 => 'Л'
+        );
     }
 }

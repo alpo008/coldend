@@ -52,7 +52,13 @@ use anmaslov\autocomplete\AutoComplete;
     ?>
 
     <?= $form->field($model, 'minqty')->textInput(['maxlength' => true]) ?>
-    
+
+    <?= $form->field($model, 'unit')->dropDownList($model->unitsDropdown()) ?>
+
+    <?= $form->field($model, 'at_stock')->textInput(['maxlength' => true, 'disabled' => true]) ?>
+
+    <?= $form->field($model, 'at_dept')->textInput(['maxlength' => true, 'disabled' => true]) ?>
+
     <?= $form->field($model, 'comment_1')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'comment_2')->textarea(['rows' => 6]) ?>

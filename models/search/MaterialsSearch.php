@@ -18,7 +18,8 @@ class MaterialsSearch extends Materials
     public function rules()
     {
         return [
-            [['id', 'sap', 'minqty'], 'integer'],
+            [['id', 'sap', 'unit'], 'integer'],
+            [['at_stock', 'at_dept', 'minqty'], 'integer'],
             [['name', 'model_ref', 'trade_mark', 'manufacturer', 'generic_usage', 'function', 'type', 'analog', 'comment_1', 'comment_2'], 'safe'],
         ];
     }
@@ -63,6 +64,9 @@ class MaterialsSearch extends Materials
             'sap' => $this->sap,
             'analog' => $this->analog,
             'minqty' => $this->minqty,
+            'at_stock' => $this->at_stock,
+            'at_dept' => $this->at_dept,
+            'unit' => $this->unit,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
