@@ -1,8 +1,8 @@
 <?php
 
-use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Materials */
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]);
                 ?>
             </div>
+            <br />
             
             <div class="row material-cart__doc">
                 <?php
@@ -77,6 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php if (!!$model->machines): ?>
     <div id="accordion" class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -111,6 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-
     </div>
+    <?php endif; ?>
+    <?php include 'relations_view.php'; ?>
 </div>

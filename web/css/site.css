@@ -114,11 +114,11 @@ a.desc:after {
     outline: none;
 }
 
-.form-opener, .usages-edit, .usages-delete{
+.form-opener, .usages-edit, .usages-delete, .relations-delete{
     color: #337ab7;
     cursor: pointer;
 }
-.form-opener:hover, .usages-edit:hover, .usages-delete:hover{
+.form-opener:hover, .usages-edit:hover, .usages-delete:hover, .relations-delete:hover{
     color: #23527c;
 }
 .create-form{

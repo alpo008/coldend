@@ -18,6 +18,33 @@
         }
     };
 
+    var RelationsView = {
+        hideShowInput : function (n, m, v) {
+            var $formGroup = $('#relations-form');
+            var $inputsGroup = $($formGroup).find('input');
+            var $labelsGroup = $($formGroup).find('label');
+            $($inputsGroup[n]).hide();
+            $($inputsGroup[n]).val(v);
+            $($labelsGroup[n-1]).hide();
+            $($inputsGroup[m]).show();
+            $($inputsGroup[m]).val(null);
+            $($labelsGroup[m-1]).show();
+        },
+        unitId : function () {
+            return $('#relations-form').find('.unit-id').html();
+        },
+        sendDelete : function (object, row, primaryId){
+            var $inputsGroup = $('#relations-form').find('input');
+            var $dataGroup =($(row).children('td'));
+            var secondaryId = parseInt($($dataGroup[1]).find('a').html());
+            $($inputsGroup[2]).val('del');
+            $($inputsGroup[3]).val('del');
+            $($inputsGroup[4]).val(primaryId);
+            $($inputsGroup[5]).val(secondaryId);
+            $(object).parents('.panel-collapse').find('.create-form').find('button').click();
+        }
+    };
+
     $('.form-opener').on('click', function (event) {
        event.preventDefault();
         var $formToOpen = $(this).next('.create-form')[0];
@@ -25,6 +52,7 @@
     });
 
     $(document).on('click', '.usages-edit', function(){
+        console.log(this);
         var $gridViewRow = $(this).parents('tr');
         var newQty = UsagesView.newQuantity($gridViewRow);
         var oldQty = UsagesView.oldQuantity($gridViewRow);
@@ -37,6 +65,7 @@
             }
         }
     });
+
     $(document).on('click', '.usages-delete', function(){
         var $gridViewRow = $(this).parents('tr');
         var offsettQty = - UsagesView.oldQuantity($gridViewRow);
@@ -44,5 +73,24 @@
             UsagesView.sendForm(this, offsettQty);
         }
     });
+
+    $(document).on('click', 'form input:radio', function(){
+        var partKind = $(this).val();
+        if (partKind == 'parent'){
+            RelationsView.hideShowInput(5, 4, RelationsView.unitId());
+        }
+        if (partKind == 'child'){
+            RelationsView.hideShowInput(4, 5, RelationsView.unitId());
+        }
+    });
+
+    $(document).on('click', '.relations-delete', function(){
+        var $gridViewRow = $(this).parents('tr');
+
+        if (confirm('Пожалуйста, подтвердите удаление.')){
+            RelationsView.sendDelete(this, $gridViewRow, RelationsView.unitId());
+        }
+    });
+
 
 })(jQuery);

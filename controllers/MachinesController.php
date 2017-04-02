@@ -84,7 +84,6 @@ class MachinesController extends Controller
         $model = $this->findModel($id);
         $usagesModel = new Usages();
         if ($usagesModel->load(Yii::$app->request->post())) {
-            $machinesId = $usagesModel->machines_id;
             $existingRow = Usages::findOne(['machines_id' => $usagesModel->machines_id, 'unit_id' => $usagesModel->unit_id, 'materials_id' => $usagesModel->materials_id]);
             if (!!$existingRow) {
                 $existingRow->unit_qty += $usagesModel->unit_qty;

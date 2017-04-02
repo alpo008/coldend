@@ -294,6 +294,12 @@ return [
     'LOGIN' => 'ВХОД',
     'LOGOUT' => 'ВЫХОД',
     'Materials type' => 'Тип материала',
+    'Materials related to this one' => 'Материалы, имеющие отношение к данному материалу',
+    'Parent ID' => 'Базовые блоки',
+    'Child ID' => 'Запасные части',
+    'Part Type' => 'Чем является',
+    'Choice of materials' => 'Выбор материалов',
+    'Relation type' => 'Чем является по отношению к данному материалу',
 
     
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',

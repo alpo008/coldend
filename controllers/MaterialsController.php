@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\User;
+use app\models\Relations;
 
 /**
  * MaterialsController implements the CRUD actions for Materials model.
@@ -79,8 +80,39 @@ class MaterialsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $relationsModel = new Relations();
+        if ($relationsModel->load(Yii::$app->request->post())) {
+            $existingRow1 = Relations::findOne(['parent_id' => $relationsModel->parent_id, 'child_id' => $relationsModel->child_id]);
+            $existingRow2 = Relations::findOne(['parent_id' => $relationsModel->child_id, 'child_id' => $relationsModel->parent_id]);
+            if ($relationsModel->partType == 'del'){
+                if (!!$existingRow1){
+                    $existingRow1->delete();
+                }
+                if (!!$existingRow2){
+                    $existingRow2->delete();
+                }
+
+            }elseif (!$existingRow1 && !$existingRow2){
+                $relationsModel->save();
+            }
+        }
+
+        if (!!$model->getChildren()->one() && !$model->getParents()->one()){
+            $relationsModel->partType = 'parent';
+            $existingRelations = $model->getChildren();
+        }elseif (!$model->getChildren()->one() && !!$model->getParents()->one()){
+            $existingRelations = $model->getParents();
+            $relationsModel->partType = 'child';
+        }else{
+            $existingRelations = NULL;
+            $relationsModel->partType = NULL;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'relationsModel' => $relationsModel,
+            'existingRelations' => $existingRelations,
         ]);
     }
 

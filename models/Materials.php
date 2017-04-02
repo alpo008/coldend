@@ -124,10 +124,27 @@ class Materials extends ActiveRecord
         return $this->hasMany(Machines::className(), ['id' => 'machines_id'])
             ->via('usages');
     }
-    
+
+    /**
+     * @return array|yii\db\ActiveRecord[]
+     */
     public  function  typesDropdown () {
         $typesArray = Mattypes::find()->asArray()->all();
         $typesArray = array_column($typesArray, 'type_name', 'type_name');
         return $typesArray;
+    }
+
+    /**
+     * @return yii\db\ActiveQuery
+     */
+    public function getParents (){
+        return $this->hasMany(Relations::className(),['child_id' => 'id']);
+    }
+
+    /**
+     * @return yii\db\ActiveQuery
+     */
+    public function getChildren (){
+        return $this->hasMany(Relations::className(),['parent_id' => 'id']);
     }
 }
