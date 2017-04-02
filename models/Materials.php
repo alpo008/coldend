@@ -20,7 +20,9 @@ use app\traits\AutocompleteTrait;
  * @property integer $sap
  * @property string $type
  * @property integer $analog
- * @property integer $minqty
+ * @property number $minqty
+ * @property number $at_stock
+ * @property number $at_dept
  * @property string $comment_1
  * @property string $comment_2
  */
@@ -45,7 +47,8 @@ class Materials extends ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['id', 'sap', 'minqty'], 'integer'],
+            [['id', 'sap', 'unit'], 'integer'],
+            [['minqty', 'at_stock', 'at_dept'], 'number'],
             [['function', 'comment_2'], 'string'],
             [['name', 'generic_usage', 'function', 'comment_1'], 'string', 'max' => 64],
             [['model_ref'], 'string', 'max' => 40],
@@ -74,6 +77,9 @@ class Materials extends ActiveRecord
             'type' => Yii::t('app', 'Materials type'),
             'analog' => Yii::t('app', 'Analog'),
             'minqty' => Yii::t('app', 'Minimal qty'),
+            'at_stock' => Yii::t('app', 'At stock'),
+            'at_dept' => Yii::t('app', 'At department'),
+            'unit' => Yii::t('app', 'Unit'),
             'comment_1' => Yii::t('app', 'Comment 1'),
             'comment_2' => Yii::t('app', 'Comment 2'),
             'imagefile' => Yii::t('app', 'Upload jpeg image'),
