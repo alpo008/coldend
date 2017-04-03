@@ -37,7 +37,7 @@ class Incoms extends \yii\db\ActiveRecord
         return [
             [['qty', 'came_from', 'came_to', 'responsible', 'trans_date'], 'required'],
             [['came_from', 'came_to'], 'integer'],
-            [['qty'], 'number', 'min' => 0],
+            [['qty'], 'number', 'min' => 1],
             [['materials_id', 'trans_date'], 'safe'],
             [['comment'], 'string'],
             [['responsible'], 'string', 'max' => 64],
@@ -65,16 +65,25 @@ class Incoms extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert) && $this->came_from != $this->came_to){
-            $result = true;
+        if (parent::beforeSave($insert)){
+            if($this->came_to == 1 && $this->came_from == 1){
+                echo "<script>alert('Обратите внимание на поля ОТКУДА и КУДА!');</script>";
+                return false;
+            }
             $this->materials_id = (int) $this->materials_id;
+            if (!array_key_exists($this->materials_id, $this->partsAutocompleteList())){
+                echo "<script>alert('Такого материала не существует!');</script>";
+                return false;
+            }
+            $result = true;
+
             if ($this->came_to == 1){
                 if ($material = Materials::findOne(['id' => $this->materials_id])){
                     $material->at_stock += $this->qty;
                     $result = $material->save();
                 }
             }
-            if ($this->came_to == 0){
+            if ($this->came_to == 0 && $this->came_from != 1){
                 if ($material = Materials::findOne(['id' => $this->materials_id])){
                     $material->at_dept += $this->qty;
                     $result = $material->save();
@@ -82,8 +91,16 @@ class Incoms extends \yii\db\ActiveRecord
             }
             if ($this->came_from == 1){
                 if ($material = Materials::findOne(['id' => $this->materials_id])){
+                    if ($material->at_stock < $this->qty){
+                        echo "<script>alert('На складе нет такого количества материала!');</script>";
+                        return false;
+                    }else{
+                        if ($this->came_to == 0){
+                            $material->at_dept += $this->qty;
+                        }
                     $material->at_stock -= $this->qty;
                     $result = $material->save();
+                    }
                 }
             }
             return $result;
