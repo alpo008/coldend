@@ -30,6 +30,10 @@ use anmaslov\autocomplete\AutoComplete;
             <?= $form->field($model, 'to_do')->textarea(['rows' => 6]) ?>
 
             <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+
+            <?= $form->field($model, 'photofile')->fileInput() ?>
+
+            <?= $form->field($model, 'schemafile')->fileInput() ?>
         </div>
 
         <div class="col-lg-2 col-md-2"></div>

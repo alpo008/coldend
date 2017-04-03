@@ -135,3 +135,13 @@ a.desc:after {
 .usages-qty{
     width: 45px;
 }
+.machine-cart__image a img{
+    border: 2px solid #337ab7;;
+    cursor: zoom-in;
+}
+.machine-cart__image .machine-cart__schema{
+    padding-left: 10px;
+}
+.machine-cart__image a img:hover{
+    border: 2px solid #23527c;
+}

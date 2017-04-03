@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii;
 use app\traits\AutocompleteTrait;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "machines".
@@ -36,6 +37,8 @@ use app\traits\AutocompleteTrait;
 class Machines extends \yii\db\ActiveRecord
 {
     use AutocompleteTrait;
+    public $photofile;
+    public $schemafile;
     
     /**
      * @inheritdoc
@@ -57,6 +60,8 @@ class Machines extends \yii\db\ActiveRecord
             [['to_do', 'comment'], 'string'],
             [['name', 'place'], 'string', 'max' => 24],
             [['unit_01', 'unit_02', 'unit_03', 'unit_04', 'unit_05', 'unit_06', 'unit_07', 'unit_08', 'unit_09', 'unit_10', 'unit_11', 'unit_12', 'unit_13', 'unit_14', 'unit_15', 'unit_16'], 'string', 'max' => 32],
+            [['photofile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg', 'maxSize' => 512*1024],
+            [['schemafile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 4096*1024],
         ];
     }
 
@@ -90,6 +95,8 @@ class Machines extends \yii\db\ActiveRecord
             'unit_15' => Yii::t('app', 'Unit 15'),
             'unit_16' => Yii::t('app', 'Unit 16'),
             'comment' => Yii::t('app', 'Comments'),
+            'photofile' => Yii::t('app', 'Upload jpeg image'),
+            'schemafile' => Yii::t('app', 'Upload schema')
         ];
     }
 
@@ -102,6 +109,19 @@ class Machines extends \yii\db\ActiveRecord
         }else{
             return false;
         }
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $imagesStoragePath = Yii::getAlias('@app/web/photos_/');
+        $schemasStoragePath = Yii::getAlias('@app/web/schemas/');
+        if ($this->photofile = UploadedFile::getInstance($this, 'photofile')){
+            $this->photofile->saveAs($imagesStoragePath . $this->id . '.' . $this->photofile->extension);
+        }
+        if ($this->schemafile = UploadedFile::getInstance($this, 'schemafile')){
+            $this->schemafile->saveAs($schemasStoragePath . $this->id . '.' . $this->schemafile->extension);
+        }
+        return true;
     }
 
     public function beforeDelete()

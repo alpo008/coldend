@@ -1,5 +1,6 @@
 <?php
 
+use anmaslov\autocomplete\AutoComplete;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -28,10 +29,20 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'materials_id',
                 'value' => function ($searchModel) {
-                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), ['materials/view', 'id' => $searchModel->id]));
+                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), ['materials/view', 'id' => $searchModel->materials_id]));
                 },
 
                 'format' => 'raw',
+                'filter' => \anmaslov\autocomplete\AutoComplete::widget(
+                    [
+
+                        'attribute' => 'materials_id',
+                        'name' => 'IncomsSearch[materials_id]',
+                        'data' => $searchModel->partsAutocompleteList(),
+                        'clientOptions' => [
+                            'minChars' => 2,
+                        ]
+                    ])
             ],
             'qty',
             [

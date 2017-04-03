@@ -30,6 +30,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5 col-md-5">
+                <div class="machine-cart__image">
+                    <?php
+                    $imagefile = '@web/photos_/' . $model->id . '.jpg';
+                    $imagefile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos_/' . $model->id . '.jpg')) ? $imagefile : '@web/photos_/_no-image.jpg';
+                    if (!!$imagefile) {
+                        echo '<br />' . Html::a(Html::img($imagefile, ['alt' => $model->name,
+                                'title' => $model->name,
+                                'width' => '200',
+                            ]), '@web/photos_/' . $model->id . '.jpg', ['target' => '_blank']);
+                    }
+                    ?>
+                </div>
+                <br/>
+
+                <div class="machine-cart__schema">
+                    <?php
+                    $docfile = $_SERVER['DOCUMENT_ROOT'] . '/schemas/' . $model->id . '.pdf';
+                    $docfile_ = 'schemas/' . $model->id . '.pdf';
+                    if (file_exists($docfile)) {
+                        echo '<br />' . Html::a(Yii::t('app', 'Open datasheet'), '@web/schemas/' . $model->id . '.pdf', ['target' => '_blank']);
+                    }
+                    ?>
+                </div>
+
+        </div>
+        <div class="col-lg-5 col-md-5">
 
             <?= DetailView::widget([
                 'model' => $model,
