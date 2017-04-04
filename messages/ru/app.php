@@ -317,6 +317,10 @@ return [
     'Ref Doc' => 'Номер заявки',
     'Create Incoms' => 'Создать запись о поступлении',
     'See schema' => 'Открыть схему',
+    'Came from and Came to can not be same' => 'Поля Откуда поступил и Куда поступил не могут совпадать!',
+    'Such material does not exist in the list' => 'Данный материал отсутствует в списке!',
+    'The stock rest id only' => 'Остаток на складе составляет только',
+    'un.' => 'ед.',
     
  
     

@@ -70,7 +70,8 @@ class IncomsSearch extends Incoms
 
         $query->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['like', 'ref_doc', $this->ref_doc])
-            ->andFilterWhere(['like', 'comment', $this->comment]);
+            ->andFilterWhere(['like', 'comment', $this->comment])
+            ->orderBy('id DESC');
 
 
         return $dataProvider;

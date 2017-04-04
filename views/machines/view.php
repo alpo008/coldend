@@ -56,13 +56,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="machine-cart__image">
                     <?php
                     $imagefile = '@web/photos_/' . $model->id . '.jpg';
-                    $imagefile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos_/' . $model->id . '.jpg')) ? $imagefile : '@web/photos_/_no-image.jpg';
-                    if (!!$imagefile) {
+                    $imagefile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos_/' . $model->id . '.jpg')) ? $imagefile : '@web/photos/_no-image.jpg';
                         echo '<br />' . Html::a(Html::img($imagefile, ['alt' => $model->name,
                                 'title' => Yii::t('app', 'See schema'),
                                 'width' => '200',
                             ]), '@web/photos_/' . $model->id . '.jpg', ['target' => '_blank']);
-                    }
                     ?>
                 </div>
                 <br/>

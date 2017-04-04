@@ -42,7 +42,30 @@ class Incoms extends \yii\db\ActiveRecord
             [['comment'], 'string'],
             [['responsible'], 'string', 'max' => 64],
             [['ref_doc'], 'string', 'max' => 16],
+            ['came_to', 'validateCameTo'],
+            ['materials_id', 'validateMaterial'],
+            ['qty', 'validateQty'],
         ];
+    }
+
+    public function validateCameTo(){
+        if ($this->came_to == 1 && $this->came_from == 1){
+            $this->addError('came_to', Yii::t('app', 'Came from and Came to can not be same'));
+        }
+    }
+
+    public  function  validateMaterial(){
+        if (!array_key_exists((int)$this->materials_id, $this->partsAutocompleteList())){
+            $this->addError('materials_id', Yii::t('app', 'Such material does not exist in the list'));
+        }
+
+    }
+
+    public  function  validateQty(){
+        if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
+            $this->addError('materials_id', Yii::t('app', 'The stock rest id only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
+        }
+
     }
 
     /**
@@ -66,15 +89,9 @@ class Incoms extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)){
-            if($this->came_to == 1 && $this->came_from == 1){
-                echo "<script>alert('Обратите внимание на поля ОТКУДА и КУДА!');</script>";
-                return false;
-            }
+
             $this->materials_id = (int) $this->materials_id;
-            if (!array_key_exists($this->materials_id, $this->partsAutocompleteList())){
-                echo "<script>alert('Такого материала не существует!');</script>";
-                return false;
-            }
+
             $result = true;
 
             if ($this->came_to == 1){
@@ -91,16 +108,11 @@ class Incoms extends \yii\db\ActiveRecord
             }
             if ($this->came_from == 1){
                 if ($material = Materials::findOne(['id' => $this->materials_id])){
-                    if ($material->at_stock < $this->qty){
-                        echo "<script>alert('На складе нет такого количества материала!');</script>";
-                        return false;
-                    }else{
-                        if ($this->came_to == 0){
-                            $material->at_dept += $this->qty;
-                        }
-                    $material->at_stock -= $this->qty;
-                    $result = $material->save();
+                    if ($this->came_to == 0){
+                        $material->at_dept += $this->qty;
                     }
+                $material->at_stock -= $this->qty;
+                $result = $material->save();
                 }
             }
             return $result;
