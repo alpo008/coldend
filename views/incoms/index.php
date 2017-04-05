@@ -19,6 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Incoms'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?php if ($message = Yii::$app->session->getFlash('incom_delete_error')){
+        echo "<script>alert('$message');</script>";
+    }
+    ?>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -26,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
+            'trans_date',
             [
                 'attribute' => 'materials_id',
                 'value' => function ($searchModel) {
@@ -64,7 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => $searchModel->toDropdown(),
             ],
             'responsible',
-            'trans_date',
             'ref_doc',
             // 'comment:ntext',
 

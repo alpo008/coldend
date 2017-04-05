@@ -123,37 +123,41 @@ class Incoms extends \yii\db\ActiveRecord
 
     public function beforeDelete()
     {
-
-        $result = parent::beforeDelete();
-/*        if (self::findOne(['>', 'id', $this->id])){
-
+        $laterEntries = self::getLaterEntries($this->id, $this->materials_id);
+        if (parent::beforeDelete() && !$laterEntries) {
+              $this->materials_id = (int)$this->materials_id;
+            if ($this->came_to == 1) {
+                if ($material = Materials::findOne(['id' => $this->materials_id])) {
+                    $material->at_stock -= $this->qty;
+                    $material->save();
+                }
+            }
+            if ($this->came_to == 0) {
+                if ($material = Materials::findOne(['id' => $this->materials_id])) {
+                    $material->at_dept -= $this->qty;
+                    $material->save();
+                }
+            }
+            if ($this->came_from == 1) {
+                if ($material = Materials::findOne(['id' => $this->materials_id])) {
+                    $material->at_stock += $this->qty;
+                    $material->save();
+                }
+            }
+            return true;
+        }else{
             return false;
-        }*/
-        $this->materials_id = (int) $this->materials_id;
-        if ($this->came_to == 1){
-            if ($material = Materials::findOne(['id' => $this->materials_id])){
-                $material->at_stock -= $this->qty;
-                $result = $material->save();
-            }
         }
-        if ($this->came_to == 0){
-            if ($material = Materials::findOne(['id' => $this->materials_id])){
-                $material->at_dept -= $this->qty;
-                $result = $material->save();
-            }
-        }
-        if ($this->came_from == 1){
-            if ($material = Materials::findOne(['id' => $this->materials_id])){
-                $material->at_stock += $this->qty;
-                $result = $material->save();
-            }
-        }
-        return $result;
+
     }
 
     public function getMaterials()
     {
         return $this->hasOne(Materials::className(), ['id' => 'materials_id']);
+    }
+
+    public static function getLaterEntries ($id, $material){
+        return self::find()->where(['>', 'id', $id])->andWhere(['materials_id' => $material])->one();
     }
 
     /**

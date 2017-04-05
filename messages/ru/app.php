@@ -322,6 +322,7 @@ return [
     'The stock rest id only' => 'Остаток на складе составляет только',
     'un.' => 'ед.',
     'This material has relations and can not be deleted!' => 'Данный материал связан с другими записями и не может быть удален!',
+    'There are later entries concerning this material. It can not be deleted!' => 'Есть более поздние записи о поступлении данного материала. Выбранная запись не может быть удалена!',
     
  
     
