@@ -18,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Materials'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php if ($message = Yii::$app->session->getFlash('material_delete_error')){
+        echo "<script>alert('$message');</script>";
+    }
+    ?>
 
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
@@ -85,4 +89,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
 <?php Pjax::end(); ?></div>

@@ -123,7 +123,12 @@ class Incoms extends \yii\db\ActiveRecord
 
     public function beforeDelete()
     {
+
         $result = parent::beforeDelete();
+/*        if (self::findOne(['>', 'id', $this->id])){
+
+            return false;
+        }*/
         $this->materials_id = (int) $this->materials_id;
         if ($this->came_to == 1){
             if ($material = Materials::findOne(['id' => $this->materials_id])){

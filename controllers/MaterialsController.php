@@ -161,7 +161,13 @@ class MaterialsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if (!!$model->usages || !!$model->incoms){
+            \Yii::$app->getSession()->setFlash('material_delete_error', Yii::t('app', 'This material has relations and can not be deleted!'));
+        }
+
+            $model->delete();
 
         return $this->redirect(['index']);
     }

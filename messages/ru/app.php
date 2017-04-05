@@ -321,6 +321,7 @@ return [
     'Such material does not exist in the list' => 'Данный материал отсутствует в списке!',
     'The stock rest id only' => 'Остаток на складе составляет только',
     'un.' => 'ед.',
+    'This material has relations and can not be deleted!' => 'Данный материал связан с другими записями и не может быть удален!',
     
  
     

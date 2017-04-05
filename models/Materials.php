@@ -114,8 +114,7 @@ class Materials extends ActiveRecord
     public function beforeDelete()
     {
         if (parent::beforeDelete()){
-            Usages::deleteAll(['materials_id' => $this->id]);
-            return true;
+            return (!$this->usages && !$this->incoms);
         }else{
             return false;
         }
