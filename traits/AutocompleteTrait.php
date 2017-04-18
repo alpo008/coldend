@@ -9,6 +9,7 @@
 namespace app\traits;
 
 
+use app\models\Machines;
 use app\models\Materials;
 
 trait AutocompleteTrait
@@ -16,7 +17,8 @@ trait AutocompleteTrait
     /**
      * @return array
      */
-    public function partsAutocompleteList(){
+    public function partsAutocompleteList()
+    {
         $arr = Materials::find()
             ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
             ->asArray()
@@ -28,7 +30,8 @@ trait AutocompleteTrait
      * @param string $type
      * @return array
      */
-    public function analogsAutocompleteList($type){
+    public function analogsAutocompleteList($type)
+    {
         if (!!$type) {
             $arr = Materials::find()
                 ->select(['id as id', 'concat(id, "; " ,name, "; " ,model_ref, "; " ,sap) as value'])
@@ -40,5 +43,16 @@ trait AutocompleteTrait
             return self::partsAutocompleteList();
         }
 
+    }
+
+    /**
+     * @return array
+     */
+    public function machinesAutocompleteList(){
+        $arr = Machines::find()
+            ->select(['id as id', 'concat(id, "; " ,place, "; " ,name) as value'])
+            ->asArray()
+            ->all();
+        return array_column($arr, 'value', 'id');
     }
 }
