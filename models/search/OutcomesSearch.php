@@ -18,7 +18,7 @@ class OutcomesSearch extends Outcomes
     public function rules()
     {
         return [
-            [['id', 'materials_id', 'came_from', 'unit_id', 'purpose'], 'integer'],
+            [['id', 'materials_id', 'came_from', 'purpose'], 'integer'],
             [['qty'], 'number'],
             [['materials_id', 'came_to', 'responsible', 'trans_date', 'comment'], 'safe'],
         ];
@@ -65,7 +65,6 @@ class OutcomesSearch extends Outcomes
             'qty' => $this->qty,
             'came_from' => $this->came_from,
             'came_to' => $this->came_to,
-            'unit_id' => $this->unit_id,
             'trans_date' => $this->trans_date,
             'purpose' => $this->purpose,
         ]);

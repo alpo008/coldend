@@ -81,7 +81,7 @@ use anmaslov\autocomplete\AutoComplete;
                     'attribute' => 'to_replace',
                     'name' => 'Machines[to_replace]',
                     'data' => $model->partsAutocompleteList(),
-                    'value' => (isset ($model->partsAutocompleteList()[$model->to_replace])) ? $model->partsAutocompleteList()[$model->to_replace] : '',
+                    'value' => $model->refreshAutocompleteField('parts', 'to_replace'),
                     'clientOptions' => [
                         'minChars' => 2,
                     ]
@@ -96,7 +96,7 @@ use anmaslov\autocomplete\AutoComplete;
                     'attribute' => 'to_order',
                     'name' => 'Machines[to_order]',
                     'data' => $model->partsAutocompleteList(),
-                    'value' => (isset ($model->partsAutocompleteList()[$model->to_order])) ? $model->partsAutocompleteList()[$model->to_order] : '',
+                    'value' => $model->refreshAutocompleteField('parts', 'to_order'),
                     'clientOptions' => [
                         'minChars' => 2,
                     ]

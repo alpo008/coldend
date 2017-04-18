@@ -25,7 +25,7 @@ use anmaslov\autocomplete\AutoComplete;
             'attribute' => 'materials_id',
             'name' => 'Incoms[materials_id]',
             'data' => $model->partsAutocompleteList(),
-            'value' => (isset ($model->partsAutocompleteList()[$model->materials_id])) ? $model->partsAutocompleteList()[$model->materials_id] : '',
+            'value' => $model->refreshAutocompleteField('parts', 'materials_id'),
             'clientOptions' => [
                 'minChars' => 2,
             ]

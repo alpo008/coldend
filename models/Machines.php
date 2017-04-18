@@ -54,7 +54,7 @@ class Machines extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status'], 'required'],
+            [['status', 'name'], 'required'],
             [['status'], 'integer'],
             [['to_replace', 'to_order'], 'safe'],
             [['to_do', 'comment'], 'string'],

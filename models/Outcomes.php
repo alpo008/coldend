@@ -67,10 +67,14 @@ class Outcomes extends ActiveRecord
 
     public  function  validateQty()
     {
-        if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
-             $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
-        }elseif ($this->came_from == 0 && $this->materials->at_dept < $this->qty){
-            $this->addError('qty', Yii::t('app', 'The dept rest is only') . ' ' . $this->materials->at_dept. ' ' . Yii::t('app', 'un.'));
+        if ($this->materials){
+            if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
+                 $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
+            }elseif ($this->came_from == 0 && $this->materials->at_dept < $this->qty){
+                $this->addError('qty', Yii::t('app', 'The dept rest is only') . ' ' . $this->materials->at_dept. ' ' . Yii::t('app', 'un.'));
+            }
+        }else{
+            $this->addError('materials_id', Yii::t('app', 'The material is not defined'));
         }
     }
 

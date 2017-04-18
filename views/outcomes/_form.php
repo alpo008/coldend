@@ -25,7 +25,7 @@ use anmaslov\autocomplete\AutoComplete;
             'attribute' => 'materials_id',
             'name' => 'Outcomes[materials_id]',
             'data' => $model->partsAutocompleteList(),
-            'value' => (isset ($model->partsAutocompleteList()[$model->materials_id])) ? $model->partsAutocompleteList()[$model->materials_id] : '',
+            'value' => $model->refreshAutocompleteField('parts', 'materials_id'),
             'clientOptions' => [
                 'minChars' => 2,
             ]
@@ -42,7 +42,7 @@ use anmaslov\autocomplete\AutoComplete;
             'attribute' => 'came_to',
             'name' => 'Outcomes[came_to]',
             'data' => $model->machinesAutocompleteList(),
-            'value' => (isset ($model->machinesAutocompleteList()[$model->came_to])) ? $model->machinesAutocompleteList()[$model->materials_id] : '',
+            'value' => $model->refreshAutocompleteField('machines', 'came_to'),//(isset ($model->machinesAutocompleteList()[$model->came_to])) ? $model->machinesAutocompleteList()[$model->materials_id] : '',
             'clientOptions' => [
                 'minChars' => 2,
             ]
