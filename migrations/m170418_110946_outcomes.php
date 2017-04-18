@@ -13,7 +13,6 @@ class m170418_110946_outcomes extends Migration
           `qty` decimal(5,2) NOT NULL,
           `came_from` int(2) NOT NULL,
           `came_to` int(3) NOT NULL,
-          `unit_id` int(2) NOT NULL,
           `responsible` varchar(64) NOT NULL,
           `trans_date` date NOT NULL,
           `purpose` int(2) DEFAULT NULL,

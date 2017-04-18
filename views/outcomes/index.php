@@ -29,10 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'qty',
             'came_from',
             'came_to',
-            // 'unit_id',
             // 'responsible',
-            // 'trans_date',
-            // 'purpose',
+            'trans_date',
+            'purpose',
             // 'comment:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],

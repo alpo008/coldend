@@ -48,22 +48,25 @@ class Incoms extends \yii\db\ActiveRecord
         ];
     }
 
-    public function validateCameTo(){
+    public function validateCameTo()
+    {
         if ($this->came_to == 1 && $this->came_from == 1){
             $this->addError('came_to', Yii::t('app', 'Came from and Came to can not be same'));
         }
     }
 
-    public  function  validateMaterial(){
+    public  function  validateMaterial()
+    {
         if (!array_key_exists((int)$this->materials_id, $this->partsAutocompleteList())){
             $this->addError('materials_id', Yii::t('app', 'Such material does not exist in the list'));
         }
 
     }
 
-    public  function  validateQty(){
+    public  function  validateQty()
+    {
         if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
-            $this->addError('materials_id', Yii::t('app', 'The stock rest id only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
+            $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
         }
 
     }
@@ -163,7 +166,8 @@ class Incoms extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public  function fromDropdown (){
+    public  function fromDropdown ()
+    {
         return [
             0 => Yii::t('app', 'Supplier'),
             1 => Yii::t('app', 'Factory stock'),
@@ -171,7 +175,8 @@ class Incoms extends \yii\db\ActiveRecord
         ];
     }
 
-    public  function toDropdown (){
+    public  function toDropdown ()
+    {
         return [
             0 => Yii::t('app', 'Department'),
             1 => Yii::t('app', 'Factory stock'),

@@ -18,9 +18,9 @@ class OutcomesSearch extends Outcomes
     public function rules()
     {
         return [
-            [['id', 'materials_id', 'came_from', 'came_to', 'unit_id', 'purpose'], 'integer'],
+            [['id', 'materials_id', 'came_from', 'unit_id', 'purpose'], 'integer'],
             [['qty'], 'number'],
-            [['responsible', 'trans_date', 'comment'], 'safe'],
+            [['materials_id', 'came_to', 'responsible', 'trans_date', 'comment'], 'safe'],
         ];
     }
 

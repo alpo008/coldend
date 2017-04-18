@@ -148,6 +148,11 @@ class Materials extends ActiveRecord
     public function getIncoms()
     {
         return $this->hasMany(Incoms::className(), ['materials_id' => 'id']);
+    }    
+    
+    public function getOutcomes()
+    {
+        return $this->hasMany(Outcomes::className(), ['materials_id' => 'id']);
     }
 
     /**
