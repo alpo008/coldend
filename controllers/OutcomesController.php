@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
-use Yii;
+use yii;
 use app\models\Outcomes;
 use app\models\search\OutcomesSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\User;
+use app\models\Incoms;
 
 /**
  * OutcomesController implements the CRUD actions for Outcomes model.
@@ -24,6 +27,29 @@ class OutcomesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['site/login'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::checkRights(Yii::$app->user->identity['role'], $this->uniqueId, $action->id);
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['logout'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -101,7 +127,11 @@ class OutcomesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if (Incoms::getLaterEntries($id, $model->materials_id) || Outcomes::getLaterEntries($id, $model->materials_id) ){
+            \Yii::$app->getSession()->setFlash('incom_delete_error', Yii::t('app', 'There are later entries concerning this material. It can not be deleted!'));
+        }
+        $model->delete();
 
         return $this->redirect(['index']);
     }

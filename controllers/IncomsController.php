@@ -10,6 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Outcomes;
 
 /**
  * IncomsController implements the CRUD actions for Incoms model.
@@ -127,7 +128,7 @@ class IncomsController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if (Incoms::getLaterEntries($id, $model->materials_id)){
+        if (Incoms::getLaterEntries($id, $model->materials_id) || Outcomes::getLaterEntries($id, $model->materials_id) ){
             \Yii::$app->getSession()->setFlash('incom_delete_error', Yii::t('app', 'There are later entries concerning this material. It can not be deleted!'));
         }
         $model->delete();
