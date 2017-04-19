@@ -65,8 +65,10 @@ class Incoms extends \yii\db\ActiveRecord
 
     public  function  validateQty()
     {
-        if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
-            $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
+        if ($this->isNewRecord) {
+            if ($this->came_from == 1 && $this->materials->at_stock < $this->qty) {
+                $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock . ' ' . Yii::t('app', 'un.'));
+            }
         }
 
     }
@@ -95,30 +97,30 @@ class Incoms extends \yii\db\ActiveRecord
 
             $this->materials_id = (int) $this->materials_id;
 
-            $result = true;
-
-            if ($this->came_to == 1){
-                if ($material = Materials::findOne(['id' => $this->materials_id])){
-                    $material->at_stock += $this->qty;
-                    $result = $material->save();
-                }
-            }
-            if ($this->came_to == 0 && $this->came_from != 1){
-                if ($material = Materials::findOne(['id' => $this->materials_id])){
-                    $material->at_dept += $this->qty;
-                    $result = $material->save();
-                }
-            }
-            if ($this->came_from == 1){
-                if ($material = Materials::findOne(['id' => $this->materials_id])){
-                    if ($this->came_to == 0){
-                        $material->at_dept += $this->qty;
+            if ($this->isNewRecord) {
+                if ($this->came_to == 1) {
+                    if ($material = Materials::findOne(['id' => $this->materials_id])) {
+                        $material->at_stock += $this->qty;
+                        $material->save();
                     }
-                $material->at_stock -= $this->qty;
-                $result = $material->save();
+                }
+                if ($this->came_to == 0 && $this->came_from != 1) {
+                    if ($material = Materials::findOne(['id' => $this->materials_id])) {
+                        $material->at_dept += $this->qty;
+                        $material->save();
+                    }
+                }
+                if ($this->came_from == 1) {
+                    if ($material = Materials::findOne(['id' => $this->materials_id])) {
+                        if ($this->came_to == 0) {
+                            $material->at_dept += $this->qty;
+                        }
+                        $material->at_stock -= $this->qty;
+                        $material->save();
+                    }
                 }
             }
-            return $result;
+            return true;
         }else{
             return false;
         }

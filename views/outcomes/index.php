@@ -18,13 +18,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Outcomes'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'trans_date',
+
+            [
+                'attribute' => 'trans_date',
+                'value' => function ($searchModel) {
+                    return ( Html::a($searchModel->trans_date, ['outcomes/view', 'id' => $searchModel->id]));
+                },
+
+                'format' => 'raw',
+            ],
 
             [
                 'attribute' => 'materials_id',

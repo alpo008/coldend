@@ -67,14 +67,16 @@ class Outcomes extends ActiveRecord
 
     public  function  validateQty()
     {
-        if ($this->materials){
-            if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
-                 $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
-            }elseif ($this->came_from == 0 && $this->materials->at_dept < $this->qty){
-                $this->addError('qty', Yii::t('app', 'The dept rest is only') . ' ' . $this->materials->at_dept. ' ' . Yii::t('app', 'un.'));
+        if ($this->isNewRecord){
+            if ($this->materials){
+                if ($this->came_from == 1 && $this->materials->at_stock < $this->qty){
+                     $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock. ' ' . Yii::t('app', 'un.'));
+                }elseif ($this->came_from == 0 && $this->materials->at_dept < $this->qty){
+                    $this->addError('qty', Yii::t('app', 'The dept rest is only') . ' ' . $this->materials->at_dept. ' ' . Yii::t('app', 'un.'));
+                }
+            }else{
+                $this->addError('materials_id', Yii::t('app', 'The material is not defined'));
             }
-        }else{
-            $this->addError('materials_id', Yii::t('app', 'The material is not defined'));
         }
     }
 
@@ -102,24 +104,51 @@ class Outcomes extends ActiveRecord
            $this->materials_id = (int) $this->materials_id;
            $this->came_to = (int) $this->came_to;
 
-           if ($this->came_from == 1){
-               if ($material = Materials::findOne(['id' => $this->materials_id])){
-                   $material->at_stock -= $this->qty;
-                   $material->save();
+           if ($this->isNewRecord){
+               if ($this->came_from == 1){
+                   if ($material = Materials::findOne(['id' => $this->materials_id])){
+                       $material->at_stock -= $this->qty;
+                       $material->save();
+                   }
+               }
+
+               if ($this->came_from == 0){
+                   if ($material = Materials::findOne(['id' => $this->materials_id])){
+                       $material->at_dept -= $this->qty;
+                       $material->save();
+                   }
                }
            }
-
-           if ($this->came_from == 0){
-               if ($material = Materials::findOne(['id' => $this->materials_id])){
-                   $material->at_dept -= $this->qty;
-                   $material->save();
-               }
-           }
-
            return true;
            }else{
            return false;
        }
+    }
+
+    public  function beforeDelete()
+    {
+        $laterEntries = self::getLaterEntries($this->id, $this->materials_id);
+        if (parent::beforeDelete() && !$laterEntries){
+            $this->materials_id = (int) $this->materials_id;
+
+            if ($this->came_from == 1){
+                if ($material = Materials::findOne(['id' => $this->materials_id])){
+                    $material->at_stock += $this->qty;
+                    $material->save();
+                }
+            }
+
+            if ($this->came_from == 0){
+                if ($material = Materials::findOne(['id' => $this->materials_id])){
+                    $material->at_dept += $this->qty;
+                    $material->save();
+                }
+            }
+
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -128,6 +157,10 @@ class Outcomes extends ActiveRecord
     public function getMaterials()
     {
         return $this->hasOne(Materials::className(), ['id' => 'materials_id']);
+    }
+
+    public static function getLaterEntries ($id, $material){
+        return self::find()->where(['>', 'id', $id])->andWhere(['materials_id' => $material])->one();
     }
 
     /**

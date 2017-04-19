@@ -65,12 +65,12 @@ class OutcomesSearch extends Outcomes
             'qty' => $this->qty,
             'came_from' => $this->came_from,
             'came_to' => $this->came_to,
-            'trans_date' => $this->trans_date,
             'purpose' => $this->purpose,
         ]);
 
         $query->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['like', 'comment', $this->comment])
+            ->andFilterWhere(['like', 'trans_date', $this->trans_date])
             ->orderBy('id DESC');
 
         return $dataProvider;

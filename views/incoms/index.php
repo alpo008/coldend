@@ -27,7 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'trans_date',
+            [
+                'attribute' => 'trans_date',
+                'value' => function ($searchModel) {
+                    return ( Html::a($searchModel->trans_date, ['incoms/view', 'id' => $searchModel->id]));
+                },
+
+                'format' => 'raw',
+            ],
             [
                 'attribute' => 'materials_id',
                 'value' => function ($searchModel) {
@@ -70,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'comment:ntext',
 
             ['class' => 'app\models\CustomActionColumn',
-                'buttons' => ['update' => function(){return false;}],
+                //'buttons' => ['update' => function(){return false;}],
                 'filter' =>     '<a href="/incoms"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
             ],
         ],

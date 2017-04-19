@@ -271,7 +271,14 @@ class User extends ActiveRecord implements IdentityInterface
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => false,
+                    'update' => true,
+                    'delete' => true,
+                ),                
+                'outcomes' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
                     'delete' => true,
                 ),
                 'user' => array(
@@ -313,7 +320,14 @@ class User extends ActiveRecord implements IdentityInterface
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => false,
+                    'update' => true,
+                    'delete' => true,
+                ),
+                'outcomes' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
                     'delete' => true,
                 ),
                 'user' => array(
@@ -355,7 +369,14 @@ class User extends ActiveRecord implements IdentityInterface
                     'index' =>true,
                     'view' => true,
                     'create' => true,
-                    'update' => false,
+                    'update' => true,
+                    'delete' => false,
+                ),
+                'outcomes' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => true,
+                    'update' => true,
                     'delete' => false,
                 ),
                 'user' => array(
@@ -394,6 +415,13 @@ class User extends ActiveRecord implements IdentityInterface
                     'delete' => false,
                 ),
                 'incoms' => array(
+                    'index' =>true,
+                    'view' => true,
+                    'create' => false,
+                    'update' => false,
+                    'delete' => false,
+                ),
+                'outcomes' => array(
                     'index' =>true,
                     'view' => true,
                     'create' => false,

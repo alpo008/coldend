@@ -64,13 +64,13 @@ class IncomsSearch extends Incoms
             'qty' => $this->qty,
             'came_from' => $this->came_from,
             'came_to' => $this->came_to,
-            'trans_date' => $this->trans_date,
             'materials_id' => $this->materials_id
         ]);
 
         $query->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['like', 'ref_doc', $this->ref_doc])
             ->andFilterWhere(['like', 'comment', $this->comment])
+            ->andFilterWhere(['like', 'trans_date', $this->trans_date])
             ->orderBy('id DESC');
 
 
