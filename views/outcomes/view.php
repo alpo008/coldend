@@ -44,7 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'responsible',
             'trans_date',
-            'purpose',
+            [
+                'attribute' => 'purpose',
+                'value' => (array_key_exists($model->purpose, $model->purposeDropdown())) ? $model->purposeDropdown()[$model->purpose] : $model->purpose,
+            ],
             'comment:ntext',
         ],
     ]) ?>

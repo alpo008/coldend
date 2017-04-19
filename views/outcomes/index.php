@@ -24,17 +24,72 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'materials_id',
-            'qty',
-            'came_from',
-            'came_to',
-            // 'responsible',
             'trans_date',
-            'purpose',
-            // 'comment:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'materials_id',
+                'value' => function ($searchModel) {
+                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), ['materials/view', 'id' => $searchModel->materials_id]));
+                },
+
+                'format' => 'raw',
+                'filter' => \anmaslov\autocomplete\AutoComplete::widget(
+                    [
+
+                        'attribute' => 'materials_id',
+                        'name' => 'OutcomesSearch[materials_id]',
+                        'data' => $searchModel->partsAutocompleteList(),
+                        'clientOptions' => [
+                            'minChars' => 2,
+                        ]
+                    ])
+            ],
+
+            'qty',
+
+            [
+                'attribute' => 'came_from',
+                'value' => function ($searchModel) {
+                    return Yii::t('app', $searchModel->fromDropdown()[$searchModel->came_from]);
+                },
+
+                'format' => 'raw',
+                'filter' => $searchModel->fromDropdown(),
+            ],
+
+            [
+                'attribute' => 'came_to',
+                'value' => function ($searchModel) {
+                    return ( Html::a(Yii::t('app', $searchModel->machinesAutocompleteList()[$searchModel->came_to]), ['machines/view', 'id' => $searchModel->came_to]));
+                },
+
+                'format' => 'raw',
+                'filter' => \anmaslov\autocomplete\AutoComplete::widget(
+                    [
+
+                        'attribute' => 'came_to',
+                        'name' => 'OutcomesSearch[came_to]',
+                        'data' => $searchModel->machinesAutocompleteList(),
+                        'clientOptions' => [
+                            'minChars' => 2,
+                        ]
+                    ])
+            ],
+            // 'responsible',
+            [
+                'attribute' => 'purpose',
+                'value' => function ($searchModel) {
+                    return Yii::t('app', $searchModel->purposeDropdown()[$searchModel->purpose]);
+                },
+
+                'format' => 'raw',
+                'filter' => $searchModel->purposeDropdown(),
+            ],
+            ['class' => 'app\models\CustomActionColumn',
+                //'buttons' => ['update' => function(){return false;}],
+                'filter' =>     '<a href="/outcomes"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+            ],
+            // 'comment:ntext',
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
