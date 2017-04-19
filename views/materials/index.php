@@ -80,6 +80,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'comment_1',
             // 'comment_2:ntext',
 
+            [
+                'label' => '',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::a('<span class ="glyphicon glyphicon-import" title ="Создать запись о приходе"></span>', ['incoms/create', 'id' => $model->id ])
+                    . '<br /><br />'
+                    . Html::a('<span class ="glyphicon glyphicon-export" title ="Создать запись о расходе"></span>', ['outcomes/create', 'id' => $model->id], ['class' => ($model->at_stock + $model->at_dept == 0) ? 'hidden' : '' ]);
+
+                },
+            ],
+
             ['class' => 'app\models\CustomActionColumn',
                 'filter' =>     '<a href="/materials"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
             ],

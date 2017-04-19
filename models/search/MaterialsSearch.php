@@ -77,7 +77,8 @@ class MaterialsSearch extends Materials
             ->andFilterWhere(['like', 'function', $this->function])
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'comment_1', $this->comment_1])
-            ->andFilterWhere(['like', 'comment_2', $this->comment_2]);
+            ->andFilterWhere(['like', 'comment_2', $this->comment_2])
+            ->orderBy('at_stock DESC');
 
         return $dataProvider;
     }

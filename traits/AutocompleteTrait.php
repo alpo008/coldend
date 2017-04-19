@@ -62,14 +62,14 @@ trait AutocompleteTrait
         if ($list == 'parts') {
             if (isset (self::partsAutocompleteList()[$this->{$attr}])) {
                 return self::partsAutocompleteList()[$this->{$attr}];
-            } elseif (!!$this->dirtyAttributes) {
+            } elseif (!!$this->dirtyAttributes && array_key_exists($attr, $this->dirtyAttributes)) {
                 return ($this->dirtyAttributes[$attr]);
             }
         }
         if ($list == 'machines') {
             if (isset (self::machinesAutocompleteList()[$this->{$attr}])) {
                 return self::machinesAutocompleteList()[$this->{$attr}];
-            } elseif (!!$this->dirtyAttributes) {
+            } elseif (!!$this->dirtyAttributes && array_key_exists($attr, $this->dirtyAttributes)) {
                 return ($this->dirtyAttributes[$attr]);
             }
         }

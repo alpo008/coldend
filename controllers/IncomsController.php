@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Materials;
 use app\models\User;
 use yii;
 use app\models\Incoms;
@@ -90,9 +91,13 @@ class IncomsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = NULL)
     {
         $model = new Incoms();
+
+        if ($id !== NULL){
+            $model->materials_id = (array_key_exists($id, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$id] : NULL;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

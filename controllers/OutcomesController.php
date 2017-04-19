@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Materials;
 use yii;
 use app\models\Outcomes;
 use app\models\search\OutcomesSearch;
@@ -90,9 +91,16 @@ class OutcomesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = NULL)
     {
         $model = new Outcomes();
+
+        if ($id !== NULL){
+            $model->materials_id = (array_key_exists($id, $model->partsAutocompleteList())) ? $model->partsAutocompleteList()[$id] : NULL;
+            if ($material = Materials::findOne(['id' => $id])){
+                $model->qty = max($material->at_stock, $material->at_dept);
+            }
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
