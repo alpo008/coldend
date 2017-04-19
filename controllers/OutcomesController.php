@@ -61,6 +61,9 @@ class OutcomesController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        };
         $searchModel = new OutcomesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
