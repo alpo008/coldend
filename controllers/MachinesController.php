@@ -97,12 +97,10 @@ class MachinesController extends Controller
             }
             $usagesModel = new Usages();
         }
-        $existingUsages = Usages::find()->where(['machines_id' => $id]);
 
         return $this->render('view', [
             'model' => $model,
             'usagesModel' => $usagesModel,
-            'existingUsages' => $existingUsages,
         ]);
     }
 

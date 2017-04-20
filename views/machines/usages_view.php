@@ -82,11 +82,12 @@ $this->registerJs(
 ?>
 
 <div id="accordion" class="panel-group">
-    <?php for ($i = 1; $i < 17; $i++):?>
+    <?php
+    for ($i = 1; $i < 17; $i++):?>
         <?php
+        $unitModel = $model->getUsages();
         $i = ($i < 10) ? '0' . $i : $i;
         $unitId = 'unit_' . $i;
-
         ?>
         <?php if ((!!$model->{$unitId})): ?>
 
@@ -98,7 +99,9 @@ $this->registerJs(
                 </div>
                 <div id="<?= 'collapse'. $i; ?>" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <?php $unitModel = $existingUsages->filterWhere(['unit_id' => $i]);?>
+                        <?php
+                        $unitModel->where(['unit_id' => (int) $i]);
+                        ?>
                         <?php Pjax::begin(['id' => 'usages-table_'.$i]) ?>
                         <?= GridView::widget([
                             'dataProvider' => new \yii\data\ActiveDataProvider([
@@ -150,7 +153,8 @@ $this->registerJs(
                                     'format' => 'raw',
                                 ],
                             ],
-                        ]) ?>
+                        ]);
+                        ?>
                         <?php Pjax::end(); ?>
 
                         <span class="glyphicon glyphicon-plus-sign form-opener"></span>
