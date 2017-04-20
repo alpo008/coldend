@@ -1,7 +1,5 @@
 <?php
-use anmaslov\autocomplete\AutoComplete;
-use yii\bootstrap\ActiveForm;
-use yii\data\ActiveDataProvider;
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -30,8 +28,13 @@ use yii\widgets\Pjax;
                     'columns' => [
 
                         [
-                            'attribute' => 'trans_date',
+                           'attribute' => 'trans_date',
+                           'value' => function ($movementsDataProvider) {
+                               $contrName = ($movementsDataProvider->qty > 0) ? 'incoms' : 'outcomes';
+                                return (Html::a($movementsDataProvider->trans_date, [$contrName . '/view', 'id' => $movementsDataProvider->id]));
+                            },
                             'footer' => Yii::t('app', 'Dept rest').':',
+                            'format' => 'raw',
                         ],
                         [
                             'attribute' => 'qty',

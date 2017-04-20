@@ -34,19 +34,19 @@ class Relations extends \yii\db\ActiveRecord
             [['parent_id', 'child_id'], 'safe'],
             [['partType'], 'string'],
             [['partType'], 'required'],
-            [['parent_id'], 'validateParent'],
-            [['child_id'], 'validateChild'],
+            ['parent_id', 'validateParent'],
+            ['child_id', 'validateChild'],
         ];
     }
 
     public function validateParent(){
-        if (!array_key_exists($this->parent_id, $this->partsAutocompleteList())){
+        if (!array_key_exists((int) $this->parent_id, $this->partsAutocompleteList())){
             $this->addError('parent_id', Yii::t('app', 'This parent does not exist'));
         }
     }
 
     public function validateChild(){
-        if (!array_key_exists($this->child_id, $this->partsAutocompleteList())){
+        if (!array_key_exists((int) $this->child_id, $this->partsAutocompleteList())){
             $this->addError('child_id', Yii::t('app', 'This child does not exist'));
         }
     }
