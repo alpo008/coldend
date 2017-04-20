@@ -22,6 +22,7 @@ use app\traits\AutocompleteTrait;
  */
 class Outcomes extends ActiveRecord
 {
+
     use AutocompleteTrait;
     /**
      * @inheritdoc

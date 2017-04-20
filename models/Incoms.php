@@ -24,6 +24,7 @@ class Incoms extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'incoms';

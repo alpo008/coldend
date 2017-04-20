@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Incoms;
+use app\models\Outcomes;
 use yii;
 use app\models\Materials;
 use app\models\search\MaterialsSearch;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -108,11 +111,28 @@ class MaterialsController extends Controller
             $existingRelations = NULL;
             $relationsModel->partType = NULL;
         }
+         $incomsQuery = Incoms::find()
+            ->select(['id', 'trans_date', 'qty'])
+            ->where(['incoms.materials_id' => $model->id])
+            ->andWhere(['incoms.came_to' => 0]);
+
+         $outcomesQuery = Outcomes::find()
+            ->select(['id', 'trans_date', '(- [[qty]])'])
+            ->where(['outcomes.materials_id' => $model->id])
+            ->andWhere(['outcomes.came_from' => 0]);;
+
+        $incomsQuery -> union($outcomesQuery);
+
+
+        $movementsDataProvider = new ActiveDataProvider([
+            'query' => $incomsQuery
+        ]);
 
         return $this->render('view', [
             'model' => $model,
             'relationsModel' => $relationsModel,
             'existingRelations' => $existingRelations,
+            'movementsDataProvider' => $movementsDataProvider,
         ]);
     }
 
