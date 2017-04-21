@@ -30,7 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'trans_date',
                 'value' => function ($searchModel) {
-                    return ( Html::a($searchModel->trans_date, ['incoms/view', 'id' => $searchModel->id]));
+                    return ( Html::a($searchModel->trans_date, 
+                        ['incoms/view', 'id' => $searchModel->id], 
+                        ['title' => Yii::t('app', 'Incoms view')])
+                    );
                 },
 
                 'format' => 'raw',
@@ -38,7 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'materials_id',
                 'value' => function ($searchModel) {
-                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), ['materials/view', 'id' => $searchModel->materials_id]));
+                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), 
+                        ['materials/view', 'id' => $searchModel->materials_id], 
+                        ['title' => Yii::t('app', 'Materials view')])
+                    );
                 },
 
                 'format' => 'raw',

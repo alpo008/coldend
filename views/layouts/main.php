@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'COLDEND',
+        'brandLabel' => Yii::t('app', 'HOME'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,14 +36,15 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => (Yii::t('app', 'HOME')), 'url' => ['/site/index']],
             ['label' => (Yii::t('app', 'MACHINES')), 'url' => ['/machines']],
+            ['label' => (Yii::t('app', 'MATERIALS')), 'url' => ['/materials']],
             [
-                'label' => (Yii::t('app', 'MATERIALS')),
+                'label' => (Yii::t('app', 'OPERATIONS')),
                 'items' => [
-                    ['label' => Yii::t('app', 'Materials table'), 'url' => ['/materials'] ],
+
                     ['label' => Yii::t('app', 'Materials incoms'), 'url' => ['/incoms'] ],
                     ['label' => Yii::t('app', 'Materials outlays'), 'url' => ['/outcomes'] ],
+                    ['label' => Yii::t('app', 'Orders'), 'url' => ['/orders'] ],
                 ],
             ],            [
                 'label' => (Yii::t('app', 'OPTIONS')),

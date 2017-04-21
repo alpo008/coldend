@@ -291,6 +291,7 @@ return [
     'HOME' =>'ГЛАВНАЯ',
     'MACHINES' => 'МАШИНЫ',
     'MATERIALS' => 'МАТЕРИАЛЫ',
+    'OPERATIONS' => 'ОПЕРАЦИИ',
     'OPTIONS' => 'СЛУЖЕБНЫЕ',
     'LOGIN' => 'ВХОД',
     'LOGOUT' => 'ВЫХОД',
@@ -341,6 +342,10 @@ return [
     'Dept stock history' => 'Приходно-расходные операции по участку',
     'Dept rest' => 'Остаток на участке',
     'Incoms' => 'Приход материалов',
+    'Outcomes view' => 'Просмотр расходной записи',
+    'Incoms view' => 'Просмотр приходной записи',
+    'Materials view' => 'Просмотр карточки материала',
+    'Machines view' => 'Просмотр карточки машины',
 
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
     'You can upload at most {limit, number} {limit, plural, one{file} other{files}}.' => 'Вы не можете загружать более {limit, number} {limit, plural, one{файла} few{файлов} many{файлов} other{файла}}.',
