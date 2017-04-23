@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
-use Yii;
+use app\models\Lists;
+use yii;
 use app\models\Orders;
 use app\models\search\OrdersSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,10 +54,12 @@ class OrdersController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $listsModel = $model->getLists();
+        $listsDataProvider = new ActiveDataProvider([
+            'query' => $model->getLists()
+        ]);
         return $this->render('view', [
             'model' => $model,
-            'listsModel' => $listsModel,
+            'listsDataProvider' => $listsDataProvider,
         ]);
     }
 
@@ -67,12 +71,16 @@ class OrdersController extends Controller
     public function actionCreate()
     {
         $model = new Orders();
+        $listsDataProvider = new ActiveDataProvider([
+            'query' => $model->getLists(),
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'listsDataProvider' => $listsDataProvider,
             ]);
         }
     }
@@ -86,12 +94,16 @@ class OrdersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $listsDataProvider = new ActiveDataProvider([
+            'query' => $model->getLists()
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'listsDataProvider' => $listsDataProvider,
             ]);
         }
     }

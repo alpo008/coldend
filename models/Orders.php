@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii;
+use app\traits\AutocompleteTrait;
 
 /**
  * This is the model class for table "orders".
@@ -17,6 +18,7 @@ use yii;
  */
 class Orders extends \yii\db\ActiveRecord
 {
+    use AutocompleteTrait;
     /**
      * @inheritdoc
      */

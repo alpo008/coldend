@@ -24,8 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-            'ref_doc',
+            [
+                'attribute' => 'ref_doc',
+                'value' => function ($searchModel) {
+                    return  Html::a(Yii::t('app', $searchModel->ref_doc), ['orders/view', 'id' => $searchModel->id],['title' => Yii::t('app', 'View order')]);
+                },
+
+                'format' => 'raw',
+            ],
             'responsible',
             'created',
             'updated',
