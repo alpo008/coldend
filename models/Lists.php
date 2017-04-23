@@ -29,7 +29,8 @@ class Lists extends \yii\db\ActiveRecord
     {
         return [
             [['materials_id', 'orders_id'], 'required'],
-            [['materials_id', 'orders_id'], 'integer'],
+            [['orders_id'], 'integer'],
+            [['materials_id'], 'safe'],
             [['qty'], 'number'],
         ];
     }
@@ -45,5 +46,15 @@ class Lists extends \yii\db\ActiveRecord
             'orders_id' => Yii::t('app', 'Orders ID'),
             'qty' => Yii::t('app', 'Qty'),
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)){
+            $this->materials_id = (int) $this->materials_id;
+            return true;
+        }else{
+            return false;
+        }
     }
 }

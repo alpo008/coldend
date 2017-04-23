@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
         <?php //echo Yii::t('app', 'Components list'); ?>
 
 
-<?php Pjax::begin(['id' => 'orders-table']) ?>
+<?php Pjax::begin(['id' => 'lists-table']) ?>
     <?= GridView::widget([
         'dataProvider' => $listsDataProvider,
         'summary' => false,

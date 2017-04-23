@@ -41,15 +41,20 @@ use yii\bootstrap\ActiveForm;
         <?php ActiveForm::end(); ?>
 
     </div>
+
+<?php if (isset($listsModel)): ?>
     <div class="col-lg-1 col-md-1"></div>
 
     <div class="col-lg-5 col-md-5">
         <?php include('lists_view.php'); ?>
     </div>
+<?php endif;?>
+
 </div>
 
+<?php if (isset($listsModel)): ?>
     <div class="col-lg-7 col-md-7"></div>
-
     <div class="col-lg-5 col-md-5">
         <?php include ('lists_form.php');?>
     </div>
+<?php endif;?>

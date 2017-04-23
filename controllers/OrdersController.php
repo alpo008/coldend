@@ -71,16 +71,18 @@ class OrdersController extends Controller
     public function actionCreate()
     {
         $model = new Orders();
+        $listsModel = new Lists();
         $listsDataProvider = new ActiveDataProvider([
             'query' => $model->getLists(),
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'listsDataProvider' => $listsDataProvider,
+                'listsModel' => $listsModel,
             ]);
         }
     }
@@ -94,9 +96,19 @@ class OrdersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $listsModel = new Lists();
         $listsDataProvider = new ActiveDataProvider([
             'query' => $model->getLists()
         ]);
+
+        if ($listsModel->load(Yii::$app->request->post())) {
+            $existingRow = Lists::findOne(['orders_id' => $listsModel->orders_id, 'materials_id' => $listsModel->materials_id]);
+            if (!$existingRow) {
+                $listsModel->save();
+                $listsModel = new Lists();
+            }
+
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -104,6 +116,7 @@ class OrdersController extends Controller
             return $this->render('update', [
                 'model' => $model,
                 'listsDataProvider' => $listsDataProvider,
+                'listsModel' => $listsModel,
             ]);
         }
     }
