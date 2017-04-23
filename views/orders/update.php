@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         'model' => $model,
         'listsDataProvider' => $listsDataProvider,
         'listsModel' => $listsModel,
+        'editable' => $editable,
     ]) ?>
 
 </div>

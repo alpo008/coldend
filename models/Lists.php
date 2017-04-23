@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii;
+use app\traits\AutocompleteTrait;
 
 /**
  * This is the model class for table "lists".
@@ -14,6 +15,7 @@ use yii;
  */
 class Lists extends \yii\db\ActiveRecord
 {
+    use AutocompleteTrait;
     /**
      * @inheritdoc
      */
@@ -30,9 +32,16 @@ class Lists extends \yii\db\ActiveRecord
         return [
             [['materials_id', 'orders_id'], 'required'],
             [['orders_id'], 'integer'],
-            [['materials_id'], 'safe'],
             [['qty'], 'number'],
+            [['materials_id'], 'validateMaterial'],
         ];
+    }
+
+    public  function  validateMaterial()
+    {
+        if (!array_key_exists((int)$this->materials_id, $this->partsAutocompleteList())){
+            $this->addError('materials_id', Yii::t('app', 'Such material does not exist in the list'));
+        }
     }
 
     /**

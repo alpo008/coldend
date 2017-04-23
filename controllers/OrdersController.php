@@ -57,9 +57,11 @@ class OrdersController extends Controller
         $listsDataProvider = new ActiveDataProvider([
             'query' => $model->getLists()
         ]);
+        $editable = false;
         return $this->render('view', [
             'model' => $model,
             'listsDataProvider' => $listsDataProvider,
+            'editable' => $editable,
         ]);
     }
 
@@ -100,6 +102,7 @@ class OrdersController extends Controller
         $listsDataProvider = new ActiveDataProvider([
             'query' => $model->getLists()
         ]);
+        $editable = true;
 
         if ($listsModel->load(Yii::$app->request->post())) {
             $existingRow = Lists::findOne(['orders_id' => $listsModel->orders_id, 'materials_id' => $listsModel->materials_id]);
@@ -117,6 +120,7 @@ class OrdersController extends Controller
                 'model' => $model,
                 'listsDataProvider' => $listsDataProvider,
                 'listsModel' => $listsModel,
+                'editable' => $editable,
             ]);
         }
     }

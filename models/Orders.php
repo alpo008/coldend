@@ -81,4 +81,14 @@ class Orders extends \yii\db\ActiveRecord
             5 => Yii::t('app', 'Cancelled'),
         ];
     }
+
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()){
+            Lists::deleteAll(['orders_id' => $this->id]);
+            return true;
+            }else{
+            return false;
+        }
+    }
 }

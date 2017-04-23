@@ -6,12 +6,7 @@ use yii\widgets\Pjax;
 
 ?>
 
-
-
-        <?php //echo Yii::t('app', 'Components list'); ?>
-
-
-<?php Pjax::begin(['id' => 'lists-table']) ?>
+<?php Pjax::begin(['id' => 'lists-table']); ?>
     <?= GridView::widget([
         'dataProvider' => $listsDataProvider,
         'summary' => false,
@@ -32,10 +27,19 @@ use yii\widgets\Pjax;
     
                 'format' => 'raw',
             ],
-    
-            'qty',
-            // 'comment:ntext',
-    
+
+            [
+                'attribute' => 'qty',
+                'value' => function ($listsDataProvider) use ($editable)  {
+                    return ($editable) ?
+                        Html::input('text', 'qty', $listsDataProvider->qty, ['class' => 'lists-qty']) .
+                        Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil lists-edit', 'id' => $listsDataProvider->id . '_e']) .
+                        Html::tag('span', '', ['class' => 'glyphicon glyphicon-trash lists-delete', 'id' => $listsDataProvider->id . '_d'])
+                        : $listsDataProvider->qty;
+                },
+                'format' => 'raw',
+
+            ],
         ],
     ]); 
     ?>

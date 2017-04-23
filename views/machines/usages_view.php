@@ -126,7 +126,7 @@ $this->registerJs(
                                 'value' => function ($unitModel) use($usagesModel) {
                                     $str = $usagesModel->partsAutocompleteList()[$unitModel->materials_id];
                                     $arr = explode (';', $str);
-                                    return Html::input('text', 'username', $unitModel->unit_qty, ['class' => 'usages-qty']);
+                                    return Html::input('text', 'unit_qty', $unitModel->unit_qty, ['class' => 'usages-qty']);
                                 },
                                 'format' => 'raw',
 
