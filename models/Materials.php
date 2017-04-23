@@ -155,6 +155,17 @@ class Materials extends ActiveRecord
         return $this->hasMany(Outcomes::className(), ['materials_id' => 'id']);
     }
 
+    public function getLists()
+    {
+        return $this->hasMany(Lists::className(), ['materials_id' => 'id']);
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Orders::className(), ['id' => 'orders_id'])
+            ->via('lists');
+    }
+
     /**
      * @return array|yii\db\ActiveRecord[]
      */

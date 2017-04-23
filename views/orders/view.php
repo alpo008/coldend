@@ -6,11 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Orders */
 
-$this->title = $model->id;
+$this->title = Yii::t('app', 'Order') . ' No ' .$model->ref_doc . ' ' . Yii::t('app', 'dated') . ' ' . date('Y-m-d', strtotime ($model->created));
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="orders-view">
+<div class="orders-view col-lg-6 col-md-6">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -24,6 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?php
+    //var_dump($model->materials[0]->name);
+    //var_dump($model->lists[0]->qty);
+    //var_dump( date('Y-m-d H:i:s'));
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -33,7 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'responsible',
             'created',
             'updated',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => (array_key_exists($model->status, $model->statusesDropdown())) ? $model->statusesDropdown()[$model->status] : $model->status,
+            ],
             'comment:ntext',
         ],
     ]) ?>

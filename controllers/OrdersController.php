@@ -51,8 +51,11 @@ class OrdersController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $listsModel = $model->getLists();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'listsModel' => $listsModel,
         ]);
     }
 

@@ -60,14 +60,14 @@ class OrdersSearch extends Orders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created' => $this->created,
-            'updated' => $this->updated,
             'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'ref_doc', $this->ref_doc])
             ->andFilterWhere(['like', 'responsible', $this->responsible])
-            ->andFilterWhere(['like', 'comment', $this->comment]);
+            ->andFilterWhere(['like', 'comment', $this->comment])
+            ->andFilterWhere(['like', 'created', $this->created])
+            ->andFilterWhere(['like', 'updated', $this->updated]);
 
         return $dataProvider;
     }

@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use yii;
 
 /**
  * This is the model class for table "orders".
@@ -31,7 +31,7 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['responsible', 'created', 'updated', 'comment'], 'required'],
+            [['responsible', 'created', 'updated'], 'required'],
             [['created', 'updated'], 'safe'],
             [['status'], 'integer'],
             [['comment'], 'string'],
@@ -49,11 +49,34 @@ class Orders extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'ref_doc' => Yii::t('app', 'Ref Doc'),
-            'responsible' => Yii::t('app', 'Responsible'),
-            'created' => Yii::t('app', 'Created'),
+            'responsible' => Yii::t('app', 'Created by'),
+            'created' => Yii::t('app', 'Creation date'),
             'updated' => Yii::t('app', 'Updated'),
             'status' => Yii::t('app', 'Status'),
-            'comment' => Yii::t('app', 'Comment'),
+            'comment' => Yii::t('app', 'Comments'),
+        ];
+    }
+
+    public function getLists()
+    {
+        return $this->hasMany(Lists::className(), ['orders_id' => 'id']);
+    }
+
+    public function getMaterials()
+    {
+        return $this->hasMany(Materials::className(), ['id' => 'materials_id'])
+            ->via('lists');
+    }
+    
+    public  function statusesDropdown ()
+    {
+        return [
+            0 => Yii::t('app', 'Applied'),
+            1 => Yii::t('app', 'Delayed'),
+            2 => Yii::t('app', 'Confirmed'),
+            3 => Yii::t('app', 'Paid'),
+            4 => Yii::t('app', 'Completed'),
+            5 => Yii::t('app', 'Cancelled'),
         ];
     }
 }

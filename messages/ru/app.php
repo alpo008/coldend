@@ -346,6 +346,13 @@ return [
     'Incoms view' => 'Просмотр приходной записи',
     'Materials view' => 'Просмотр карточки материала',
     'Machines view' => 'Просмотр карточки машины',
+    'Created by' => 'Кто составил',
+    'Creation date' => 'Дата составления',
+    'Update order' => 'Редактировать заявку',
+    'Applied' => 'Подана',
+    'Delayed' => 'Не выполняется',
+    'Confirmed' => 'Утверждена',
+    'Cancelled' => 'Отменена',
 
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
     'You can upload at most {limit, number} {limit, plural, one{file} other{files}}.' => 'Вы не можете загружать более {limit, number} {limit, plural, one{файла} few{файлов} many{файлов} other{файла}}.',

@@ -24,15 +24,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'ref_doc',
             'responsible',
             'created',
             'updated',
-            // 'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($searchModel) {
+                    return Yii::t('app', $searchModel->statusesDropdown()[$searchModel->status]);
+                },
+
+                'format' => 'raw',
+                'filter' => $searchModel->statusesDropdown(),
+            ],
             // 'comment:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\models\CustomActionColumn',
+                'filter' =>     '<a href="/orders"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
