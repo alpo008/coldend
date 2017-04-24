@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Incoms;
+use app\models\Lists;
+use app\models\Orders;
 use app\models\Outcomes;
 use yii;
 use app\models\Materials;
@@ -128,11 +130,21 @@ class MaterialsController extends Controller
             'query' => $incomsQuery
         ]);
 
+        $ordersQuery = Orders::find()
+            ->joinWith(Lists::tableName())
+            ->where(['lists.materials_id' => $model->id]);
+
+
+        $ordersDataProvider = new ActiveDataProvider([
+            'query' => $ordersQuery
+        ]);
+
         return $this->render('view', [
             'model' => $model,
             'relationsModel' => $relationsModel,
             'existingRelations' => $existingRelations,
             'movementsDataProvider' => $movementsDataProvider,
+            'ordersDataProvider' => $ordersDataProvider,
         ]);
     }
 

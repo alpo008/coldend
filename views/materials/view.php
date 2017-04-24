@@ -130,5 +130,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php include 'relations_view.php'; ?>
     <?php if (!!$model->incoms){
         include 'movements_view.php';
+    }?>    
+    <?php if (!!$model->orders){
+        include 'orders_view.php';
     }?>
 </div>

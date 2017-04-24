@@ -314,7 +314,7 @@ class User extends ActiveRecord implements IdentityInterface
                     'view' => true,
                     'create' => true,
                     'update' => true,
-                    'delete' => false,
+                    'delete' => true,
                 ),
                 'incoms' => array(
                     'index' =>true,
@@ -408,8 +408,8 @@ class User extends ActiveRecord implements IdentityInterface
                     'delete' => false,
                 ),
                 'orders' => array(
-                    'index' =>false,
-                    'view' => false,
+                    'index' =>true,
+                    'view' => true,
                     'create' => false,
                     'update' => false,
                     'delete' => false,
