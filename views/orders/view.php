@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
+
 <div class="row">
     <div class="orders-view col-lg-6 col-md-6">
 

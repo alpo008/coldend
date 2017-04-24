@@ -45,6 +45,26 @@
         }
     };
 
+    var ListsForm = {
+        newQuantity : function (object){
+            return parseInt($(object).find('.lists-qty').val());
+        },
+        oldQuantity : function (object){
+            return parseInt($(object).find('.old-qty').html());
+        },
+        sendForm : function (object, offset) {
+            var $listsForm = $('.clists-form');
+            var $inputsGroup = $listsForm.find('input');
+            $($inputsGroup[2]).val(parseInt(object.id));
+            $($inputsGroup[3]).val(offset);
+            $listsForm.find('button').click();
+        },
+        setQty : function (object, qty){
+            $(object).find('.lists-qty').val(qty);
+        }
+
+    };
+
     $('.form-opener').on('click', function (event) {
        event.preventDefault();
         var $formToOpen = $(this).next('.create-form')[0];
@@ -52,7 +72,6 @@
     });
 
     $(document).on('click', '.usages-edit', function(){
-        console.log(this);
         var $gridViewRow = $(this).parents('tr');
         var newQty = UsagesView.newQuantity($gridViewRow);
         var oldQty = UsagesView.oldQuantity($gridViewRow);
@@ -89,6 +108,29 @@
 
         if (confirm('Пожалуйста, подтвердите удаление.')){
             RelationsView.sendDelete(this, $gridViewRow, RelationsView.unitId());
+        }
+    });
+
+    $(document).on('click', '.lists-edit', function(){
+        var $gridViewRow = $(this).parents('tr');
+        var newQty = ListsForm.newQuantity($gridViewRow);
+        var oldQty = ListsForm.oldQuantity($gridViewRow);
+        var offsettQty = newQty - oldQty;
+        if (newQty < 1 || offsettQty == 0 ){
+            ListsForm.setQty($gridViewRow, oldQty.toFixed(2));
+            alert ('Такое изменение невозможно или бессмысленно!')
+        }else{
+            if (confirm('Количество будет установлено равным.' + ' ' + newQty + '.')){
+                ListsForm.sendForm(this, offsettQty);
+            }
+        }
+    });
+
+    $(document).on('click', '.lists-delete', function(){
+        var $gridViewRow = $(this).parents('tr');
+        var offsettQty = - ListsForm.oldQuantity($gridViewRow);
+        if (confirm('Пожалуйста, подтвердите удаление.')){
+            ListsForm.sendForm(this, offsettQty);
         }
     });
 

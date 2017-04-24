@@ -33,12 +33,12 @@ use yii\widgets\Pjax;
                 'value' => function ($listsDataProvider) use ($editable)  {
                     return ($editable) ?
                         Html::input('text', 'qty', $listsDataProvider->qty, ['class' => 'lists-qty']) .
-                        Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil lists-edit', 'id' => $listsDataProvider->id . '_e']) .
-                        Html::tag('span', '', ['class' => 'glyphicon glyphicon-trash lists-delete', 'id' => $listsDataProvider->id . '_d'])
+                        Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil lists-edit', 'id' => $listsDataProvider->materials_id . '_e']) .
+                        Html::tag('span', '', ['class' => 'glyphicon glyphicon-trash lists-delete', 'id' => $listsDataProvider->materials_id . '_d']) .
+                        Html::tag('div', $listsDataProvider->qty, ['class' => 'old-qty hidden'])
                         : $listsDataProvider->qty;
                 },
                 'format' => 'raw',
-
             ],
         ],
     ]); 

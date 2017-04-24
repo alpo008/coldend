@@ -106,11 +106,17 @@ class OrdersController extends Controller
 
         if ($listsModel->load(Yii::$app->request->post())) {
             $existingRow = Lists::findOne(['orders_id' => $listsModel->orders_id, 'materials_id' => $listsModel->materials_id]);
-            if (!$existingRow) {
+            if (!!$existingRow) {
+                $existingRow->qty += (int) $listsModel->qty;
+                if ($existingRow->qty == 0){
+                    $existingRow->delete();
+                }elseif ($existingRow->qty > 0){
+                    $existingRow->save();
+                }
+            }else{
                 $listsModel->save();
-                $listsModel = new Lists();
             }
-
+            $listsModel = new Lists();
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
