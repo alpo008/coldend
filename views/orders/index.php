@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'comment:ntext',
 
             ['class' => 'app\models\CustomActionColumn',
-                'filter' =>     '<a href="/orders"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
+                'filter' => '<a href="/orders"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'
             ],
         ],
     ]); ?>

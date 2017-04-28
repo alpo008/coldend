@@ -57,4 +57,5 @@ use yii\bootstrap\ActiveForm;
     <div class="col-lg-5 col-md-5">
         <?php include ('lists_form.php');?>
     </div>
+
 <?php endif;?>
