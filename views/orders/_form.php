@@ -52,7 +52,7 @@ use yii\bootstrap\ActiveForm;
 
 </div>
 
-<?php if (isset($listsModel)): ?>
+<?php if (isset($listsModel) && $editable): ?>
     <div class="col-lg-7 col-md-7"></div>
     <div class="col-lg-5 col-md-5">
         <?php include ('lists_form.php');?>

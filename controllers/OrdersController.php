@@ -131,7 +131,7 @@ class OrdersController extends Controller
         $listsDataProvider = new ActiveDataProvider([
             'query' => $model->getLists()
         ]);
-        $editable = true;
+        $editable = ($model->status < 3);
 
         if ($listsModel->load(Yii::$app->request->post())) {
             $existingRow = Lists::findOne(['orders_id' => $listsModel->orders_id, 'materials_id' => $listsModel->materials_id]);
