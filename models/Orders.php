@@ -15,10 +15,12 @@ use app\traits\AutocompleteTrait;
  * @property string $updated
  * @property integer $status
  * @property string $comment
+ * @property integer $incomeTo
  */
 class Orders extends \yii\db\ActiveRecord
 {
     use AutocompleteTrait;
+    public $incomeTo;
     /**
      * @inheritdoc
      */
@@ -56,6 +58,7 @@ class Orders extends \yii\db\ActiveRecord
             'updated' => Yii::t('app', 'Updated'),
             'status' => Yii::t('app', 'Status'),
             'comment' => Yii::t('app', 'Comments'),
+            'incomeTo' => Yii::t('app', 'Apply income to'). ' :',
         ];
     }
 

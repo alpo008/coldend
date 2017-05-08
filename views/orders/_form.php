@@ -39,6 +39,11 @@ use yii\bootstrap\ActiveForm;
             '5' => ['disabled' => (isset ($model->status)) ? ($model->status > 3) : false],
         ]]) ?>
 
+
+        <?= Html::checkbox('create-incoms', false, ['label' => Yii::t('app', 'Create incoms for all items'), 'class' => 'incoms-switch'] ) ?>
+
+        <?= $form->field($model, 'incomeTo', ['labelOptions'=>['class'=>'col-lg-11 col-md-11']])->radioList([1 => Yii::t('app', 'Factory stock'), 2 => Yii::t('app', 'Department')]) ?>
+
         <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
         <div class="form-group">
