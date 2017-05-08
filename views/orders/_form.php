@@ -30,7 +30,14 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'updated', ['options' => ['class' => 'hidden']])->textInput(['value' => date('Y-m-d H:i:s')]) ?>
 
-        <?= $form->field($model, 'status')->dropDownList($model->statusesDropdown()) ?>
+        <?= $form->field($model, 'status')->dropDownList($model->statusesDropdown(),
+            ['options' => [
+            '0' => ['disabled' => (isset ($model->status)) ? ($model->status > 2) : false],
+            '1' => ['disabled' => (isset ($model->status)) ? ($model->status > 2) : false],
+            '2' => ['disabled' => (isset ($model->status)) ? ($model->status > 2) : false],
+            '3' => ['disabled' => (isset ($model->status)) ? ($model->status > 3) : false],
+            '5' => ['disabled' => (isset ($model->status)) ? ($model->status > 3) : false],
+        ]]) ?>
 
         <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
