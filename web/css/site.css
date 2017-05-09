@@ -164,5 +164,11 @@ a.desc:after {
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
+.incoms-switch, .field-orders-incometo{
+    display: none;
+}
+.field-orders-incometo .radio:first-child{
+    display: none;
+}
 
 

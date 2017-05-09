@@ -134,4 +134,15 @@
         }
     });
 
+    $(document).on('change', '.field-orders-status', function () {
+        var selectedOption = $(this).find('select option:selected').val();
+            if (selectedOption == 4){
+                $('.incoms-switch').show();
+            }
+    });
+
+    $(document).on('change', '.incoms-switch > input', function () {
+        $('.field-orders-incometo').show();
+    })
+
 })(jQuery);

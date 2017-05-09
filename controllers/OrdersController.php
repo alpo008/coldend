@@ -168,9 +168,14 @@ class OrdersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        if ($model->status < 4){
+            $model->delete();
+            return $this->redirect(['index']);
+        }else{
+            \Yii::$app->getSession()->setFlash('order_delete_error', Yii::t('app', 'Completed and cancelled orders cant be deleted!'));
+            return $this->redirect(['view', 'id' => $id]);
+        }
     }
 
     /**

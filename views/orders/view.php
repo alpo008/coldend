@@ -57,3 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php include('lists_view.php'); ?>
     </div>
 </div>
+<?php if ($message = Yii::$app->session->getFlash('order_delete_error')){
+    echo "<script>alert('$message');</script>";
+}
+?>

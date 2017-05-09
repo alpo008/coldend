@@ -13,6 +13,7 @@ use yii\bootstrap\ActiveForm;
 
         <?php
         $update = !$model->isNewRecord;
+        $model->incomeTo = 0;
         $form = ActiveForm::begin([
             'layout' => 'horizontal',
             'fieldConfig' => [
@@ -33,16 +34,18 @@ use yii\bootstrap\ActiveForm;
         <?= $form->field($model, 'status')->dropDownList($model->statusesDropdown(),
             ['options' => [
             '0' => ['disabled' => (isset ($model->status)) ? ($model->status > 2) : false],
-            '1' => ['disabled' => (isset ($model->status)) ? ($model->status > 2) : false],
-            '2' => ['disabled' => (isset ($model->status)) ? ($model->status > 2) : false],
-            '3' => ['disabled' => (isset ($model->status)) ? ($model->status > 3) : false],
-            '5' => ['disabled' => (isset ($model->status)) ? ($model->status > 3) : false],
-        ]]) ?>
+            '1' => ['disabled' => $model->isNewRecord ? true :((isset ($model->status)) ? ($model->status > 2) : false)],
+            '2' => ['disabled' => $model->isNewRecord ? true :((isset ($model->status)) ? ($model->status > 2) : false)],
+            '3' => ['disabled' => $model->isNewRecord ? true : ((isset ($model->status)) ? ($model->status > 3) : false)],
+            '4' => ['disabled' => $model->isNewRecord ? true : ((isset ($model->status)) ? ($model->status > 4) : false)],
+            '5' => ['disabled' => $model->isNewRecord ? true : ((isset ($model->status)) ? ($model->status > 3) : false)],
+            ]
+        ]) ?>
 
 
-        <?= Html::checkbox('create-incoms', false, ['label' => Yii::t('app', 'Create incoms for all items'), 'class' => 'incoms-switch'] ) ?>
+        <?= Html::checkbox('create-incoms', false, ['label' => Yii::t('app', 'Create incoms for all items'), 'labelOptions' => ['class' => 'incoms-switch']] ) ?>
 
-        <?= $form->field($model, 'incomeTo', ['labelOptions'=>['class'=>'col-lg-11 col-md-11']])->radioList([1 => Yii::t('app', 'Factory stock'), 2 => Yii::t('app', 'Department')]) ?>
+        <?= $form->field($model, 'incomeTo', ['labelOptions'=>['class'=>'col-lg-11 col-md-11']])->radioList([0 => 'Default',1 => Yii::t('app', 'Department'), 2 => Yii::t('app', 'Factory stock')]) ?>
 
         <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 

@@ -138,10 +138,10 @@ class IncomsController extends Controller
         $model = $this->findModel($id);
         if (Incoms::getLaterEntries($id, $model->materials_id) || Outcomes::getLaterEntries($id, $model->materials_id) ){
             \Yii::$app->getSession()->setFlash('incom_delete_error', Yii::t('app', 'There are later entries concerning this material. It can not be deleted!'));
-        }
+        }else{
         $model->delete();
-
         return $this->redirect(['index']);
+        }
     }
 
     /**
