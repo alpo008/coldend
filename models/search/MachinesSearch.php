@@ -42,6 +42,7 @@ class MachinesSearch extends Machines
     public function search($params)
     {
         $query = Machines::find();
+        
 
         // add conditions that should always apply here
 
@@ -85,6 +86,7 @@ class MachinesSearch extends Machines
             ->andFilterWhere(['like', 'unit_15', $this->unit_15])
             ->andFilterWhere(['like', 'unit_16', $this->unit_16])
             ->andFilterWhere(['like', 'comment', $this->comment]);
+            
         //$query->joinWith('materials');
         //$query->joinWith('usages');
 

@@ -55,7 +55,7 @@ class Machines extends \yii\db\ActiveRecord
     {
         return [
             [['status', 'name'], 'required'],
-            [['status'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['to_replace', 'to_order'], 'safe'],
             [['to_do', 'comment'], 'string'],
             [['name', 'place'], 'string', 'max' => 24],
