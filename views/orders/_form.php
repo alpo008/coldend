@@ -29,7 +29,7 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'created', ['options' => ['class' => 'hidden']])->textInput(['value' => ($update) ? $model->created : date('Y-m-d H:i:s')]) ?>
 
-        <?= $form->field($model, 'updated', ['options' => ['class' => 'hidden']])->textInput(['value' => date('Y-m-d H:i:s')]) ?>
+        <?= $form->field($model, 'updated', ['options' => ['class' => 'hidden']])->input('date'); ?>
 
         <?= $form->field($model, 'status')->dropDownList($model->statusesDropdown(),
             ['options' => [
@@ -41,7 +41,6 @@ use yii\bootstrap\ActiveForm;
             '5' => ['disabled' => $model->isNewRecord ? true : ((isset ($model->status)) ? ($model->status > 3) : false)],
             ]
         ]) ?>
-
 
         <?= Html::checkbox('create-incoms', false, ['label' => Yii::t('app', 'Create incoms for all items'), 'labelOptions' => ['class' => 'incoms-switch']] ) ?>
 

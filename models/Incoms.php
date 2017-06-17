@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii;
 use app\traits\AutocompleteTrait;
+use app\traits\DateTrait;
 
 /**
  * This is the model class for table "incoms".
@@ -21,6 +22,7 @@ use app\traits\AutocompleteTrait;
 class Incoms extends \yii\db\ActiveRecord
 {
     use AutocompleteTrait;
+    use DateTrait;
     /**
      * @inheritdoc
      */
@@ -39,7 +41,8 @@ class Incoms extends \yii\db\ActiveRecord
             [['qty', 'came_from', 'came_to', 'responsible', 'trans_date'], 'required'],
             [['came_from', 'came_to'], 'integer'],
             [['qty'], 'number', 'min' => 1],
-            [['materials_id', 'trans_date'], 'safe'],
+            [['materials_id'], 'safe'],
+            [['trans_date'], 'validateDate'],
             [['comment'], 'string'],
             [['responsible'], 'string', 'max' => 64],
             [['ref_doc'], 'string', 'max' => 16],
@@ -71,6 +74,17 @@ class Incoms extends \yii\db\ActiveRecord
                 $this->addError('qty', Yii::t('app', 'The stock rest is only') . ' ' . $this->materials->at_stock . ' ' . Yii::t('app', 'un.'));
             }
         }
+
+    }
+
+    public  function  validateDate()
+    {
+        $pattern1 = '/(19|20)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/';
+        $pattern2 = '/(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[012])\.(19|20)\d\d/';
+        if (!preg_match($pattern1, $this->trans_date) && !preg_match($pattern2, $this->trans_date)){
+            $this->addError('trans_date', Yii::t('app', 'Date format is not acceptable'));
+        }
+
 
     }
 
@@ -121,6 +135,8 @@ class Incoms extends \yii\db\ActiveRecord
                     }
                 }
             }
+            $reformatDate = explode('.', $this->trans_date);
+            $this->trans_date = implode('-', array_reverse($reformatDate));
             return true;
         }else{
             return false;

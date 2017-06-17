@@ -138,6 +138,10 @@
         var selectedOption = $(this).find('select option:selected').val();
             if (selectedOption == 4){
                 $('.incoms-switch').show();
+            }else{
+                $('.incoms-switch').find('input:checkbox').attr('checked', false);
+                $('.incoms-switch').hide();
+                $('.field-orders-incometo').hide();
             }
     });
 

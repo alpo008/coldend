@@ -54,7 +54,7 @@ use anmaslov\autocomplete\AutoComplete;
 
     <?= $form->field($model, 'responsible')->textInput(['maxlength' => true, 'value' => ($update) ? $model->responsible : ((!!Yii::$app->user->identity) ? Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->surname : '')]) ?>
 
-    <?= $form->field($model, 'trans_date')->textInput(['value' => date('Y-m-d')]) ?>
+    <?= $form->field($model, 'trans_date')->textInput(['placeholder' => 'DD.MM.YYYY или YYYY-MM-DD']) ?>
 
     <?= $form->field($model, 'purpose')->dropDownList($model->purposeDropdown()) ?>
 

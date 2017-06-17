@@ -41,7 +41,7 @@ class Outcomes extends ActiveRecord
             [['qty', 'came_from', 'responsible', 'trans_date'], 'required'],
             [['came_from', 'purpose'], 'integer'],
             [['qty'], 'number', 'min' => 1],
-            [['trans_date'], 'safe'],
+            [['trans_date'], 'validateDate'],
             [['comment'], 'string'],
             [['responsible'], 'string', 'max' => 64],
             ['materials_id', 'validateMaterial'],
@@ -79,6 +79,17 @@ class Outcomes extends ActiveRecord
                 $this->addError('materials_id', Yii::t('app', 'The material is not defined'));
             }
         }
+    }
+
+    public  function  validateDate()
+    {
+        $pattern1 = '/(19|20)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/';
+        $pattern2 = '/(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[012])\.(19|20)\d\d/';
+        if (!preg_match($pattern1, $this->trans_date) && !preg_match($pattern2, $this->trans_date)){
+            $this->addError('trans_date', Yii::t('app', 'Date format is not acceptable'));
+        }
+
+
     }
 
     /**
@@ -120,6 +131,8 @@ class Outcomes extends ActiveRecord
                    }
                }
            }
+           $reformatDate = explode('.', $this->trans_date);
+           $this->trans_date = implode('-', array_reverse($reformatDate));
            return true;
            }else{
            return false;
