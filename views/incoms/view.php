@@ -43,7 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => (array_key_exists($model->came_to, $model->toDropdown())) ? $model->toDropdown()[$model->came_to] : $model->came_to,
             ],
             'responsible',
-            'trans_date',
+            [
+                'attribute' => 'trans_date',
+                'value' => $model->dateToRus ($model->trans_date),
+            ],
             'ref_doc',
             'comment:ntext',
         ],

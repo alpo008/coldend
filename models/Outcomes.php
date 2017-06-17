@@ -5,6 +5,7 @@ namespace app\models;
 use yii;
 use yii\db\ActiveRecord;
 use app\traits\AutocompleteTrait;
+use app\traits\DateTrait;
 
 /**
  * This is the model class for table "outcomes".
@@ -24,6 +25,7 @@ class Outcomes extends ActiveRecord
 {
 
     use AutocompleteTrait;
+    use DateTrait;
     /**
      * @inheritdoc
      */

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'trans_date',
                 'value' => function ($searchModel) {
-                    return ( Html::a($searchModel->trans_date,
+                    return ( Html::a($searchModel->dateToRus ($searchModel->trans_date),
                         ['outcomes/view', 'id' => $searchModel->id],
                         ['title' => Yii::t('app', 'Outcomes view')])
                     );
