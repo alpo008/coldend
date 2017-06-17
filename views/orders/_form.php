@@ -42,6 +42,7 @@ use yii\bootstrap\ActiveForm;
             ]
         ]) ?>
 
+
         <?= Html::checkbox('create-incoms', false, ['label' => Yii::t('app', 'Create incoms for all items'), 'labelOptions' => ['class' => 'incoms-switch']] ) ?>
 
         <?= $form->field($model, 'incomeTo', ['labelOptions'=>['class'=>'col-lg-11 col-md-11']])->radioList([0 => 'Default',1 => Yii::t('app', 'Department'), 2 => Yii::t('app', 'Factory stock')]) ?>

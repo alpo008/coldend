@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii;
 use app\traits\AutocompleteTrait;
+use app\traits\DateTrait;
 
 /**
  * This is the model class for table "orders".
@@ -20,6 +21,7 @@ use app\traits\AutocompleteTrait;
 class Orders extends \yii\db\ActiveRecord
 {
     use AutocompleteTrait;
+    use DateTrait;
     public $incomeTo;
     /**
      * @inheritdoc

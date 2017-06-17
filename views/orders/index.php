@@ -32,9 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'format' => 'raw',
             ],
+
             'responsible',
-            'created',
-            'updated',
+            [
+                'attribute' => 'created',
+                'value' =>  function($searchModel){
+                            return $searchModel->datetimeToRus($searchModel->created);
+                            },
+            ],
+
+            [
+                'attribute' => 'updated',
+                'value' =>  function($searchModel){
+                    return $searchModel->datetimeToRus($searchModel->updated);
+                },
+            ],
+
             [
                 'attribute' => 'status',
                 'value' => function ($searchModel) {

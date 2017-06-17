@@ -30,8 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'id',
                 'ref_doc',
                 'responsible',
-                'created',
-                'updated',
+                [
+                    'attribute' => 'created',
+                    'value' => $model->datetimeToRus($model->created),
+                ],
+
+                [
+                    'attribute' => 'updated',
+                    'value' => $model->datetimeToRus($model->updated),
+                ],
+
                 [
                     'attribute' => 'status',
                     'value' => (array_key_exists($model->status, $model->statusesDropdown())) ? $model->statusesDropdown()[$model->status] : $model->status,
