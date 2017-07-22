@@ -29,7 +29,7 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'created', ['options' => ['class' => 'hidden']])->textInput(['value' => ($update) ? $model->created : date('Y-m-d H:i:s')]) ?>
 
-        <?= $form->field($model, 'updated', ['options' => ['class' => 'hidden']])->input('date'); ?>
+        <?= $form->field($model, 'updated', ['options' => ['class' => 'hidden']])->textInput(['value' => ($update) ? $model->created : date('Y-m-d H:i:s')]) ?>
 
         <?= $form->field($model, 'status')->dropDownList($model->statusesDropdown(),
             ['options' => [
