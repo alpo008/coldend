@@ -28,16 +28,15 @@ $this->registerJs(
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse"><?= $panelTitle ?></a>
             </h4>
         </div>
-        <div id="collapse" class="panel-collapse collapse">
+        <div id="collapse" class="panel-collapse collapse in">
             <div class="panel-body">
                 <?php
-                $relation = $relationsModel->partType;
-                $relationsQuery = ($relation == 'parent')? $model->getChildren() : $model->getParents();
-                $attributeName = ($relation == 'parent')? 'child_id' : 'parent_id';
-                $parentInputClassName = ($relation == 'parent')? 'hidden' : NULL;
-                $childInputClassName = ($relation == 'child')? 'hidden' : NULL;
-                $radioInputClassName = ($relation != NULL)? 'hidden' : NULL;
-
+                    $relation = $relationsModel->partType;
+                    $relationsQuery = ($relation == 'parent')? $model->getChildren() : $model->getParents();
+                    $attributeName = ($relation == 'parent')? 'child_id' : 'parent_id';
+                    $parentInputClassName = ($relation == 'parent')? 'hidden' : NULL;
+                    $childInputClassName = ($relation == 'child')? 'hidden' : NULL;
+                    $radioInputClassName = ($relation != NULL)? 'hidden' : NULL;
                 ?>
                 <?php Pjax::begin(['id' => 'relations-table']) ?>
                 <?= GridView::widget([
@@ -108,7 +107,7 @@ $this->registerJs(
                     </div>
                     <br />
                     <div class="form-group">
-                        <?= Html::submitButton($relationsModel->isNewRecord ? Yii::t('app', 'Add') : Yii::t('app', 'Update'), ['class' => $relationsModel->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Add'), ['class' => 'btn btn-success']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                     <?php Pjax::end(); ?>
