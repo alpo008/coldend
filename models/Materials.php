@@ -57,7 +57,7 @@ class Materials extends ActiveRecord
             [['analog'], 'safe'],
             [['manufacturer'], 'string', 'max' => 32],
             [['imagefile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg', 'maxSize' => 128*1024],
-            [['docfile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
+            [['docfile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 8192*1024],
         ];
     }
 
@@ -169,13 +169,15 @@ class Materials extends ActiveRecord
     /**
      * @return array|yii\db\ActiveRecord[]
      */
-    public  function  typesDropdown () {
-        $typesArray = Mattypes::find()->asArray()->all();
+    public  function  typesDropdown ()
+    {
+        $typesArray = Mattypes::find()->asArray()->orderBy('id')->all();
         $typesArray = array_column($typesArray, 'type_name', 'type_name');
         return $typesArray;
     }    
     
-    public  function  unitsDropdown () {
+    public  function  unitsDropdown ()
+    {
         return array (
             0 => 'ШТ',
             1 => 'М',
@@ -183,5 +185,14 @@ class Materials extends ActiveRecord
             3 => 'КГ',
             4 => 'Л'
         );
+    }
+
+    public static function zeroAtStock ()
+    {
+        return Materials::find()
+            ->where(['>', 'minqty', 0])
+            ->andWhere(['=', 'at_stock', 0])
+            ->andWhere(['=', 'at_dept', 0])
+            ->count();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Materials;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -60,10 +61,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         if(Yii::$app->user->isGuest){
             return $this->actionLogin();
         }elseif (Yii::$app->user->identity->role === 'ADMIN' || Yii::$app->user->identity->role === 'ENGINEER'){
-        return $this->render('index');
+        return $this->render('index',[
+            'zeroAtStock' => Materials::zeroAtStock(),
+        ]);
         }
     }
 

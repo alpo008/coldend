@@ -256,6 +256,8 @@ return [
 
     //COLDEND
 
+    'Cold End Electronics' => 'Отдел электроники холодного участка',
+    'Stock' => 'Склад',
     'Suppliers Ref' => 'Код производителя',
     'Trade Mark' => 'Торговая марка',
     'Manufacturer' => 'Фирма-производитель',
@@ -360,6 +362,8 @@ return [
     'Apply income to' => 'Зарегистрировать приход всех материалов на',
     'Completed and cancelled orders cant be deleted!' => 'Выполненные и отмененные заявки не могут быть удалены',
     'Date format is not acceptable' => 'Неприемлемый формат даты',
+    'Total q-ty at stocks is zero' => 'Суммарный остаток равен нулю',
+    'items' => 'позиций',
 
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
     'You can upload at most {limit, number} {limit, plural, one{file} other{files}}.' => 'Вы не можете загружать более {limit, number} {limit, plural, one{файла} few{файлов} many{файлов} other{файла}}.',

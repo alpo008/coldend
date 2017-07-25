@@ -30,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'name',
                 'value' => function ($searchModel) {
-                        return ( Html::a(Yii::t('app', $searchModel->name), ['materials/view', 'id' => $searchModel->id]));
+                    $filename = (is_file('../web/photos/' . $searchModel->id . '.jpg')) ? '@web/photos/' . $searchModel->id . '.jpg' : '@web/photos/_no-image.jpg';
+                    return ( Html::a(Yii::t('app', $searchModel->name), ['materials/view', 'id' => $searchModel->id], ['data-content' => Html::img($filename)]));
                 },
 
                 'format' => 'raw',

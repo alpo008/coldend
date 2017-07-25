@@ -147,6 +147,17 @@
 
     $(document).on('change', '.incoms-switch > input', function () {
         $('.field-orders-incometo').show();
-    })
+    });
+
+    $('.materials-index').on('mouseover', 'tr td a', function(){
+        if (!$(this).siblings('img')[0]){
+            $(this).after($(this).data().content)
+        }
+        $(this).siblings('img').slideDown(200);
+    });
+
+    $('.materials-index').on('mouseout', 'tr td a', function(){
+        $(this).siblings('img').slideUp(200);
+    });
 
 })(jQuery);
