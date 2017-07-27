@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Machines;
 use app\models\Materials;
 use Yii;
 use yii\filters\AccessControl;
@@ -67,6 +68,7 @@ class SiteController extends Controller
         }elseif (Yii::$app->user->identity->role === 'ADMIN' || Yii::$app->user->identity->role === 'ENGINEER'){
         return $this->render('index',[
             'zeroAtStock' => Materials::zeroAtStock(),
+            'tasksList' => Machines::getTasksLists(),
         ]);
         }
     }

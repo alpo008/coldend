@@ -39,7 +39,8 @@ class Machines extends \yii\db\ActiveRecord
     use AutocompleteTrait;
     public $photofile;
     public $schemafile;
-    
+    public $m_name;
+
     /**
      * @inheritdoc
      */
@@ -57,7 +58,7 @@ class Machines extends \yii\db\ActiveRecord
             [['status', 'name'], 'required'],
             [['id', 'status'], 'integer'],
             [['to_replace', 'to_order'], 'safe'],
-            [['to_do', 'comment'], 'string'],
+            [['to_do', 'comment', 'm_name'], 'string'],
             [['name', 'place'], 'string', 'max' => 24],
             [['unit_01', 'unit_02', 'unit_03', 'unit_04', 'unit_05', 'unit_06', 'unit_07', 'unit_08', 'unit_09', 'unit_10', 'unit_11', 'unit_12', 'unit_13', 'unit_14', 'unit_15', 'unit_16'], 'string', 'max' => 32],
             [['photofile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg', 'maxSize' => 512*1024],
@@ -174,9 +175,22 @@ class Machines extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return array
-     */
-
-
+    public static function getTasksLists()
+    {
+        $tasksList = array();
+        $tasksList ['to_do'] = self::find()
+            ->where(['<>', 'to_do', ''])
+            ->all();
+        $tasksList ['to_replace'] = self::find()
+            ->select (['machines.id', 'machines.name', 'machines.place', 'materials.name AS m_name'])
+            ->where(['<>', 'to_replace', ''])
+            ->innerJoin('materials', 'materials.id = machines.to_replace')
+            ->all();
+        $tasksList ['to_order'] = self::find()
+            ->select (['machines.id', 'machines.name', 'machines.place', 'materials.name AS m_name'])
+            ->innerJoin('materials', 'materials.id = machines.to_order')
+            ->where(['<>', 'to_order', ''])
+            ->all();
+        return $tasksList;
+    }
 }

@@ -186,5 +186,26 @@ a.desc:after {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+.card .card-header a{
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    width: 80%;
+    height: 30px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #ccc;
+    color: #4d4d4d;
+}
+.card .collapse{
+    width: 80%;
+    background-color: #eee;
+    border: 1px solid #888;
+}
+.card .card-block a{
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+}
 
 

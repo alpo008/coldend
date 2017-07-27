@@ -21,7 +21,7 @@ use anmaslov\autocomplete\AutoComplete;
     ?>
 
     <div class="row">
-        <div class="col-lg-5 col-md-5"><?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <div class="col-lg-6 col-md-6"><?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'place')->textInput(['maxlength' => true]) ?>
 
@@ -36,7 +36,7 @@ use anmaslov\autocomplete\AutoComplete;
             <?= $form->field($model, 'schemafile')->fileInput() ?>
         </div>
 
-        <div class="col-lg-2 col-md-2"></div>
+        <div class="col-lg-1 col-md-1"></div>
 
         <div class="col-lg-5 col-md-5">
 
