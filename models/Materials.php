@@ -187,12 +187,26 @@ class Materials extends ActiveRecord
         );
     }
 
-    public static function zeroAtStock ()
+    public static function stockStatus ()
     {
-        return Materials::find()
+        $stockStatus = array();
+         $stockStatus['total_count_equals_to_zero'] = Materials::find()
             ->where(['>', 'minqty', 0])
             ->andWhere(['=', 'at_stock', 0])
             ->andWhere(['=', 'at_dept', 0])
-            ->count();
+            ->all();
+         $stockStatus['total_count_less_than_limit'] = Materials::find()
+             ->select (['id', 'name', 'at_stock', 'at_dept', '([[at_stock]] + [[at_dept]])', '([[at_stock]] + [[at_dept]] - [[minqty]])', 'minqty' ])
+             ->where(['!=', '([[at_stock]] + [[at_dept]])', 0])
+             ->andWhere(['!=', 'minqty', 0])
+             ->andWhere(['<', '([[at_stock]] + [[at_dept]] - [[minqty]])', 0])
+             ->all();
+         $stockStatus['total_count_equals_to_limit'] = Materials::find()
+             ->select (['id', 'name', 'at_stock', 'at_dept', '([[at_stock]] + [[at_dept]] - [[minqty]])', 'minqty' ])
+             ->where(['!=', '([[at_stock]] + [[at_dept]])', 0])
+             ->andWhere(['!=', 'minqty', 0])
+             ->andWhere(['=', '([[at_stock]] + [[at_dept]] - [[minqty]])', 0])
+             ->all();
+         return $stockStatus;
     }
 }

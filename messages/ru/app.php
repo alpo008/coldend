@@ -364,6 +364,10 @@ return [
     'Date format is not acceptable' => 'Неприемлемый формат даты',
     'Total q-ty at stocks is zero' => 'Суммарный остаток равен нулю',
     'items' => 'позиций',
+    'Total Count Equals To Zero' => 'Суммарный остаток равен нулю',
+    'Total Count Less Than Limit' => 'Суммарный остаток меньше лимита',
+    'Total Count Equals To Limit' => 'Суммарный остаток равен лимиту',
+    'rest' => 'остаток',
 
     'You are not allowed to perform this action.' => 'Для выполнения этого действия требуется более высокий уровень доступа.',
     'You can upload at most {limit, number} {limit, plural, one{file} other{files}}.' => 'Вы не можете загружать более {limit, number} {limit, plural, one{файла} few{файлов} many{файлов} other{файла}}.',

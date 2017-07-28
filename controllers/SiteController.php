@@ -67,7 +67,7 @@ class SiteController extends Controller
             return $this->actionLogin();
         }elseif (Yii::$app->user->identity->role === 'ADMIN' || Yii::$app->user->identity->role === 'ENGINEER'){
         return $this->render('index',[
-            'zeroAtStock' => Materials::zeroAtStock(),
+            'stockStatus' => Materials::stockStatus(),
             'tasksList' => Machines::getTasksLists(),
         ]);
         }
