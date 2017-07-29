@@ -1,6 +1,8 @@
 html,
 body {
     height: 100%;
+    background: #eee;
+    overflow: scroll;
 }
 
 .wrap {
@@ -212,8 +214,20 @@ a.desc:after {
 }
 .card .card-block a{
     display: block;
+    padding: 2px;
+    color: #3d3d3d;
+    text-decoration: none;
     width: 100%;
     border-bottom: 1px solid #fff;
+    background: linear-gradient(#adadad,#cacaca, #adadad );
+    text-shadow: 1px 1px 1px #fff;
+}
+.card .card-block a:hover{
+    color: #2c2c2c;
+    background: linear-gradient(#bdbdbd,#dadada, #bdbdbd );
+}
+.navbar-nav > li > a:hover{
+
 }
 
 

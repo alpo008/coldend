@@ -15,7 +15,6 @@ $this->title = 'COLD END';
     </div>
 
     <div class="body-content">
-
         <div class="row">
             <div class="col-lg-4">
                 <h2><?=Yii::t('app', 'Machines')?></h2>
@@ -50,7 +49,6 @@ $this->title = 'COLD END';
                         </div>
                      </div>
                 <?php endif;?>
-
             <div class="col-lg-4">
                 <h2><?=Yii::t('app', 'Stock')?></h2>
                 <?php if(isset($stockStatus) && (count($stockStatus) > 0)): ?>
@@ -73,8 +71,8 @@ $this->title = 'COLD END';
                                     <div class="card-block">
                                         <?php
                                         foreach($stockData as $sData){
-                                            $subject = ($stockName === 'total_count_less_than_limit') ? Yii::t('app', 'rest') . ' : ' . ($sData->at_stock + $sData->at_dept) : '';
-                                            echo Html::a($sData->name . ' : <br />' . Yii::t('app', 'Minimal qty'). ' - ' .$sData->minqty . ' , ' . $subject, '/materials/view/'.$sData->id );
+                                            $subject = ($stockName === 'total_count_less_than_limit') ? ' , ' . Yii::t('app', 'rest') . ' : ' . ($sData->at_stock + $sData->at_dept) : '';
+                                            echo Html::a($sData->name . ' : <br />' . Yii::t('app', 'Minimal qty'). ' - ' .$sData->minqty . $subject, '/materials/view/'.$sData->id );
                                         }
                                         ?>
                                     </div>
@@ -84,7 +82,6 @@ $this->title = 'COLD END';
                     </div>
                 <?php endif;?>
             </div>
-
 
             <div class="col-lg-4">
                 <h2><?=Yii::t('app', 'Orders')?></h2>
