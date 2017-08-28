@@ -219,12 +219,12 @@ a.desc:after {
     text-decoration: none;
     width: 100%;
     border-bottom: 1px solid #fff;
-    background: linear-gradient(#adadad,#cacaca, #adadad );
+    background: linear-gradient(#bdbdbd,#dadada, #bdbdbd );
     text-shadow: 1px 1px 1px #fff;
 }
 .card .card-block a:hover{
     color: #2c2c2c;
-    background: linear-gradient(#bdbdbd,#dadada, #bdbdbd );
+    background: linear-gradient(#cdcdcd,#eaeaea, #cdcdcd );
 }
 .navbar-nav > li > a:hover{
 

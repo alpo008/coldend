@@ -153,11 +153,14 @@
         if (!$(this).siblings('img')[0]){
             $(this).after($(this).data().content)
         }
-        $(this).siblings('img').slideDown(200);
+        var topOffset = $(this)[0].getBoundingClientRect().top + $(this).height();
+            $(this).siblings('img').css('top', topOffset);
+            $(this).siblings('img').css('z-index', 10);
+            $(this).siblings('img').slideDown(350);
     });
 
     $('.materials-index').on('mouseout', 'tr td a', function(){
-        $(this).siblings('img').slideUp(200);
+        $(this).siblings('img').slideUp(350);
     });
 
 })(jQuery);
