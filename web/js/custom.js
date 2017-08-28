@@ -149,18 +149,21 @@
         $('.field-orders-incometo').show();
     });
 
-    $('.materials-index').on('mouseover', 'tr td a', function(){
+    $('.materials-index').on('mouseover', 'tr td a', function(e){
         if (!$(this).siblings('img')[0]){
             $(this).after($(this).data().content)
         }
+        console.log($(this).parents('.table').find('.thumb:animated').length);
         var topOffset = $(this)[0].getBoundingClientRect().top + $(this).height();
             $(this).siblings('img').css('top', topOffset);
             $(this).siblings('img').css('z-index', 10);
-            $(this).siblings('img').slideDown(350);
+            if (!$(this).parents('.table').find('.thumb:animated').length){
+                $(this).siblings('img').slideDown(250);
+            }
     });
 
     $('.materials-index').on('mouseout', 'tr td a', function(){
-        $(this).siblings('img').slideUp(350);
+        $(this).siblings('img').slideUp(150);
     });
 
 })(jQuery);
