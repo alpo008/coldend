@@ -70,8 +70,7 @@ class OutcomesSearch extends Outcomes
 
         $query->andFilterWhere(['like', 'responsible', $this->responsible])
             ->andFilterWhere(['like', 'comment', $this->comment])
-            ->andFilterWhere(['like', 'trans_date', $this->trans_date])
-            ->orderBy('id DESC');
+            ->andFilterWhere(['like', 'trans_date', $this->trans_date]);
 
         return $dataProvider;
     }

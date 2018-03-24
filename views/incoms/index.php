@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -41,10 +41,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'materials_id',
                 'value' => function ($searchModel) {
-                    return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]), 
+                    if (isset($searchModel->partsAutocompleteList()[$searchModel->materials_id])) {
+                        return ( Html::a(Yii::t('app', $searchModel->partsAutocompleteList()[$searchModel->materials_id]),
                         ['materials/view', 'id' => $searchModel->materials_id], 
                         ['title' => Yii::t('app', 'Materials view')])
-                    );
+                        );
+                    } else {
+                        return ( Html::a(Yii::t('app', 'Unregistered material'),
+                            ['materials/view', 'id' => $searchModel->materials_id],
+                            ['title' => Yii::t('app', 'Materials view')])
+                        );
+                    }
                 },
 
                 'format' => 'raw',

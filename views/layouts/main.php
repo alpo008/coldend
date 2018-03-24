@@ -46,7 +46,8 @@ AppAsset::register($this);
                     ['label' => Yii::t('app', 'Materials outlays'), 'url' => ['/outcomes'] ],
                     ['label' => Yii::t('app', 'Orders'), 'url' => ['/orders'] ],
                 ],
-            ],            [
+            ],
+            [
                 'label' => (Yii::t('app', 'OPTIONS')),
                 'items' => [
                     ['label' => Yii::t('app', 'Materials types'), 'url' => '/mattypes'],
