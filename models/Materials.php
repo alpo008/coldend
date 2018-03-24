@@ -68,7 +68,7 @@ class Materials extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Material description'),
+            'name' => Yii::t('app', 'Material'),
             'model_ref' => Yii::t('app', 'Suppliers Ref'),
             'trade_mark' => Yii::t('app', 'Trade Mark'),
             'manufacturer' => Yii::t('app', 'Manufacturer'),

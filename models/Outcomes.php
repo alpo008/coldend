@@ -101,7 +101,7 @@ class Outcomes extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'materials_id' => Yii::t('app', 'Materials ID'),
+            'materials_id' => Yii::t('app', 'Material'),
             'qty' => Yii::t('app', 'Qty'),
             'came_from' => Yii::t('app', 'Taken From'),
             'came_to' => Yii::t('app', 'Used in machine'),

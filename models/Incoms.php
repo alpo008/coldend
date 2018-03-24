@@ -95,7 +95,7 @@ class Incoms extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'materials_id' => Yii::t('app', 'Material description'),
+            'materials_id' => Yii::t('app', 'Material'),
             'qty' => Yii::t('app', 'Qty'),
             'came_from' => Yii::t('app', 'Came From'),
             'came_to' => Yii::t('app', 'Came To'),

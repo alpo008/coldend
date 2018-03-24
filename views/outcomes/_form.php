@@ -35,9 +35,9 @@ use anmaslov\autocomplete\AutoComplete;
         ]);
     ?>
 
-    <?= $form->field($model, 'came_from')->dropDownList($model->fromDropdown(),['disabled' => $update]) ?>
-
     <?= $form->field($model, 'qty')->textInput(['maxlength' => true, 'disabled' => $update]) ?>
+
+    <?= $form->field($model, 'came_from')->dropDownList($model->fromDropdown(),['disabled' => $update]) ?>
 
     <?= $form->field($model, 'came_to')->textInput()->widget(
         AutoComplete::className(),
