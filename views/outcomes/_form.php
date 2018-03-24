@@ -56,6 +56,8 @@ use anmaslov\autocomplete\AutoComplete;
 
     <?= $form->field($model, 'trans_date')->textInput(['placeholder' => 'DD.MM.YYYY или YYYY-MM-DD']) ?>
 
+    <?= $form->field($model, 'ref_doc')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'purpose')->dropDownList($model->purposeDropdown()) ?>
 
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>

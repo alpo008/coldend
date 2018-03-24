@@ -103,6 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'filter' => $searchModel->purposeDropdown(),
             ],
+            'ref_doc',
             ['class' => 'app\models\CustomActionColumn',
                 //'buttons' => ['update' => function(){return false;}],
                 'filter' =>     '<a href="/outcomes"><span class="glyphicon glyphicon-refresh" title="Сбросить фильтр"></span></a>'

@@ -18,6 +18,7 @@ use app\traits\DateTrait;
  * @property integer $unit_id
  * @property string $responsible
  * @property string $trans_date
+ * @property string $ref_doc
  * @property integer $purpose
  * @property string $comment
  */
@@ -46,9 +47,10 @@ class Outcomes extends ActiveRecord
             [['trans_date'], 'validateDate'],
             [['comment'], 'string'],
             [['responsible'], 'string', 'max' => 64],
+            [['ref_doc'], 'string', 'max' => 16],
             ['materials_id', 'validateMaterial'],
             ['came_to', 'validateCameTo'],
-            ['qty', 'validateQty'],
+            ['qty', 'validateQty']
         ];
     }
 
@@ -107,8 +109,9 @@ class Outcomes extends ActiveRecord
             'came_to' => Yii::t('app', 'Used in machine'),
             'responsible' => Yii::t('app', 'Responsible'),
             'trans_date' => Yii::t('app', 'Trans Date'),
+            'ref_doc' => Yii::t('app', 'Ref Doc'),
             'purpose' => Yii::t('app', 'Purpose'),
-            'comment' => Yii::t('app', 'Comments'),
+            'comment' => Yii::t('app', 'Comments')
         ];
     }
     

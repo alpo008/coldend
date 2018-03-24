@@ -20,7 +20,7 @@ class OutcomesSearch extends Outcomes
         return [
             [['id', 'materials_id', 'came_from', 'purpose'], 'integer'],
             [['qty'], 'number'],
-            [['materials_id', 'came_to', 'responsible', 'trans_date', 'comment'], 'safe'],
+            [['materials_id', 'came_to', 'responsible', 'trans_date', 'ref_doc', 'comment'], 'safe'],
         ];
     }
 
@@ -69,6 +69,7 @@ class OutcomesSearch extends Outcomes
         ]);
 
         $query->andFilterWhere(['like', 'responsible', $this->responsible])
+            ->andFilterWhere(['like', 'ref_doc', $this->ref_doc])
             ->andFilterWhere(['like', 'comment', $this->comment])
             ->andFilterWhere(['like', 'trans_date', $this->trans_date]);
 

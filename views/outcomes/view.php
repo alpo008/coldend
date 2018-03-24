@@ -51,7 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'purpose',
                 'value' => (array_key_exists($model->purpose, $model->purposeDropdown())) ? $model->purposeDropdown()[$model->purpose] : $model->purpose,
             ],
-            'comment:ntext',
+            'ref_doc',
+            'comment:ntext'
         ],
     ]) ?>
 
