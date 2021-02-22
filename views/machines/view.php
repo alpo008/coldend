@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php
                     $imagefile = '@web/photos_/' . $model->id . '.jpg';
                     $imagefile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos_/' . $model->id . '.jpg')) ? $imagefile : '@web/photos/_no-image.jpg';
-                        echo '<br />' . Html::a(Html::img($imagefile, ['alt' => $model->name,
+                        echo '<br />' . Html::a(Html::img($model->photoPath, ['alt' => $model->name,
                                 'title' => Yii::t('app', 'See schema'),
                                 'width' => '200',
                             ]), '@web/photos_/' . $model->id . '.jpg', ['target' => '_blank']);
@@ -67,10 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="machine-cart__schema">
                     <?php
-                    $docfile = $_SERVER['DOCUMENT_ROOT'] . '/schemas/' . $model->id . '.pdf';
-                    $docfile_ = 'schemas/' . $model->id . '.pdf';
-                    if (file_exists($docfile)) {
-                        echo '<br />' . Html::a(Yii::t('app', 'Open datasheet'), '@web/schemas/' . $model->id . '.pdf', ['target' => '_blank']);
+                    if ($model->schemaPath) {
+                        echo '<br />' . Html::a(Yii::t('app', 'Open datasheet'), $model->schemaPath, ['target' => '_blank']);
                     }
                     ?>
                 </div>

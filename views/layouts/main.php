@@ -17,11 +17,13 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--   <link rel="icon" type="image/png" href="http://127.0.0.1/hotend/favicon.ico">-->
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
+<?php $user = Yii::$app->user->identity ?>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -50,10 +52,14 @@ AppAsset::register($this);
             [
                 'label' => (Yii::t('app', 'OPTIONS')),
                 'items' => [
-                    ['label' => Yii::t('app', 'Materials types'), 'url' => '/mattypes'],
-                    ['label' => Yii::t('app', 'Users'), 'url' => '/user',
+                    ['label' => Yii::t('app', 'Materials types'), 'url' => ['/mattypes'],
                         'options' => [
-                            'class' => (Yii::$app->user->identity['role'] != 'ADMIN' && Yii::$app->user->identity['role'] != 'ENGINEER') ? 'hidden' : '',
+                            'class' => !$user ? 'hidden' : '',
+                        ]
+                    ],
+                    ['label' => Yii::t('app', 'Users'), 'url' => ['/user'],
+                        'options' => [
+                            'class' => (!$user || ($user->role != 'ADMIN' && $user->role != 'ENGINEER')) ? 'hidden' : '',
                         ]
                     ],
 

@@ -33,6 +33,9 @@ use yii\web\UploadedFile;
  * @property string $unit_15
  * @property string $unit_16
  * @property string $comment
+ *
+ * @property string $photoPath
+ * @property string $schemaPath
  */
 class Machines extends \yii\db\ActiveRecord
 {
@@ -192,5 +195,25 @@ class Machines extends \yii\db\ActiveRecord
             ->where(['<>', 'to_order', ''])
             ->all();
         return $tasksList;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhotoPath()
+    {
+        $imgfile = '@web/photos_/' . $this->id . '.jpg';
+        return file_exists($_SERVER['DOCUMENT_ROOT'] . '/coldend/photos_/' . $this->id . '.jpg') ?
+            $imgfile : '@web/photos/_no-image.jpg';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSchemaPath()
+    {
+        $schemaFile = '@web/schemas/' . $this->id . '.pdf';
+        return file_exists($_SERVER['DOCUMENT_ROOT'] . '/coldend/schemas/' . $this->id . '.pdf') ?
+            $schemaFile : '';
     }
 }

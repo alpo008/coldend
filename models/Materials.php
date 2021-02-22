@@ -26,6 +26,8 @@ use app\traits\AutocompleteTrait;
  * @property integer $unit
  * @property string $comment_1
  * @property string $comment_2
+ *
+ * @property string $photoPath
  */
 class Materials extends ActiveRecord
 {
@@ -164,6 +166,16 @@ class Materials extends ActiveRecord
     {
         return $this->hasMany(Orders::className(), ['id' => 'orders_id'])
             ->via('lists');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhotoPath()
+    {
+        $imgfile = '@web/photos/' . $this->id . '.jpg';
+        return file_exists($_SERVER['DOCUMENT_ROOT'] . '/coldend/photos/' . $this->id . '.jpg') ?
+            $imgfile : '@web/photos/_no-image.jpg';
     }
 
     /**

@@ -19,10 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row material-cart">
         <div class="col-lg-3">
             <div class="row material-cart__image">
-                <?php
-                $imagefile = '@web/photos/' . $model->id . '.jpg';
-                $imagefile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/photos/' . $model->id . '.jpg')) ? $imagefile : '@web/photos/_no-image.jpg';
-                echo Html::img($imagefile, ['alt' => $model->name,
+                <?= Html::img($model->photoPath, ['alt' => $model->name,
                     'title' => $model->name,
                     'width' => '200'
                 ]);
