@@ -25,6 +25,8 @@ $config = [
             'cookieParams' => ['httponly' => true, 'lifetime' => 3600 * 4],
             'timeout' => 3600*8, //session expire
             'useCookies' => true,
+            'name' => 'PHPCOLDSESSID',
+            'savePath' => dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'tmp',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
